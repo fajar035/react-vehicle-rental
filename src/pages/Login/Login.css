@@ -1,0 +1,6 @@
+/* Size < 576  */
+@media only screen and (max-width: 576px) {
+  .img-van {
+    display: none;
+  }
+}

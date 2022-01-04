@@ -1,0 +1,401 @@
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+/* start header -  font navbar */
+.navbar-font {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  /* line-height: 22px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #202336;
+  text-decoration: none;
+  margin-right: 40px;
+}
+
+.navbar-font:hover {
+  color: #ffcd61;
+}
+
+.btn-login,
+.btn-signup {
+  height: 45px;
+  width: 150px;
+  border: 1px solid black;
+  text-align: center;
+  justify-content: center;
+
+  border-radius: 10px;
+}
+
+.btn-signup {
+  background-color: #ffcd61;
+}
+
+.f-nunito-signup,
+.f-nunito-login {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #393939;
+}
+
+.f-nunito-signup:hover {
+  color: #fff;
+}
+
+.f-nunito-login:hover {
+  color: #ffcd61;
+}
+
+/* end header -  font navbar */
+
+/* Start jumbroton */
+.btn-custom {
+  width: 133px !important;
+  height: 44.01px !important;
+}
+
+.btn-search {
+  width: 100%;
+  height: 52.01px;
+  background: #ffcd61;
+  border-radius: 8px;
+  border: none;
+}
+
+.jumbotron {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("../../assets/images/cover_home.webp");
+
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+}
+
+.line {
+  width: 20%;
+  height: 3px;
+  background-color: #202336;
+}
+
+/* Font */
+.f-nunito-vehicle-finder {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #202336;
+}
+
+.f-playfair {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 80px;
+  color: #202336;
+}
+
+.f-playfair-main {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.f-mulish {
+  font-family: Mulish;
+  font-style: normal;
+  font-size: 19px;
+  color: #393939;
+}
+
+.f-mulish-coment {
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 36px;
+  color: #393939;
+}
+
+.input-type {
+  width: 100%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 6px;
+  border: 0.8px solid #afb0b9;
+  margin-left: -10px;
+}
+
+.input-date {
+  width: 100%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 6px;
+  border: 0.8px solid #afb0b9;
+}
+
+.input-select {
+  width: 100%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 6px;
+  border: 0.8px solid #afb0b9;
+  margin-left: -10px;
+}
+
+.link a {
+  text-decoration: none;
+  color: #848484;
+}
+
+.link a:hover {
+  color: #fff;
+}
+
+.link:hover {
+  background-color: #848484;
+}
+
+/* End jumbroton */
+
+/* Start Body */
+.dimensi {
+  width: 250px;
+  height: 300px;
+}
+
+.card {
+  border: none;
+}
+
+.img-size {
+  width: 100%;
+  max-height: 100%;
+  background-size: cover;
+  position: relative;
+  background-position: center;
+}
+
+.next {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffcd61;
+  position: absolute;
+  right: -50px;
+  top: 30%;
+  z-index: 1;
+  font-size: 50px;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(251, 143, 29, 0.65);
+}
+
+.color-subtitle {
+  color: #918f8f;
+}
+/* End Body */
+
+/* TESTIMONIAL */
+.circle-testimonial {
+  width: 42px;
+  height: 42.01px;
+  border: 6px solid rgba(191, 240, 221, 1);
+  border-radius: 50%;
+}
+
+.position-circle {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  z-index: -1;
+}
+
+/* plus pf testimonial */
+.plus {
+  width: 42px;
+  height: 42.01px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: -20px;
+  left: -20px;
+}
+
+.vertikal {
+  width: 10px;
+  height: 100%;
+  background-color: rgba(253, 208, 141, 1);
+  position: absolute;
+}
+
+.horizontal {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(253, 208, 141, 1);
+  position: absolute;
+}
+
+/* rectangle */
+.rectangle {
+  width: 132px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 16px 0px 0px 0px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.left {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #d7d7d7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-cs {
+  width: 400px;
+  height: 500px;
+  background: url("../../assets/images/comment_users.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: 14px;
+}
+
+/* FOOTER */
+.bg-footer {
+  background: #f9f9fb;
+}
+
+.logo-footer {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.text-footer-title {
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 60px;
+  color: #393939;
+}
+
+.text-footer {
+  text-decoration: none;
+  color: #848484;
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 38px;
+}
+
+.text-footer:hover {
+  color: #ffcd61;
+}
+
+/* RESPONSIVE HEADER */
+@media only screen and (max-width: 990px) {
+  .navbar-font {
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .btn-login,
+  .btn-signup {
+    width: 100%;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+
+  .btn-dropwdown {
+    margin-right: 20px;
+  }
+}
+
+/* RESPONSIVE JUMBROTON*/
+@media only screen and (max-width: 790px) {
+  .f-nunito {
+    color: #fff;
+  }
+  .line {
+    background-color: #fff;
+  }
+
+  .input-type::-webkit-input-placeholder,
+  .input-select,
+  .input-date {
+    color: #fff;
+  }
+
+  .f-nunito-vehicle-finder {
+    color: #fff;
+  }
+
+  .next {
+    display: none;
+  }
+
+  .card {
+    margin-bottom: 100px;
+  }
+}
