@@ -40,7 +40,7 @@ function Login() {
             <Link to="/forgot" className="forgot p-3">
               Forgot password?
             </Link>
-            <div className="col-12 p-3 ">
+            <div className="col-12 p-3 mt-5">
               <Link to="/">
                 <button className="btn-login-login" type="submit">
                   Login

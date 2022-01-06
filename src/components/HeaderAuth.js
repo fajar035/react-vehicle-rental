@@ -52,38 +52,44 @@ export class Header extends Component {
             </ul>
 
             <div className="d-flex flex-row ms-3">
-              <div class="icon">
-                <div class="count ">
+              <div className="icon">
+                <div className="count ">
                   <p>10</p>
                 </div>
-                <img src={iconMessage} class="img-icon" alt="icon-message" />
-              </div>
-              <div class="dropdown profile">
                 <img
-                  class="img-profile rounded-circle dropdown-toggle"
+                  src={iconMessage}
+                  className="img-icon"
+                  alt="icon-message"
+                />
+              </div>
+              <div className="dropdown profile">
+                <img
+                  className="img-profile rounded-circle dropdown-toggle"
                   src={userProfile}
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   alt="icon-profile"
                 />
 
-                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                <ul
+                  className="dropdown-menu "
+                  aria-labelledby="dropdownMenuLink">
                   <li>
                     <Link className="dropdown-item">
-                      <i class="fas fa-angle-right float-end me-4"></i>
+                      <i className="fas fa-angle-right float-end me-4"></i>
                       Edit
                     </Link>
                   </li>
 
                   <li>
                     <Link className="dropdown-item">
-                      <i class="fas fa-angle-right float-end me-4"></i>
+                      <i className="fas fa-angle-right float-end me-4"></i>
                       Help
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item">
-                      <i class="fas fa-angle-right float-end me-4"></i>
+                      <i className="fas fa-angle-right float-end me-4"></i>
                       Log Out
                     </Link>
                   </li>

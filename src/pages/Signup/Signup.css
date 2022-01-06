@@ -7,7 +7,7 @@
   z-index: 1;
   border-left: 1px solid #fff;
   left: 47%;
-  top: 7%;
+  top: 18%;
   position: relative;
 }
 
@@ -39,5 +39,38 @@
 
   .border-line-signup {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .border-line-signup {
+    height: 540px;
+  }
+
+  .input-login {
+    height: 60px;
+  }
+
+  .input-login,
+  .btn-login-google,
+  .btn-login-login,
+  .btn-signup-login {
+    font-size: 20px;
+  }
+
+  .forgot {
+    font-size: 16px;
+  }
+
+  .btn-login-login,
+  .btn-login-google,
+  .btn-signup-login {
+    height: 60px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .border-line-signup {
+    top: 13%;
   }
 }

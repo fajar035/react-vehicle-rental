@@ -10,7 +10,7 @@ function Forgot() {
         <div className="col-10">
           <div className="back-forgot col-2">
             <Link to="/login" className="link-back-forgot">
-              <i class="fas fa-chevron-left me-5"></i>
+              <i className="fas fa-chevron-left me-5"></i>
               Back
             </Link>
           </div>

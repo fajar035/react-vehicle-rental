@@ -21,7 +21,7 @@ function Signup() {
           <span></span>
           <span></span>
         </div>
-        <div className="col-lg-6 col-md-6 col-sm-12  form mt-5 p-5">
+        <div className="col-lg-6 col-md-6 col-sm-12  form mt-2 p-5">
           <form>
             <div className="col-12 p-3 ">
               <input typeof="text" placeholder="Name" className="input-login" />
@@ -33,7 +33,7 @@ function Signup() {
                 className="input-login"
               />
             </div>
-            <div className="col-12 p-3 ">
+            <div className="col-12 p-3 mb-5">
               <input
                 type="password"
                 placeholder="password"

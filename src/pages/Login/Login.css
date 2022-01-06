@@ -2,7 +2,7 @@
 .border-line {
   padding: 0;
   /* background-color: red; */
-  height: 500px;
+  height: 600px;
   width: 0%;
   z-index: 1;
   border-left: 1px solid #fff;
@@ -219,7 +219,8 @@
   }
 
   .border-line {
-    top: 20%;
+    top: 18%;
+    height: 500px;
   }
 
   .title-login {
