@@ -21,6 +21,7 @@ function MainRouter() {
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
         <Route path="/detail" component={Detail} />
+
         <Route exact component={NotFound} />
         <Redirect to="/404" />
       </Switch>

@@ -1,6 +1,261 @@
-/* Size < 576  */
-@media only screen and (max-width: 576px) {
-  .img-van {
+/* Start Border Line */
+.border-line {
+  padding: 0;
+  /* background-color: red; */
+  height: 500px;
+  width: 0%;
+  z-index: 1;
+  border-left: 1px solid #fff;
+  left: 47%;
+  top: 25%;
+  position: relative;
+}
+
+.border-line > span {
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.border-line > span:first-child {
+  left: -11px;
+  top: 0;
+}
+
+.border-line > span:last-child {
+  left: -10px;
+  bottom: 0;
+}
+/* End Border Line */
+
+/* Start Main */
+.bg-img {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("../../assets/images/zeep.webp");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  background-position: center;
+}
+
+.wrapper-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-login {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 85px;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+.no-account {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.btn-signup-login {
+  width: 391px;
+  height: 79px;
+  background: #393939;
+  box-shadow: 0px 0px 20px rgba(218, 218, 218, 0.25);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #ffcd61;
+}
+
+.btn-signup-login:hover {
+  color: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-login {
+  width: 100%;
+  height: 79px;
+  background: rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  padding: 20px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  border: none;
+}
+
+.forgot {
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  text-decoration-line: underline;
+  color: #ffffff;
+}
+
+.forgot:hover {
+  color: #ffcd61;
+}
+
+/*support google chrome*/
+.input-login::-webkit-input-placeholder {
+  color: #fff;
+}
+
+/*support mozilla*/
+.input-login:-moz-input-placeholder {
+  color: #fff;
+}
+
+/*support internet explorer*/
+.input-login:-ms-input-placeholder {
+  color: #fff;
+}
+
+.btn-login-login {
+  background: #ffcd61;
+  box-shadow: 0px 0px 20px rgba(248, 161, 112, 0.47);
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+  height: 79px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #393939;
+}
+
+.icon-google {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.btn-login-google {
+  background: #ffffff;
+  border-radius: 10px;
+  width: 100%;
+  height: 79px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #000000;
+}
+
+/* End Main */
+
+/* RESPONSIVE  */
+@media only screen and (max-width: 425px) {
+  .footer {
+    margin-top: 420px !important;
+    padding: 25px;
+  }
+
+  .form {
+    background-color: #393939;
+  }
+
+  .btn-signup-login {
+    width: 320px;
+  }
+
+  .left-side {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .wrapper-left-side {
+    margin-top: 100px;
+  }
+
+  .border-line {
     display: none;
+  }
+
+  .title-login {
+    font-size: 70px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .btn-signup-login {
+    width: 200px !important;
+  }
+
+  .border-line {
+    top: 20%;
+  }
+
+  .title-login {
+    font-size: 54px !important;
+    line-height: 70px;
+    margin-bottom: 50px;
+  }
+
+  .footer {
+    margin-top: -20px;
+    padding: 25px;
+  }
+
+  .wrapper-left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .btn-signup-login {
+    width: 300px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title-login {
+    font-size: 50px;
+  }
+
+  .no-account {
+    font-size: 20px;
   }
 }

@@ -1,75 +1,74 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import vanLogin from "./../../assets/images/van_login.webp"
+import React from "react"
 import "./Login.css"
+import Footer from "../../components/Footer"
+import { Link } from "react-router-dom"
+import iconGoogle from "../../assets/icons/icon_google.png"
 
-export class Login extends Component {
-  render() {
-    return (
-      <main className="container">
-        <div className="row justify-content-center">
-          {/* image */}
-          <div className="col-6 d-sm-none d-md-none d-lg-block img-van border">
-            <img src={vanLogin} alt="img-van" className="img-fluid" />
+function Login() {
+  return (
+    <main className="container-fluid m-0 p-0">
+      <section className="row position-relative bg-img">
+        <div className="col-lg-6 col-md-6 col-sm-16 p-5 wrapper-left-side">
+          <div className="col-lg-8 col-md-12 col-sm-12 left-side">
+            <h1 className="title-login">Le’ts Explore The World</h1>
+            <p className="no-account">Don't have account?</p>
+            <Link to="/signup" className="">
+              <button className="btn-signup-login">Sign Up</button>
+            </Link>
           </div>
-          {/* form */}
-          <div className="col-6 ">form</div>
         </div>
-      </main>
-    )
-  }
+        <div className="border-line position-absolute">
+          <span></span>
+          <span></span>
+        </div>
+        <div className="col-lg-6 col-md-6 col-sm-12  form mt-5 p-5">
+          <form>
+            <div className="col-12 p-3 ">
+              <input
+                typeof="email"
+                placeholder="Email"
+                className="input-login"
+              />
+            </div>
+            <div className="col-12 p-3 ">
+              <input
+                type="password"
+                placeholder="password"
+                className="input-login"
+              />
+            </div>
+            <Link to="/forgot" className="forgot p-3">
+              Forgot password?
+            </Link>
+            <div className="col-12 p-3 ">
+              <Link to="/">
+                <button className="btn-login-login" type="submit">
+                  Login
+                </button>
+              </Link>
+            </div>
+            <div className="col-12 p-3 ">
+              <Link to="#">
+                <button className="btn-login-google" type="submit">
+                  <img
+                    src={iconGoogle}
+                    alt="icon-google"
+                    className="icon-google"
+                  />
+                  Login google
+                </button>
+              </Link>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section className="row footer">
+        <div className="col-lg-12">
+          <Footer />
+        </div>
+      </section>
+    </main>
+  )
 }
-
-// export class Login extends Component {
-//   render() {
-//     return (
-//       <main className="container">
-//         <div className="row justify-content-center">
-//           <div className="col-md-6">
-//             <h1>Login</h1>
-//             <form>
-//               <div className="form-group">
-//                 <label htmlFor="email">Email</label>
-//                 <input
-//                   id="email"
-//                   type="email"
-//                   className="form-control"
-//                   placeholder="Masukan email"
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label htmlFor="password">Password</label>
-//                 <input
-//                   id="password"
-//                   type="password"
-//                   className="form-control"
-//                   placeholder="Masukan password"
-//                   autoComplete="off"
-//                 />
-//               </div>
-//               <div className="form-check">
-//                 <input
-//                   type="checkbox"
-//                   className="form-check-input"
-//                   id="check"
-//                 />
-//                 <label className="form-check-label" htmlFor="check">
-//                   Ingat saya
-//                 </label>
-//               </div>
-//               <button
-//                 type="submit"
-//                 className="btn btn-primary btn-lg btn-block">
-//                 <Link to="/" className="text-decoration-none text-light">
-//                   <p>Index</p>
-//                 </Link>
-//               </button>
-//             </form>
-//           </div>
-//         </div>
-//       </main>
-//     )
-//   }
-// }
 
 export default Login

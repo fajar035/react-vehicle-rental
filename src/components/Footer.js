@@ -4,7 +4,7 @@ import logo from "../assets/icons/logo.svg"
 
 function Footer() {
   return (
-    <div class="row p-2 justify-content-md-around f-mulish mt-5 bg-footer">
+    <div class="row p-2 justify-content-md-around f-mulish bg-footer">
       <div class="col-lg-5 col-md-12 p-md-4">
         <img src={logo} alt="logo" className="logo-footer" />
         <div class="text-footer-about">
