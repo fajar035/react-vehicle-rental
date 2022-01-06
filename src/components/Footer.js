@@ -117,7 +117,7 @@ function Footer() {
 
       <div class="col-12">
         <div class="col-12 d-flex justify-content-center mb-3 mt-3">
-          <div class="line"></div>
+          <div class="line-footer"></div>
         </div>
 
         <div class="col-12 d-flex justify-content-center mb-5 ">

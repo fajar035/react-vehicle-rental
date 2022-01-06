@@ -13,7 +13,7 @@ function Jumbroton() {
           <div className="f-nunito-vehicle-finder mt-5 mb-3">
             Vehicle Finder
           </div>
-          <div className="line col-1 ms-3"></div>
+          <div className="line-jumbroton col-1 ms-3"></div>
         </div>
 
         <form className="row mb-5">

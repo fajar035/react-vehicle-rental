@@ -1,0 +1,43 @@
+/* Start Border Line */
+.border-line-signup {
+  padding: 0;
+  /* background-color: red; */
+  height: 700px;
+  width: 0%;
+  z-index: 1;
+  border-left: 1px solid #fff;
+  left: 47%;
+  top: 7%;
+  position: relative;
+}
+
+.border-line-signup > span {
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.border-line-signup > span:first-child {
+  left: -11px;
+  top: 0;
+}
+
+.border-line-signup > span:last-child {
+  left: -10px;
+  bottom: 0;
+}
+/* End Border Line */
+
+/* RESPONSIVE */
+@media only screen and (max-width: 425px) {
+  .footer-signup {
+    margin-top: 525px !important;
+    padding: 25px;
+  }
+
+  .border-line-signup {
+    display: none;
+  }
+}

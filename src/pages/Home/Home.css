@@ -95,10 +95,16 @@ img {
   margin: 0;
 }
 
-.line {
-  width: 20%;
+.line-jumbroton {
+  width: 10%;
   height: 3px;
   background-color: #202336;
+}
+
+.line-footer {
+  width: 90%;
+  height: 3px;
+  background-color: #c4c4c4;
 }
 
 /* Font */
@@ -377,7 +383,7 @@ img {
   .f-nunito {
     color: #fff;
   }
-  .line {
+  .line-jumbroton {
     background-color: #fff;
   }
 

@@ -1,2 +1,46 @@
-.btn-login {
+/* Start Header Login */
+.icon {
+  width: 133px;
+  height: 44.01px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
+
+.count {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #ffcd61;
+  border-radius: 50%;
+  top: -5px;
+  right: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.img-icon {
+  width: 40px;
+  height: 36px;
+}
+
+.img-profile {
+  /* position: absolute; */
+  width: 40px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profile {
+  width: 133px;
+  height: 44.01px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* End Header Login */

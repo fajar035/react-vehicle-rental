@@ -1,0 +1,154 @@
+.bg-img-forgot {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("../../assets/images/forgot-zeep.webp");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  background-position: center;
+}
+
+.back-forgot {
+  padding: 20px;
+  margin: 60px 40px;
+}
+
+.link-back-forgot {
+  text-decoration: none;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.title-forgot {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 85px;
+  color: #ffffff;
+  margin: 100px 0px;
+}
+
+.body-forgot {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-email-forgot {
+  width: 100%;
+  height: 79px;
+  background: rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  margin-bottom: 30px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  border: none;
+}
+
+/*support google chrome*/
+.input-email-forgot::-webkit-input-placeholder {
+  color: #fff;
+}
+
+/*support mozilla*/
+.input-email-forgot:-moz-input-placeholder {
+  color: #fff;
+}
+
+/*support internet explorer*/
+.input-email-forgot:-ms-input-placeholder {
+  color: #fff;
+}
+
+.btn-link-forgot {
+  width: 100%;
+  height: 79px;
+  background: #ffcd61;
+  box-shadow: 0px 0px 20px rgba(248, 161, 112, 0.47);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #393939;
+  border: none;
+}
+
+.form-forgot {
+  margin-bottom: 80px;
+}
+
+.resend-link-p {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.resend-link {
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+.resend-link:hover {
+  color: #ffcd61;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 425px) {
+  .back-forgot {
+    display: none;
+  }
+
+  .title-forgot {
+    text-align: center;
+    margin-bottom: 70px !important;
+  }
+
+  .form-forgot {
+    margin-bottom: 70px;
+  }
+
+  .resend-link-p {
+    font-size: 17px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .back-forgot {
+    margin: 27px 0;
+  }
+
+  .title-forgot {
+    font-size: 40px !important;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .title-forgot {
+    font-size: 50px;
+  }
+}

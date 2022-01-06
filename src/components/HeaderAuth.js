@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import logo from "./../assets/icons/logo.svg"
+import iconMessage from "./../assets/icons/email.png"
+import userProfile from "./../assets/images/user_profile.webp"
 import { Link } from "react-router-dom"
 import "../pages/Home/Home.css"
 
@@ -49,13 +51,44 @@ export class Header extends Component {
               </li>
             </ul>
 
-            <div className="d-lg-flex col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4  justify-content-lg-between align-items-lg-center p-md-3 p-sm-3 justify-content-xl-around">
-              <Link to="/login" className="f-nunito-login btn-login">
-                Login
-              </Link>
-              <Link to="/signup" className="f-nunito-signup btn-signup">
-                Sign Up
-              </Link>
+            <div className="d-flex flex-row ms-3">
+              <div class="icon">
+                <div class="count ">
+                  <p>10</p>
+                </div>
+                <img src={iconMessage} class="img-icon" alt="icon-message" />
+              </div>
+              <div class="dropdown profile">
+                <img
+                  class="img-profile rounded-circle dropdown-toggle"
+                  src={userProfile}
+                  id="dropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                  alt="icon-profile"
+                />
+
+                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                  <li>
+                    <Link className="dropdown-item">
+                      <i class="fas fa-angle-right float-end me-4"></i>
+                      Edit
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item">
+                      <i class="fas fa-angle-right float-end me-4"></i>
+                      Help
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item">
+                      <i class="fas fa-angle-right float-end me-4"></i>
+                      Log Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </main>
