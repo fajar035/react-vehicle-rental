@@ -1,17 +1,16 @@
 /* Start Border Line */
-.border-line {
+.border-line-login {
   padding: 0;
-  /* background-color: red; */
   height: 600px;
   width: 0%;
   z-index: 1;
   border-left: 1px solid #fff;
   left: 47%;
-  top: 25%;
+  top: 15%;
   position: relative;
 }
 
-.border-line > span {
+.border-line-login > span {
   background-color: #fff;
   width: 20px;
   height: 20px;
@@ -19,12 +18,12 @@
   position: absolute;
 }
 
-.border-line > span:first-child {
+.border-line-login > span:first-child {
   left: -11px;
   top: 0;
 }
 
-.border-line > span:last-child {
+.border-line-login > span:last-child {
   left: -10px;
   bottom: 0;
 }
@@ -204,7 +203,7 @@
     margin-top: 100px;
   }
 
-  .border-line {
+  .border-line-login {
     display: none;
   }
 
@@ -218,8 +217,8 @@
     width: 200px !important;
   }
 
-  .border-line {
-    top: 18%;
+  .border-line-login {
+    top: 18% !important;
     height: 500px;
   }
 
@@ -258,5 +257,9 @@
 
   .no-account {
     font-size: 20px;
+  }
+
+  .border-line-login {
+    top: 21%;
   }
 }

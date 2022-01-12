@@ -31,6 +31,10 @@
   color: #ffffff;
 }
 
+.link-back-forgot:hover {
+  color: #ffcd61;
+}
+
 .title-forgot {
   font-family: Playfair Display;
   font-style: normal;
@@ -38,7 +42,7 @@
   font-size: 64px;
   line-height: 85px;
   color: #ffffff;
-  margin: 100px 0px;
+  margin: 50px 0px;
 }
 
 .body-forgot {

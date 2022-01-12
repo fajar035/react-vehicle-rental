@@ -2,6 +2,12 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 function Jumbroton() {
+  const submitSearch = (e) => {
+    e.preventDefault()
+    const body = {
+      keyword: e.target.email.value
+    }
+  }
   return (
     <div className="row bg-image p-5 jumbotron">
       <div className="col-lg-6 ">
@@ -16,11 +22,12 @@ function Jumbroton() {
           <div className="line-jumbroton col-1 ms-3"></div>
         </div>
 
-        <form className="row mb-5">
+        <form className="row mb-5" onSubmit={submitSearch}>
           {/* input Search */}
           <div className="col-lg-12 p-0">
             <input
               type="text"
+              name="keyword"
               className="input-type mb-5 ms-1"
               placeholder="Type the vehicle (ex. motorbike"
             />
@@ -32,7 +39,8 @@ function Jumbroton() {
                 className="input-select dropdown-toggle p-2 ms-3"
                 type="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+                name="location">
                 Location
               </button>
               <ul className="dropdown-menu p-2">

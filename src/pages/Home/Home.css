@@ -64,6 +64,10 @@ img {
   color: #ffcd61;
 }
 
+.btn-logout {
+  border: none;
+}
+
 /* end header -  font navbar */
 
 /* Start jumbroton */

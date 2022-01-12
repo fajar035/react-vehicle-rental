@@ -17,7 +17,7 @@ function Body() {
             </div>
             <div className="col-lg-3 card  position-relative">
               <img src={vanLogin} className="img-size" alt="van_login" />
-              <div className="city col-9 d-flex flex-row align-self-center justify-content-center position-absolute position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
+              <div className="city col-9 d-flex flex-row align-self-center justify-content-center position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
                 <p className="mt-3 text-center">
                   Merapi <br />
                   <span className="color-subtitle">Yogyakarta</span>
@@ -27,7 +27,7 @@ function Body() {
 
             <div className="col-lg-3 card position-relative">
               <img src={motorcross} className="img-size" alt="van_login" />
-              <div className="city col-9 d-flex flex-row align-self-center justify-content-center position-absolute position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
+              <div className="city col-9 d-flex flex-row align-self-center justify-content-center  position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
                 <p className="mt-3 text-center">
                   Teluk Bogam <br />
                   <span className="color-subtitle">kalimantan</span>
@@ -37,7 +37,7 @@ function Body() {
 
             <div className="col-lg-3 card position-relative">
               <img src={zeep} className="img-size" alt="van_login" />
-              <div className="city col-9 d-flex flex-row align-self-center justify-content-center position-absolute position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
+              <div className="city col-9 d-flex flex-row align-self-center justify-content-center  position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
                 <p className="mt-3 text-center">
                   Bromo <br />
                   <span className="color-subtitle">Malang</span>
@@ -47,7 +47,7 @@ function Body() {
 
             <div className="col-lg-3 card position-relative">
               <img src={matic} className="img-size" alt="van_login" />
-              <div className="city col-9 d-flex flex-row align-self-center justify-content-center position-absolute position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
+              <div className="city col-9 d-flex flex-row align-self-center justify-content-center  position-absolute top-100 start-50 translate-middle bg-light rounded shadow">
                 <p className="mt-3 text-center">
                   Malioboro <br />
                   <span className="color-subtitle">Yogyakarta</span>

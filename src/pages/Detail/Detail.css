@@ -1,0 +1,267 @@
+.link-detail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+}
+
+.title-detail {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  color: #042521;
+}
+
+.detail-title-location {
+  color: rgb(104, 104, 104);
+  font-weight: 400;
+  font-size: 35px;
+}
+
+.detail-status {
+  margin: 30px 0;
+}
+
+.price {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 25px;
+  color: #000000;
+  display: flex;
+  /* justify-content: end; */
+  margin-right: 40px;
+}
+
+.detail-vehicle {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  color: #393939;
+  margin: 30px 0;
+}
+
+.avail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  color: #087e0d;
+}
+
+.no-pre {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 300 !important;
+  font-size: 20px !important;
+  line-height: 24px;
+  color: #9b0a0a !important;
+}
+
+.link-detail-0 {
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+
+.link-detail-0:hover,
+.link-detail:hover {
+  color: #ffcd61;
+}
+
+.img-thumb1 {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.img-thumb2 {
+  height: 150px;
+  width: 200px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.wrapper-carosel > button {
+  height: 40px;
+  width: 60px;
+  align-self: center;
+  background-color: transparent;
+  border: none;
+}
+
+.btn-right,
+.btn-left > i {
+  color: #4a4c53;
+  font-size: 30px;
+}
+
+.btn-plus {
+  width: 70px;
+  height: 70px;
+
+  background: #ffcd61;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 35px;
+  line-height: 25px;
+  color: #000000;
+}
+
+.btn-minus {
+  width: 70px;
+  height: 70px;
+  background: rgba(203, 203, 212, 0.2);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 35px;
+  line-height: 25px;
+  color: #000000;
+}
+
+.number {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 25px;
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+.btn-chat-admin {
+  width: 443px;
+  height: 89px;
+  background: #393939;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 25px;
+  color: #ffcd61;
+}
+
+.btn-reservation {
+  width: 421px;
+  height: 89px;
+  background: #ffcd61;
+  box-shadow: 0px 0px 20px rgba(251, 143, 29, 0.4);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 25px;
+  color: #000000;
+}
+
+.btn-like {
+  width: 225px;
+  height: 89px;
+  background: #393939;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  color: #ffcd61;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 425px) {
+  .wrapper-img {
+    width: 320px;
+    margin-bottom: 20px;
+  }
+
+  .wrapper-text-detail {
+    width: 320px;
+  }
+
+  .container-main {
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrapper-link-detail {
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+
+  .price {
+    margin-left: 40px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container-main {
+    margin: 0;
+  }
+
+  .wrapper-link-detail {
+    margin-left: 20px;
+  }
+
+  .price {
+    justify-content: center;
+    font-size: 30px !important;
+    margin-top: 40px !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .title-detail {
+    font-size: 30px;
+  }
+
+  .detail-title-location {
+    font-size: 20px;
+  }
+
+  .detail-status {
+    margin: 30px 0;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .detail-vehicle {
+    font-size: 16px;
+    line-height: 0.6;
+  }
+
+  .avail {
+    font-size: 20px;
+  }
+
+  .no-pre {
+    font-size: 20px;
+  }
+}

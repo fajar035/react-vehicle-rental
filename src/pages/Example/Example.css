@@ -1,0 +1,16 @@
+.products {
+  flex: 3;
+  border-right: 2px solid black;
+}
+.cart {
+  flex: 1;
+  border-right: 2px solid black;
+}
+
+.food-card {
+  background-color: rgba(218, 165, 32, 0.5);
+  min-width: 20%;
+  max-height: 25%;
+  cursor: pointer;
+  padding: 10px;
+}

@@ -1,0 +1,374 @@
+.btn-save-profile {
+  width: 170px;
+  height: 50px;
+  background: #ffcd61;
+  box-shadow: 0px 0px 20px rgba(248, 161, 112, 0.4);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 19px;
+  line-height: 33px;
+  text-align: center;
+  color: #393939;
+}
+
+.btn-save-profile:hover {
+  color: #fff;
+}
+
+.btn-cansel-profile:hover {
+  color: #ffcd61;
+}
+
+.btn-cansel-profile {
+  width: 170px;
+  height: 50px;
+  background: rgba(203, 203, 212, 0.27);
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 19px;
+  line-height: 33px;
+  text-align: center;
+  color: #393939;
+}
+
+.title-update-profile {
+  margin-left: 90px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  color: #000000;
+}
+
+.wrapper-btn-profile {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper-photo-profile {
+  border: 1px solid #000000;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.photo-profile {
+  width: 100%;
+  height: 100%;
+  /* border-radius: 50%; */
+}
+
+.title-name-user {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 24px;
+  margin-bottom: 40px;
+}
+
+.detail-user {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  color: #b8becd;
+  margin-bottom: 30px;
+  width: 350px;
+  text-align: center;
+}
+
+.radio {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gender {
+  display: inline;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.gender input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.gender:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the gender button is checked, add a blue background */
+.gender input:checked ~ .checkmark {
+  background-color: rgba(255, 205, 97, 1);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.gender input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.gender .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+}
+
+.edit-photo-user {
+  width: 350px;
+  height: 70px;
+  background: #ffcd61;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  color: #393939;
+}
+
+.edit-password-user {
+  width: 350px;
+  height: 70px;
+  background: #393939;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  color: #ffcd61;
+}
+
+.edit-photo-user:hover {
+  color: #fff;
+}
+
+.edit-password-user:hover {
+  color: #fff;
+}
+
+.f-form,
+.f-form-title,
+.f-form-label,
+.f-form-input {
+  font-family: Nunito;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.f-form-title {
+  font-weight: 900;
+  line-height: 33px;
+}
+
+.f-form-label {
+  color: rgba(159, 159, 159, 1);
+  font-weight: normal;
+  line-height: 33px;
+}
+
+.f-form-input {
+  line-height: 50px;
+}
+
+.form-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 80%;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 50px;
+  color: #000000;
+}
+.form-input:focus {
+  border: none;
+}
+
+.btn-submit {
+  display: inline-block;
+  width: 100%;
+  height: 70px;
+  background: #393939;
+  border-radius: 10px;
+  color: rgba(255, 205, 97, 1);
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 425px) {
+  .wrapper-title-profile {
+    margin-bottom: 50px;
+  }
+
+  .wrapper-btn-profile {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+
+  .wrapper-photo-profile {
+    width: 250px;
+    height: 250px;
+    margin: 0px !important;
+  }
+
+  .main-profile {
+    text-align: center;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .detail-user > p {
+    text-align: center;
+  }
+
+  .detail-user p:nth-child(2) {
+    padding-left: 0 !important;
+  }
+
+  .gender {
+    margin-right: 20px;
+  }
+
+  .wrapper-btn-edit-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .edit-photo-user {
+    margin-bottom: 30px;
+  }
+
+  .form-input {
+    font-size: 19px;
+    width: 350px;
+  }
+
+  .btn-submit {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper-btn-profile {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .main-profile {
+    margin-top: 80px;
+  }
+
+  .wrapper-photo-profile {
+    width: 250px;
+    height: 250px;
+    margin-left: 80px;
+  }
+
+  .detail-user,
+  .title-name-user,
+  .radio {
+    padding-left: 0 !important;
+  }
+
+  .title-name-user {
+    font-size: 30px !important;
+  }
+
+  .detail-user {
+    font-size: 20px;
+    /* border: 1px solid black; */
+    text-align: start;
+  }
+
+  .detail-user > p:nth-child(2) {
+    padding-left: 40px;
+  }
+
+  .radio {
+    display: inline-block;
+  }
+
+  .edit-photo-user,
+  .edit-password-user {
+    height: 60px;
+    width: 250px;
+  }
+
+  .f-form-input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .detail-user,
+  .title-name-user,
+  .radio {
+    padding-left: 120px;
+  }
+
+  .title-name-user {
+    font-size: 40px;
+  }
+
+  .detail-user {
+    width: 450px;
+  }
+
+  .radio {
+    width: 450px;
+  }
+
+  .wrapper-btn-edit-user {
+    width: 100%;
+  }
+}

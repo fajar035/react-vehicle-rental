@@ -7,7 +7,7 @@
   z-index: 1;
   border-left: 1px solid #fff;
   left: 47%;
-  top: 18%;
+  top: 7%;
   position: relative;
 }
 
@@ -71,6 +71,6 @@
 
 @media only screen and (max-width: 1024px) {
   .border-line-signup {
-    top: 13%;
+    top: 14%;
   }
 }

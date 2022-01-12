@@ -1,0 +1,150 @@
+.input-search-type::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8becd;
+}
+
+.input-search-type:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #b8becd;
+}
+
+.input-search-type::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #b8becd;
+}
+
+.input-search-type {
+  width: 90%;
+  height: 72px;
+  border: 0.8px solid #afb0b9;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 20px;
+  border: none;
+}
+
+.input-search-type:focus {
+  outline: none;
+}
+
+.btn-search-type {
+  height: 72px;
+  width: 70px;
+  border: none;
+  background-color: transparent;
+}
+
+.btn-search-type > i {
+  font-size: 35px;
+}
+
+.link-view-all {
+  text-decoration: none;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 60px;
+
+  color: #fb8f1d;
+}
+
+.link-view-all:hover {
+  color: black;
+}
+
+.title-category-vehicles {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.card-type-vehicles {
+  width: 250px;
+}
+
+.city-type-vehicles {
+  height: 50px;
+  width: 130px;
+  top: 0;
+  position: absolute;
+  /* padding: 10px; */
+}
+
+.subtitle-type-vehicles {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #042521;
+  margin: 0;
+}
+
+.color-subtitle-type-vehicle {
+  color: #918f8f;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 425px) {
+  .input-search-type {
+    height: 10px;
+    height: 100px;
+    /* border: 1px solid black; */
+    font-size: 13px;
+    padding: 30;
+  }
+
+  .fa-search {
+    font-size: 20px !important;
+  }
+
+  .btn-search-type {
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  .title-category-vehicles {
+    font-size: 30px;
+  }
+  .link-view-all {
+    font-size: 14px;
+  }
+
+  .container-input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .input-search-type {
+    height: 10px;
+    padding: 30;
+  }
+
+  .btn-search-type {
+    height: 40px;
+    width: 40px;
+  }
+
+  .container-input {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-search-type {
+    height: 40px;
+    width: 40px;
+  }
+
+  .card-type-vehicles {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+}

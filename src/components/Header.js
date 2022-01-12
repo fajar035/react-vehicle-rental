@@ -1,17 +1,34 @@
-import React, { Component } from "react"
+import userProfile from "./../assets/images/photo-profile-default.webp"
+import iconMessage from "./../assets/icons/email.png"
 import logo from "./../assets/icons/logo.svg"
 import { Link } from "react-router-dom"
 import "../pages/Home/Home.css"
+import React from "react"
+import { connect } from "react-redux"
+import { logoutAction } from "../redux/actions/logout"
 
-export class Header extends Component {
+class Header extends React.Component {
+  onClickLogout = () => {
+    // localStorage.removeItem("vehicle-token")
+    this.props.logoutDispatch()
+  }
+  componentDidMount() {
+    // const token = this.props.auth.userDatatoken
+    // if (!token) {
+    //   this.props.history.push("/")
+    // }
+  }
   render() {
+    const token = this.props.auth.userData.token
+    console.log("TOKEN", token)
+    // console.log("HEADER", this.props.logout.token)
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
         <main className="container-fluid p-0">
           <Link className="navbar-brand ms-5" to="/">
             <img className="logo" src={logo} alt="logo" />
           </Link>
-
           <button
             className="navbar-toggler btn-dropwdown"
             type="button"
@@ -33,7 +50,7 @@ export class Header extends Component {
                 </Link>
               </li>
               <li className="nav-item align-content-center">
-                <Link to="/detail" className="navbar-font">
+                <Link to="/vehicles" className="navbar-font">
                   Vehicle Type
                 </Link>
               </li>
@@ -48,15 +65,67 @@ export class Header extends Component {
                 </Link>
               </li>
             </ul>
+            {/* Komponen button login & sign up */}
+            {!token ? (
+              <div className="d-lg-flex col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4  justify-content-lg-between align-items-lg-center p-md-3 p-sm-3 justify-content-xl-around">
+                <Link to="/login" className="f-nunito-login btn-login">
+                  Login
+                </Link>
+                <Link to="/signup" className="f-nunito-signup btn-signup">
+                  Sign Up
+                </Link>
+              </div>
+            ) : (
+              <div className="d-flex flex-row ms-3">
+                <div className="icon">
+                  <div className="count ">
+                    <p>10</p>
+                  </div>
+                  <img
+                    src={iconMessage}
+                    className="img-icon"
+                    alt="icon-message"
+                  />
+                </div>
+                <div className="dropdown profile">
+                  <img
+                    className="img-profile img-fluid rounded-circle dropdown-toggle"
+                    src={userProfile}
+                    id="dropdownMenuLink"
+                    data-bs-toggle="dropdown"
+                    alt="icon-profile"
+                  />
 
-            <div className="d-lg-flex col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4  justify-content-lg-between align-items-lg-center p-md-3 p-sm-3 justify-content-xl-around">
-              <Link to="/login" className="f-nunito-login btn-login">
-                Login
-              </Link>
-              <Link to="/signup" className="f-nunito-signup btn-signup">
-                Sign Up
-              </Link>
-            </div>
+                  <ul
+                    className="dropdown-menu "
+                    aria-labelledby="dropdownMenuLink">
+                    <li>
+                      <Link to="/profile" className="dropdown-item">
+                        <i className="fas fa-angle-right float-end me-4"></i>
+                        Edit
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link to="" className="dropdown-item">
+                        <i className="fas fa-angle-right float-end me-4"></i>
+                        Help
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/"
+                        className="dropdown-item btn-logout"
+                        onClick={this.onClickLogout}>
+                        <i className="fas fa-angle-right float-end me-4"></i>
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+            {/* Komponen button login & sign up */}
           </div>
         </main>
       </nav>
@@ -64,4 +133,19 @@ export class Header extends Component {
   }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutDispatch: () => {
+      dispatch(logoutAction())
+    }
+  }
+}
+
+const AppWithRedux = connect(mapStateToProps, mapDispatchToProps)(Header)
+export default AppWithRedux
