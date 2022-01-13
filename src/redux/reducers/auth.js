@@ -10,6 +10,7 @@ const initialState = {
   isPending: false,
   isFulfilled: false,
   isRejected: false,
+  isLogout: false,
   err: {}
 }
 const authReducer = (prevState = initialState, action) => {
@@ -19,15 +20,17 @@ const authReducer = (prevState = initialState, action) => {
   switch (action.type) {
     // case authLogin + pending:
     case authLogout:
+      // if (prevState.isLogout === true) {
+      localStorage.removeItem("vehicle-token")
+      // }
+      // this.props.history.push("/")
       var userData = {
         ...prevState.userData,
         token: null
       }
       return {
         ...prevState,
-        isRejected: true,
-        isPending: false,
-        isFulfilled: true,
+        isLogout: true,
         userData
       }
 
@@ -49,6 +52,7 @@ const authReducer = (prevState = initialState, action) => {
       }
       return {
         ...prevState,
+        isLogout: false,
         isRejected: false,
         isPending: false,
         isFulfilled: true,

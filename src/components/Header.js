@@ -12,15 +12,10 @@ class Header extends React.Component {
     // localStorage.removeItem("vehicle-token")
     this.props.logoutDispatch()
   }
-  componentDidMount() {
-    // const token = this.props.auth.userDatatoken
-    // if (!token) {
-    //   this.props.history.push("/")
-    // }
-  }
+
   render() {
     const token = this.props.auth.userData.token
-    console.log("TOKEN", token)
+
     // console.log("HEADER", this.props.logout.token)
 
     return (

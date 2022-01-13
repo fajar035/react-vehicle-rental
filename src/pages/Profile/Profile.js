@@ -9,7 +9,7 @@ import { connect } from "react-redux"
 class Profile extends React.Component {
   state = { dataProfile: {} }
   componentDidMount() {
-    const userToken = this.props.auth.token
+    const userToken = this.props.auth.userData.token
     console.log("TOKEN", userToken)
     const url = "http://localhost:8000/users/id"
     axios
