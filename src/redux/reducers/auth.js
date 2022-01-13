@@ -48,7 +48,9 @@ const authReducer = (prevState = initialState, action) => {
 
       userData = {
         ...prevState.userData,
-        token: data.result.token
+        token: data.result.token,
+        photo: process.env.REACT_APP_HOST + data.result.photo,
+        role: data.result.role
       }
       return {
         ...prevState,

@@ -10,7 +10,7 @@ class Profile extends React.Component {
   state = { dataProfile: {} }
   componentDidMount() {
     const userToken = this.props.auth.userData.token
-    console.log("TOKEN", userToken)
+
     const url = "http://localhost:8000/users/id"
     axios
       .get(url, { headers: { "x-access-token": userToken } })
@@ -30,6 +30,7 @@ class Profile extends React.Component {
   render() {
     const { name, gender, email, phone, birtday, address, photo } =
       this.state.dataProfile
+    console.log(photo)
 
     return (
       <main>
