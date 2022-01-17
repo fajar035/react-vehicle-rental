@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Header from "../components/Header"
-import { Link, useRouteMatch } from "react-router-dom"
+import { Link } from "react-router-dom"
 // import vanLogin from "../assets/images/van_login.webp"
 // import motorcross from "../assets/images/motocross.webp"
 // import zeep from "../assets/images/zeep.webp"
