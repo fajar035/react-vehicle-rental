@@ -1,11 +1,11 @@
 import React from "react"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import "./History.css"
 import { history } from "../../utils/https/history"
-import Splitter from "../../components/Splitter"
+// import Splitter from "../../components/Splitter"
 
 class History extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class History extends React.Component {
   render() {
     // console.log("DATA-HISTORY-STATE", this.state.dataHistory)
     const history = this.state.dataHistory
-    const success = this.state.isOk
+    // const success = this.state.isOk
     return (
       <>
         <Header />

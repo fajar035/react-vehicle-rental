@@ -12,8 +12,8 @@ function NotFound() {
         viewBox="0 0 837 1045"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        throwIfNamespace="http://www.w3.org/1999/xlink"
-        throwIfNamespace="http://www.bohemiancoding.com/sketch/ns">
+        throwIfNamespace="http://www.w3.org/1999/xlink">
+        {/* throwIfNamespace="http://www.bohemiancoding.com/sketch/ns"> */}
         <g
           id="Page-1"
           stroke="none"
