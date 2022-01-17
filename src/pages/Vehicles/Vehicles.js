@@ -20,7 +20,7 @@ function Vehicles() {
   const [vehiclesCars, setVehiclesCars] = useState([])
   const [vehiclesPopular, setVehiclesPopular] = useState([])
   const [isOk, setisOk] = useState(false)
-  const [height, setHeight] = useState("")
+  // const [height, setHeight] = useState("")
 
   useEffect(() => {
     getVehiclesBike()
@@ -87,78 +87,78 @@ function Vehicles() {
 
   const hostBackend = process.env.REACT_APP_HOST
 
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "red" }}
-        onClick={onClick}
-      />
-    )
-  }
+  // function SampleNextArrow(props) {
+  //   const { className, style, onClick } = props
+  //   return (
+  //     <div
+  //       className={className}
+  //       style={{ ...style, display: "block", background: "red" }}
+  //       onClick={onClick}
+  //     />
+  //   )
+  // }
 
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props
-    return (
-      <div
-        className={className}
-        style={{
-          // ...style,
-          display: "flex",
-          background: "green",
-          color: "black",
-          height: "100px",
-          alignItems: "center"
-        }}
-        onClick={onClick}
-      />
-    )
-  }
+  // function SamplePrevArrow(props) {
+  //   const { className, style, onClick } = props
+  //   return (
+  //     <div
+  //       className={className}
+  //       style={{
+  //         // ...style,
+  //         display: "flex",
+  //         background: "green",
+  //         color: "black",
+  //         height: "100px",
+  //         alignItems: "center"
+  //       }}
+  //       onClick={onClick}
+  //     />
+  //   )
+  // }
 
-  const settings = {
-    // className: "center",
-    // centerMode: true,
-    dots: true,
-    autoplay: true,
-    infinite: true,
-    slidesToShow: 3,
-    centerPadding: "60px",
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  }
+  // const settings = {
+  //   // className: "center",
+  //   // centerMode: true,
+  //   dots: true,
+  //   autoplay: true,
+  //   infinite: true,
+  //   slidesToShow: 3,
+  //   centerPadding: "60px",
+  //   slidesToScroll: 1,
+  //   nextArrow: <SampleNextArrow />,
+  //   prevArrow: <SamplePrevArrow />,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //         dots: true
+  //       }
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2
+  //       }
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1
+  //       }
+  //     }
+  //   ]
+  // }
 
   return (
     <main>
       <Header />
-
+      {isOk}
       <div className="container px-4 mb-5">
         <div className="col-lg-12 col-sm-12 col-md-12 justify-content-center d-flex">
           <div className="col-lg-12 col-sm-12 col-md-12  border rounded-3 mt-5 container-input">

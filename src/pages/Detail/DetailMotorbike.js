@@ -1,11 +1,10 @@
 import React from "react"
 import "./Detail.css"
-import Bike from "../../assets/images/sepeda_detail.webp"
+// import Bike from "../../assets/images/sepeda_detail.webp"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { Link } from "react-router-dom"
 import axios from "axios"
-import VehiclePopular from "../../components/VehiclePopular"
 
 class Detail extends React.Component {
   state = {
@@ -52,7 +51,7 @@ class Detail extends React.Component {
   }
 
   render() {
-    const { match } = this.props
+    // const { match } = this.props
     const vehiclesMotorBike = this.state.vehiclesMotorBike
     const hostBackend = process.env.REACT_APP_HOST
 
