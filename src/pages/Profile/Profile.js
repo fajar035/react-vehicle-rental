@@ -2,7 +2,7 @@ import React from "react"
 import "./Profile.css"
 import Header from "../../components/Header"
 import { Link } from "react-router-dom"
-import photoProfile from "../../assets/images/photo-profile-default.webp"
+// import photoProfile from "../../assets/images/photo-profile-default.webp"
 import axios from "axios"
 import { connect } from "react-redux"
 
