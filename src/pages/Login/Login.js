@@ -23,6 +23,10 @@ class Login extends React.Component {
       localStorage["vehicle-token"] = JSON.stringify(
         this.props.auth.userData.token
       )
+      localStorage["user-photo"] = JSON.stringify(
+        this.props.auth.userData.photo
+      )
+      localStorage["user-role"] = JSON.stringify(this.props.auth.userData.role)
 
       this.props.history.push("/")
     }

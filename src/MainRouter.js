@@ -15,7 +15,10 @@ import Profile from "./pages/Profile/Profile"
 import Vehicles from "./pages/Vehicles/Vehicles"
 import Signup from "./pages/Signup/Signup"
 import Forgot from "./pages/Forgot/Forgot"
-import Detail from "./pages/Detail/Detail"
+import DetailPopular from "./pages/Detail/DetailPopular"
+import DetailBike from "./pages/Detail/DetailBike"
+import DetailMotorbike from "./pages/Detail/DetailMotorbike"
+import DetailCars from "./pages/Detail/DetailCars"
 import Example from "./pages/Example/Example"
 import NotFound from "./pages/404/404"
 import VehiclePopular from "./components/VehiclePopular"
@@ -24,6 +27,7 @@ import VehicleMotorbike from "./components/VehicleMotorbike"
 import vehicleBike from "./components/VehicleBike"
 import History from "./pages/History/History"
 import Reservation from "./pages/Reservation/Reservation"
+import Chat from "./pages/Chat/Chat"
 
 class MainRouter extends React.Component {
   render() {
@@ -41,11 +45,25 @@ class MainRouter extends React.Component {
 
             {/* Popular */}
             <Route exact path="/vehicles/popular" component={VehiclePopular} />
-            <Route path="/vehicles/popular/detail" component={Detail} />
+
+            {/* START DETAIL */}
+            <Route
+              exact
+              path="/vehicles/popular/detail/:id"
+              component={DetailPopular}
+            />
+
+            {/* END DETAIL */}
+
+            <Route
+              path="/vehicles/popular/reservation"
+              component={Reservation}
+            />
+            <Route path="/vehicles/popular/chat" component={Chat} />
 
             {/* cars */}
             <Route exact path="/vehicles/cars" component={vehicleCars} />
-            <Route path="/vehicles/cars/detail" component={Detail} />
+            <Route path="/vehicles/cars/detail/:id" component={DetailCars} />
 
             {/* Motorbike */}
             <Route
@@ -53,11 +71,14 @@ class MainRouter extends React.Component {
               path="/vehicles/motorbike"
               component={VehicleMotorbike}
             />
-            <Route path="/vehicles/motorbike/detail" component={Detail} />
+            <Route
+              path="/vehicles/motorbike/detail/:id"
+              component={DetailMotorbike}
+            />
 
             {/* Bike */}
             <Route exact path="/vehicles/bike/" component={vehicleBike} />
-            <Route path="/vehicles/bike/detail" component={Detail} />
+            <Route path="/vehicles/bike/detail/:id" component={DetailBike} />
             <Route
               path="/vehicles/bike/detail/reservation"
               component={Reservation}

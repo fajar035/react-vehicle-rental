@@ -1,0 +1,110 @@
+.new-arival {
+  height: 100vh;
+}
+
+.filter-history {
+  color: #b8becd;
+}
+
+.line-history {
+  height: 1px;
+  background-color: #b8becd;
+  width: 83%;
+  margin: 40px 0;
+}
+
+.week-history {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 180%;
+  letter-spacing: -0.02em;
+  color: #c4c4c4;
+}
+
+.input-search-type-history {
+  width: 90%;
+  height: 72px;
+  border: 0.8px solid #afb0b9;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 20px;
+  border: none;
+}
+
+.input-search-type-history::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8becd;
+}
+
+.input-search-type-history:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #b8becd;
+}
+
+.input-search-type-history::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #b8becd;
+}
+
+.title-history-detail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.02em;
+  color: #393939;
+}
+
+.date-history-detail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 33px;
+  letter-spacing: -0.02em;
+  color: #393939;
+}
+
+.prepayment-history-detail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.02em;
+  color: #393939;
+}
+
+.status-history-detail {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 33px;
+  letter-spacing: -0.02em;
+  color: #0ea800;
+}
+
+@media only screen and (min-width: 1024) {
+  /* .input-search-type-history {
+    width: 90%;
+    height: 72px;
+  } */
+}
+
+@media only screen and (min-width: 768) {
+  /* .input-search-type-history {
+    width: 90%;
+    height: 72px;
+  } */
+}
+
+@media only screen and (min-width: 425) {
+  /* .input-search-type-history {
+    width: 90%;
+    height: 72px;
+  } */
+}

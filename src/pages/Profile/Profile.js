@@ -30,7 +30,7 @@ class Profile extends React.Component {
   render() {
     const { name, gender, email, phone, birtday, address, photo } =
       this.state.dataProfile
-    console.log(photo)
+    const photoProfile = process.env.REACT_APP_HOST + photo
 
     return (
       <main>
@@ -76,8 +76,8 @@ class Profile extends React.Component {
                       <input
                         type="radio"
                         name="Pria"
-                        value={gender}
-                        checked={gender === "Pria"}
+                        value={!gender ? "Pria" : gender}
+                        // checked={gender === "Pria"}
                       />
                       <span className="checkmark"></span>
                     </label>
@@ -86,8 +86,8 @@ class Profile extends React.Component {
                       <input
                         type="radio"
                         name="Wanita"
-                        value={gender}
-                        checked={gender === "Wanita"}
+                        value={!gender ? "Wanita" : gender}
+                        // checked={gender === "Wanita"}
                       />
                       <span className="checkmark"></span>
                     </label>
@@ -125,7 +125,7 @@ class Profile extends React.Component {
                     type="text"
                     id="address"
                     className="form-input f-form-input"
-                    defaultValue={address}
+                    defaultValue={!address ? "hahaha" : address}
                   />
                 </div>
 

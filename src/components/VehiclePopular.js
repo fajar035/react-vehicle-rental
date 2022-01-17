@@ -1,4 +1,5 @@
 import React from "react"
+import { useState, useEffect } from "react"
 import Header from "../components/Header"
 import { Link } from "react-router-dom"
 import vanLogin from "../assets/images/van_login.webp"
@@ -7,11 +8,33 @@ import zeep from "../assets/images/zeep.webp"
 import matic from "../assets/images/matic.webp"
 import Footer from "../components/Footer"
 import { useRouteMatch } from "react-router-dom"
+import axios from "axios"
 
 function VehiclePopular(props) {
-  console.log("vehicle popular", props)
   let { url } = useRouteMatch()
-  console.log(url)
+  const role = JSON.parse(localStorage["user-role"])
+
+  const [vehiclePopular, setVehiclesPopular] = useState([])
+
+  useEffect(() => {
+    getVehiclePopular()
+  }, [])
+
+  const getVehiclePopular = () => {
+    const url = `${process.env.REACT_APP_HOST}/history/popular`
+    axios
+      .get(url)
+      .then((res) => {
+        const vehiclePopular = res.data.popular
+        setVehiclesPopular(vehiclePopular)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const hostBackend = process.env.REACT_APP_HOST
+  console.log("ROLE-VEHICLE-POPULAR-COMPONENT", role)
   return (
     <main>
       <Header />
@@ -28,179 +51,41 @@ function VehiclePopular(props) {
               <i className="fas fa-search"></i>
             </button>
           </div>
+          {/* {role === 2 ? : } */}
         </div>
+
+        {role === "2" ? (
+          <div className="col-lg-12 col-sm-12 col-md-12  border rounded-3 mt-5 container-input">
+            <button className="add-item">Add Item Vehicle</button>
+          </div>
+        ) : (
+          <div></div>
+        )}
 
         {/* Popular */}
         <h3 className="mb-5 mt-5 f-playfair-main">Popular in town</h3>
 
         {/* Card */}
         <div className="row position-relative mb-lg-5">
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <Link to={`${url}/detail`}>
-              <img src={vanLogin} className="img-size" alt="van_login" />
-              <div className=".city-type-vehicles col-9 position-absolute bottom-0  bg-light rounded shadow ">
-                <p className="mt-3">
-                  Merapi <br />
-                  <span className="color-subtitle">Yogyakarta</span>
-                </p>
+          {vehiclePopular.map((item, idx) => {
+            return (
+              <div key={idx} className="col-lg-3 col-md-6 card  ">
+                <Link to={`${url}/detail/${item.id}`}>
+                  <img
+                    src={`${hostBackend}${item.photo}`}
+                    className="img-size"
+                    alt="van_login"
+                  />
+                  <div className="city-type-vehicles  bg-light rounded shadow ">
+                    <p className="mt-3">
+                      {item.vehicle} <br />
+                      <span className="color-subtitle">{item.location}</span>
+                    </p>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={motorcross} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Teluk Bogam <br />
-                <span className="color-subtitle">Kalimantan</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={zeep} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Bromo <br />
-                <span className="color-subtitle">Malang</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={matic} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Malioboro <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="row position-relative mb-lg-5">
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={vanLogin} className="img-size" alt="van_login" />
-            <div className=".city-type-vehicles col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Merapi <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={motorcross} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Teluk Bogam <br />
-                <span className="color-subtitle">Kalimantan</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={zeep} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Bromo <br />
-                <span className="color-subtitle">Malang</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={matic} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Malioboro <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="row position-relative mb-lg-5">
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={vanLogin} className="img-size" alt="van_login" />
-            <div className=".city-type-vehicles col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Merapi <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={motorcross} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Teluk Bogam <br />
-                <span className="color-subtitle">Kalimantan</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={zeep} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Bromo <br />
-                <span className="color-subtitle">Malang</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={matic} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Malioboro <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="row position-relative mb-lg-5">
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={vanLogin} className="img-size" alt="van_login" />
-            <div className=".city-type-vehicles col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Merapi <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={motorcross} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Teluk Bogam <br />
-                <span className="color-subtitle">Kalimantan</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={zeep} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Bromo <br />
-                <span className="color-subtitle">Malang</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 card  position-relative">
-            <img src={matic} className="img-size" alt="van_login" />
-            <div className=".city col-9 position-absolute bottom-0  bg-light rounded shadow ">
-              <p className="mt-3">
-                Malioboro <br />
-                <span className="color-subtitle">Yogyakarta</span>
-              </p>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </div>
 

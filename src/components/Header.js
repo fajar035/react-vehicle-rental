@@ -16,8 +16,6 @@ class Header extends React.Component {
   render() {
     const token = this.props.auth.userData.token
     const photo = this.props.auth.userData.photo
-    const role = this.props.auth.userData.role
-    console.log(photo)
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -86,7 +84,9 @@ class Header extends React.Component {
                 <div className="dropdown profile">
                   <img
                     className="img-profile img-fluid rounded-circle dropdown-toggle"
-                    src={photo}
+                    src={
+                      !photo ? userProfile : process.env.REACT_APP_HOST + photo
+                    }
                     id="dropdownMenuLink"
                     data-bs-toggle="dropdown"
                     alt="icon-profile"

@@ -207,6 +207,7 @@ img {
 
 .card {
   border: none;
+  margin-bottom: 100px;
 }
 
 .img-size {
@@ -215,6 +216,20 @@ img {
   background-size: cover;
   position: relative;
   background-position: center;
+}
+
+.city-home {
+  height: 80px;
+  width: 130px;
+  border-radius: 10px;
+  bottom: -40px;
+  background-color: #f8f9fa;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  left: 25%;
+  justify-content: center;
+  justify-items: center;
 }
 
 .next {

@@ -48,4 +48,39 @@
   height: 100px;
 }
 
+.dropdown-message {
+  width: 100px;
+  height: 100px;
+}
 /* End Header Login */
+
+/* Start Splitter */
+.title-splitter {
+  height: 40px;
+  margin-bottom: 40px;
+  animation: gradient 2s infinite;
+  background: linear-gradient(90deg, #8a8a8a, #1a1a1a, #8a8a8a);
+  background-size: 400% 400%;
+}
+
+.body-splitter {
+  height: 300px;
+  margin-bottom: 50px;
+  animation: gradient 2s infinite;
+  background: linear-gradient(90deg, #8a8a8a, #4b4d4c, #8a8a8a);
+  background-size: 400% 400%;
+}
+
+.wrapper-splitter {
+  margin: 40px 0;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* End Splitter */

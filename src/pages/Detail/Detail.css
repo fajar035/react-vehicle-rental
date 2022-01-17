@@ -139,6 +139,10 @@
   color: #000000;
 }
 
+.wrapper-text-detail {
+  padding: 50px;
+}
+
 .number {
   font-family: Nunito;
   font-style: normal;

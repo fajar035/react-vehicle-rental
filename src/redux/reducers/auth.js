@@ -1,11 +1,13 @@
 import { ACTION_STRING } from "../actions/actionString"
 import { ActionType } from "redux-promise-middleware"
 
+// import photoDefault from "../../assets/images/userProfile.webp"
+
 const initialState = {
   userData: {
     token: JSON.parse(localStorage["vehicle-token"] || null),
-    photo: "",
-    role: 0
+    photo: JSON.parse(localStorage["user-photo"] || null),
+    role: JSON.parse(localStorage["user-role"] || null)
   },
   isPending: false,
   isFulfilled: false,
@@ -22,6 +24,9 @@ const authReducer = (prevState = initialState, action) => {
     case authLogout:
       // if (prevState.isLogout === true) {
       localStorage.removeItem("vehicle-token")
+      localStorage.removeItem("user-photo")
+      localStorage.removeItem("user-role")
+
       // }
       // this.props.history.push("/")
       var userData = {
@@ -49,7 +54,7 @@ const authReducer = (prevState = initialState, action) => {
       userData = {
         ...prevState.userData,
         token: data.result.token,
-        photo: process.env.REACT_APP_HOST + data.result.photo,
+        photo: data.result.photo,
         role: data.result.role
       }
       return {

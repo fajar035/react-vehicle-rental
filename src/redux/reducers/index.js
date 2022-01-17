@@ -1,13 +1,10 @@
 import { combineReducers } from "redux"
-// menggabungkan semua reducer menjadi 1
 import authReducer from "./auth"
-import logoutReducer from "./logout"
-// import themeReducer from "./theme"
+import cardReducer from "./card"
 
 const reducers = combineReducers({
-  auth: authReducer
-  // logout: authReducer
-  // theme: themeReducer
+  auth: authReducer,
+  card: cardReducer
 })
 
 export default reducers
