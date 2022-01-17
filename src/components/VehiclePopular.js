@@ -12,7 +12,11 @@ import axios from "axios"
 
 function VehiclePopular(props) {
   let { url } = useRouteMatch()
+  if (!localStorage["user-role"]) {
+    localStorage.setItem("user-role", "1")
+  }
   const role = JSON.parse(localStorage["user-role"])
+  console.log("ROLE-HALAMAN-POPULAR", localStorage["user-roleD"])
 
   const [vehiclePopular, setVehiclesPopular] = useState([])
 
@@ -58,6 +62,8 @@ function VehiclePopular(props) {
           <div className="col-lg-12 col-sm-12 col-md-12  border rounded-3 mt-5 container-input">
             <button className="add-item">Add Item Vehicle</button>
           </div>
+        ) : role === null ? (
+          <div>hahahaha</div>
         ) : (
           <div></div>
         )}
