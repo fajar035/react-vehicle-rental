@@ -40,6 +40,10 @@ class Home extends React.Component {
     const success = this.state.isOk
     const hostBackend = process.env.REACT_APP_HOST
     const popular = this.state.dataPopular
+    if (!localStorage["user-role"]) {
+      localStorage.setItem("user-role", "1")
+    }
+    const role = JSON.parse(localStorage["user-role"])
 
     const submitSearch = (e) => {
       e.preventDefault()
@@ -148,6 +152,18 @@ class Home extends React.Component {
                         </div>
                       )
                     })}
+
+                    {role === "2" ? (
+                      <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
+                        <Link to="/add-item" className="btn-add-item">
+                          Add New Items
+                        </Link>
+                      </div>
+                    ) : role === null ? (
+                      <div></div>
+                    ) : (
+                      <div></div>
+                    )}
 
                     {/* Testimonial */}
                     <div className="col-lg-12 mt-5">

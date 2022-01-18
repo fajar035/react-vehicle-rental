@@ -122,6 +122,18 @@
   color: #918f8f;
 }
 
+.add-item {
+  border: none;
+  background-color: transparent;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  color: #b8becd;
+}
+
 /* RESPONSIVE */
 @media only screen and (max-width: 425px) {
   .input-search-type {

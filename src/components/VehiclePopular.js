@@ -59,11 +59,13 @@ function VehiclePopular(props) {
         </div>
 
         {role === "2" ? (
-          <div className="col-lg-12 col-sm-12 col-md-12  border rounded-3 mt-5 container-input">
-            <button className="add-item">Add Item Vehicle</button>
+          <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
+            <button className="add-item">
+              Click item to see details and reservation
+            </button>
           </div>
         ) : role === null ? (
-          <div>hahahaha</div>
+          <div></div>
         ) : (
           <div></div>
         )}

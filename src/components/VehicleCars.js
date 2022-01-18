@@ -33,6 +33,10 @@ class VehicleCars extends React.Component {
     const { url } = this.props.match
     const hostBackend = process.env.REACT_APP_HOST
     const vehiclesCars = this.state.vehiclesCars
+    if (!localStorage["user-role"]) {
+      localStorage.setItem("user-role", "1")
+    }
+    const role = JSON.parse(localStorage["user-role"])
 
     return (
       <main>
@@ -51,6 +55,18 @@ class VehicleCars extends React.Component {
               </button>
             </div>
           </div>
+
+          {role === "2" ? (
+            <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
+              <button className="add-item">
+                Click item to see details and reservation
+              </button>
+            </div>
+          ) : role === null ? (
+            <div></div>
+          ) : (
+            <div></div>
+          )}
 
           {/* Popular */}
           <h3 className="mb-5 mt-5 f-playfair-main">Cars</h3>
