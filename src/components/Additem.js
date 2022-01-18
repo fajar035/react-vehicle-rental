@@ -57,10 +57,10 @@ export class Additem extends Component {
 
   submitAddItem = (e) => {
     e.preventDefault()
-    const body = {
-      email: e.target.email.value,
-      password: e.target.password.value
-    }
+    // const body = {
+    //   email: e.target.email.value,
+    //   password: e.target.password.value
+    // }
   }
 
   render() {
