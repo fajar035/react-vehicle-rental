@@ -177,7 +177,7 @@ class Profile extends React.Component {
 
   render() {
     const { isSuccess, dataUser, photoProfile } = this.state
-    const { id, name, phone, gender, email, birtday, address, photo } = dataUser
+    const { id, name, phone, gender, email, birtday, address } = dataUser
 
     let isGender = false
 

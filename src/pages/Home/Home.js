@@ -6,7 +6,6 @@ import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { connect } from "react-redux"
 import { cardAction } from "../../redux/actions/card"
-import Splitter from "../../components/Splitter"
 import Loading from "../../components/Loading"
 
 class Home extends React.Component {
