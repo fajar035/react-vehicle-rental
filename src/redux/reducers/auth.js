@@ -1,5 +1,6 @@
 import { ACTION_STRING } from "../actions/actionString"
 import { ActionType } from "redux-promise-middleware"
+import Swal from "sweetalert2"
 
 // import photoDefault from "../../assets/images/userProfile.webp"
 
@@ -69,6 +70,7 @@ const authReducer = (prevState = initialState, action) => {
     // case authLogin + rejected:
     case authLogin.concat("_", Rejected):
       const err = action.payload
+
       return {
         ...prevState,
         isPending: false,

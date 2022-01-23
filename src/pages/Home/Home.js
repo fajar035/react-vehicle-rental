@@ -7,6 +7,7 @@ import Footer from "../../components/Footer"
 import { connect } from "react-redux"
 import { cardAction } from "../../redux/actions/card"
 import Splitter from "../../components/Splitter"
+import Loading from "../../components/Loading"
 
 class Home extends React.Component {
   constructor(props) {
@@ -133,11 +134,13 @@ class Home extends React.Component {
                       return (
                         <div
                           key={idx}
-                          className="col-lg-3 col-md-6 card  position-relative">
-                          <Link to={`/vehicles/popular/detail/${item.id}`}>
+                          className="col-lg-3 col-md-6 card position-relative ">
+                          <Link
+                            to={`/vehicles/popular/detail/${item.id}`}
+                            className="wrapper-img-home">
                             <img
                               src={`${hostBackend}${item.photo}`}
-                              className="img-size"
+                              className="img-size "
                               alt="van_login"
                             />
                           </Link>
@@ -233,7 +236,7 @@ class Home extends React.Component {
             </div>
           </>
         ) : (
-          <Splitter />
+          <Loading />
         )}
 
         <Footer />

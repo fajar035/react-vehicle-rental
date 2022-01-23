@@ -1,175 +1,388 @@
 import React from "react"
 import "./Profile.css"
 import Header from "../../components/Header"
+import Footer from "../../components/Footer"
+import Loading from "../../components/Loading"
 import { Link } from "react-router-dom"
-// import photoProfile from "../../assets/images/photo-profile-default.webp"
+import photoProfile from "../../assets/images/photo-profile-default.webp"
+import pencilSvg from "../../assets/icons/pencil.svg"
 import axios from "axios"
 import { connect } from "react-redux"
+import { toast } from "react-toastify"
+import FormData from "form-data"
+
+// import DataProfile from "../../components/DataProfile"
 
 class Profile extends React.Component {
-  state = { dataProfile: {} }
-  componentDidMount() {
-    const userToken = this.props.auth.userData.token
+  constructor(props) {
+    super(props)
+    this.inputFileRef = React.createRef()
+    this.onFileChange = this.handleFileChange.bind(this)
+    this.onBtnClick = this.inputImage.bind(this)
+  }
 
-    const url = "http://localhost:8000/users/id"
+  state = {
+    isSuccess: false,
+    dataUser: {},
+    selectedFile: null,
+    selectedSex: "",
+    photoProfile: photoProfile
+  }
+
+  getDatauser = () => {
+    const userToken = this.props.auth.userData.token
+    const url = "http://localhost:8000/users/detail"
     axios
       .get(url, { headers: { "x-access-token": userToken } })
       .then((res) => {
-        const dataProfile = res.data.result
-        this.setState({ dataProfile: dataProfile })
+        console.log("RESPONSE", res)
+        const photo = res.data.result.photo
+        console.log("PHOTO", photo)
+        if (photo !== null && typeof photo !== "undefined" && photo !== "")
+          this.setState({
+            photoProfile: `http://localhost:8000${photo}`
+          })
+        this.setState({
+          dataUser: res.data.result,
+          isSuccess: true,
+          selectedSex: res.data.result.gender
+        })
       })
       .catch((err) => {
-        const status = err.request.status
-
-        if (status === 403) {
-          localStorage.removeItem("vehicle-token")
-          this.props.history.replace("/login")
-        }
+        console.log("ERROR", err)
+        const errMsg = err
+        toast.error(errMsg, {
+          position: "top-left",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
       })
   }
+
+  getBase64(e) {
+    var file = e.target.files[0]
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      this.setState({
+        photoProfile: reader.result
+      })
+    }
+    reader.onerror = function (error) {
+      console.log("Error: ", error)
+    }
+  }
+
+  handleFileChange(e) {
+    this.getBase64(e)
+    this.setState({
+      selectedFile: e.target.files[0]
+    })
+  }
+
+  inputImage = (e) => {
+    this.inputFileRef.current.click()
+  }
+
+  cancel() {
+    const photo = this.state.dataUser.photo
+    if (photo !== null && typeof photo !== "undefined") {
+      this.setState({
+        photoProfile: `http://localhost:8000${photo}`
+      })
+    }
+    console.log("DATAUSER-CANSEL", this.state.dataUser.gender)
+    this.setState({
+      selectedSex: this.state.dataUser.gender
+    })
+  }
+
+  onValueChange(event) {
+    console.log("SEX", event.target.value)
+    this.setState({
+      selectedSex: event.target.value
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log("EVENT-BODY", e)
+    const body = new FormData()
+    const url = `${process.env.REACT_APP_HOST}/users/edit`
+    const userToken = this.props.auth.userData.token
+    // console.log(this.state.selectedFile)
+
+    if (this.state.selectedFile !== null) {
+      console.log(this.state.selectedFile)
+      body.append(
+        "photoUser",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      )
+    }
+    body.append("name", e.target.name.value)
+    body.append("email", e.target.email.value)
+    body.append("gender", this.state.selectedSex)
+    body.append("address", e.target.address.value)
+    body.append("nohp", e.target.nohp.value)
+    body.append("dob", e.target.dob.value)
+
+    console.log("DATE-BODY", body.get("dob"))
+
+    const config = {
+      headers: {
+        "x-access-token": userToken
+        // content-type: "multipart/form-data"
+      }
+    }
+
+    axios
+      .patch(url, body, config)
+      .then((response) => {
+        console.log(response)
+        toast.success("Update success.", {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
+        this.getDataUser()
+      })
+      .catch((error) => {
+        console.log("error", error.response)
+        const errMsg = error.response.errMsg
+        console.log("err msg", errMsg)
+        toast.error(errMsg, {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
+      })
+  }
+
+  componentDidMount() {
+    this.getDatauser()
+  }
+
   render() {
-    const { name, gender, email, phone, birtday, address, photo } =
-      this.state.dataProfile
-    const photoProfile = process.env.REACT_APP_HOST + photo
+    const { isSuccess, dataUser, photoProfile } = this.state
+    const { id, name, phone, gender, email, birtday, address, photo } = dataUser
+
+    let isGender = false
+
+    if (gender === "Pria") isGender = true
+    console.log("ISGENDER", isGender, gender)
 
     return (
-      <main>
+      <>
         <Header />
-        <div className="container-fluid m-0 p-0">
-          <div className="row mt-5">
-            <div className="col-12 ">
-              <div className="row">
-                <div className="col-lg-5  wrapper-title-profile mb-sm-5 p-lg-3">
-                  <h1 className="title-update-profile">Update Profile</h1>
+
+        {isSuccess ? (
+          <main className="row mt-lg-5">
+            <div className=".d-none .d-sm-block col-sm-1"></div>
+            <div className="col-12 col-sm-10">
+              <div className="col-12 col-sm-10 col-md-10"></div>
+              <div className="row content">
+                <div
+                  className="col-12 row-header"
+                  style={{
+                    fontFamily: `'Nunito', sans-serif`,
+                    fontWeight: "900",
+                    fontSize: "40px"
+                  }}>
+                  Profile
                 </div>
-                <div className="col-lg-7  d-flex flex-column align-items-lg-center p-lg-3">
-                  <div className="col-lg-8 wrapper-btn-profile">
-                    <Link to="">
-                      <button className="btn-save-profile me-lg-5">
-                        Save Change
-                      </button>
-                    </Link>
-                    <Link to="">
-                      <button className="btn-cansel-profile">Cansel</button>
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6 p-lg-5 main-profile">
-                  <div className="wrapper-photo-profile ">
-                    <img
-                      src={photoProfile}
-                      alt="profile-users"
-                      className="img-fluid"
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-8 col-md-6  p-lg-5 main-profile">
-                  <h1 className="title-name-user ">{name}</h1>
-                  <div className="detail-user">
-                    <p>{email}</p>
-                    <p> {phone} </p>
-                    <p>Has been active since 2013</p>
-                  </div>
-                  <div className="radio">
-                    <label className="gender me-md-5">
-                      Male
-                      <input
-                        type="radio"
-                        name="Pria"
-                        value={!gender ? "Pria" : gender}
-                        // checked={gender === "Pria"}
-                      />
-                      <span className="checkmark"></span>
-                    </label>
-                    <label className="gender">
-                      Female
-                      <input
-                        type="radio"
-                        name="Wanita"
-                        value={!gender ? "Wanita" : gender}
-                        // checked={gender === "Wanita"}
-                      />
-                      <span className="checkmark"></span>
-                    </label>
+                <div className="col-12 profile-info">
+                  <div className="row">
+                    <div className=".d-none .d-sm-block col-sm-3"></div>
+                    <div className="col-12 col-sm-6 text-center d-flex flex-column align-items-center">
+                      <div className="profile-image-wrapper">
+                        <img
+                          src={photoProfile}
+                          alt="User Profile"
+                          className="profile-image"
+                          onClick={this.inputImage}
+                        />
+                        <figcaption>
+                          <button
+                            type="button"
+                            onClick={this.inputImage}
+                            className="btn-pencil">
+                            <img
+                              src={pencilSvg}
+                              width="50px"
+                              height="50px"
+                              alt="Edit"
+                            />
+                          </button>
+                        </figcaption>
+                      </div>
+                      <h3>{name}</h3>
+                      <div className="user-info">
+                        <p>
+                          {email} <br />
+                          {phone}
+                        </p>
+                      </div>
+                      <div className="radio">
+                        <label className="gender me-md-5">
+                          Male
+                          <input
+                            type="radio"
+                            name="gender"
+                            id="gender"
+                            defaultValue="Pria"
+                            defaultChecked={isGender}
+                            onChange={this.onValueChange.bind(this)}
+                          />
+                          <span className="checkmark"></span>
+                        </label>
+                        <label className="gender">
+                          Female
+                          <input
+                            type="radio"
+                            name="gender"
+                            id="gender"
+                            defaultValue="Wanita"
+                            defaultChecked={!isGender}
+                            onChange={this.onValueChange.bind(this)}
+                          />
+                          <span className="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <form
+                      onSubmit={this.handleSubmit.bind(this)}
+                      onReset={this.cancel.bind(this)}>
+                      <div className="col-12 text-left profile-contacts">
+                        <div className="contact-header col-12 text-left ms-3">
+                          Contacts
+                        </div>
+                        <input
+                          type="file"
+                          name="image"
+                          id="image"
+                          ref={this.inputFileRef}
+                          multiple={false}
+                          onChange={this.onFileChange}
+                          hidden
+                        />
+                        <input
+                          type="text"
+                          name="id"
+                          id="id"
+                          defaultValue={id}
+                          hidden
+                        />
+                        <div className="col-12 wrapper-input">
+                          <label htmlFor="email">Email Address:</label>
+                          <input
+                            type="email"
+                            className="input-profile"
+                            name="email"
+                            id="email"
+                            defaultValue={email}
+                          />
+                        </div>
+                        <div className="col-12 wrapper-input">
+                          <label htmlFor="address">Address:</label>
+                          <input
+                            type="text"
+                            className="input-profile"
+                            name="address"
+                            id="address"
+                            defaultValue={address}
+                          />
+                        </div>
+                        <div className="col-12 wrapper-input">
+                          <label htmlFor="phone">Mobile Number:</label>
+                          <input
+                            type="text"
+                            className="input-profile"
+                            name="phone"
+                            id="nohp"
+                            defaultValue={phone}
+                          />
+                        </div>
+                        <div className="contact-header col-12 text-left ms-3">
+                          Identity
+                        </div>
+                        <div className="col-12">
+                          <div className="row">
+                            <div className="col-12 col-sm-6 wrapper-input">
+                              <label htmlFor="display-name">
+                                Display Name:
+                              </label>
+                              <input
+                                type="text"
+                                className="input-profile"
+                                name="name"
+                                id="name"
+                                defaultValue={name}
+                              />
+                            </div>
+                            <div className="col-12 col-sm-6 wrapper-input">
+                              <label htmlFor="dob">DD/MM/YYYY:</label>
+                              <input
+                                type="date"
+                                className="input-profile"
+                                name="dob"
+                                id="dob"
+                                defaultValue={birtday}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-12 d-flex justify-content-center">
+                          <div className="row gx-4">
+                            <div className="col-12 col-md-4 col-sm-4 wrapper-btn">
+                              <button
+                                type="submit"
+                                className="btn-save-profile">
+                                Save Change
+                              </button>
+                            </div>
+                            <div className="col-12 col-md-4 col-sm-4 wrapper-btn">
+                              <Link
+                                to="/profile/forgot"
+                                className="btn-edit-password">
+                                Edit Password
+                              </Link>
+                            </div>
+                            <div className="col-12 col-md-4 col-sm-4 wrapper-btn">
+                              <button
+                                className="btn-cansel-profile"
+                                type="reset">
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
+              {/* <Outlet /> */}
             </div>
-            <div className="d-flex justify-content-center col-lg-12">
-              <div className="col-lg-12 col-md-12 justify-content-md-around d-md-flex mt-5 wrapper-btn-edit-user">
-                <button className="edit-photo-user">Edit photo</button>
-                <button className="edit-password-user">Edit Password</button>
-              </div>
-            </div>
-            <form>
-              <div className="row d-flex flex-row ps-5 mt-5">
-                <p className="f-form-title">Contacts</p>
-
-                <div className="col-lg-6 mb-5 d-flex flex-column">
-                  <label htmlFor="email" className="f-form-label mb-3">
-                    Email address :
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="form-input f-form-input"
-                    defaultValue={email}
-                  />
-                </div>
-
-                <div className="col-lg-6 mb-5 d-flex flex-column ">
-                  <label htmlFor="address" className="f-form-label mb-3">
-                    Address :
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    className="form-input f-form-input"
-                    defaultValue={!address ? "hahaha" : address}
-                  />
-                </div>
-
-                <p className="f-form-title">Identity</p>
-
-                <div className="col-lg-6 d-flex flex-column mb-5">
-                  <label htmlFor="name" className="f-form-label mb-3">
-                    Display name :
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="form-input f-form-input"
-                    defaultValue={name}
-                  />
-                </div>
-
-                <div className="col-lg-6 d-flex flex-column mb-5">
-                  <label htmlFor="date" className="f-form-label mb-3">
-                    DD/MM/YY :
-                  </label>
-                  <input
-                    type="date"
-                    id="date"
-                    className="form-input f-form-input"
-                    defaultValue={birtday}
-                  />
-                </div>
-              </div>
-            </form>
-
-            <div className="row mb-5 p-5">
-              <div className="col-lg-12 justify-content-center d-flex">
-                <button
-                  type="submit"
-                  name="save"
-                  className="btn-submit f-save-cansel mt-3">
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+            <div className=".d-none .d-sm-block col-sm-1"></div>
+          </main>
+        ) : (
+          <Loading />
+        )}
+        <Footer />
+      </>
     )
   }
 }

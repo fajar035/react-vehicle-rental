@@ -29,6 +29,7 @@ import History from "./pages/History/History"
 import Reservation from "./pages/Reservation/Reservation"
 import Chat from "./pages/Chat/Chat"
 import Additem from "./components/Additem"
+import EditProfile from "./components/EditProfile"
 
 class MainRouter extends React.Component {
   render() {
@@ -39,9 +40,9 @@ class MainRouter extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/forgot" component={Forgot} />
-            <Route path="/profile" component={Profile} />
-
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/profile/forgot" component={Forgot} />
+            <Route path="/profile/edit/:id" component={EditProfile} />
             <Route exact path="/vehicles" component={Vehicles} />
 
             {/* Popular */}

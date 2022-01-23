@@ -5,11 +5,21 @@ import { Link } from "react-router-dom"
 import "../pages/Home/Home.css"
 import React from "react"
 import { connect } from "react-redux"
+import Swal from "sweetalert2"
 import { logoutAction } from "../redux/actions/logout"
 
 class Header extends React.Component {
   onClickLogout = () => {
     // localStorage.removeItem("vehicle-token")
+    Swal.fire({
+      title: "Are you sure?",
+      text: "User will have Admin Privileges",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!"
+    })
     this.props.logoutDispatch()
   }
 
@@ -110,7 +120,7 @@ class Header extends React.Component {
                     </li>
                     <li>
                       <Link
-                        to="/"
+                        to=""
                         className="dropdown-item btn-logout"
                         onClick={this.onClickLogout}>
                         <i className="fas fa-angle-right float-end me-4"></i>

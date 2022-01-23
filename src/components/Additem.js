@@ -84,7 +84,7 @@ export class Additem extends Component {
               <input
                 type="file"
                 onChange={this.onFileChange}
-                className=" input-img-additem"
+                className=" input-img-additem d-none"
               />
             </div>
           </div>

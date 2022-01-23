@@ -84,3 +84,93 @@
   }
 }
 /* End Splitter */
+
+/* START LOADING SPINNER */
+.body-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fbf7f4;
+}
+
+.btn-spinner {
+  display: flex;
+  align-items: center;
+  font-size: 100px;
+  border: none;
+  background-color: #ffcd61;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  padding: 50px 50px;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  box-shadow: 0.1rem 2rem - 1rem rgba(0, 0, 0, 0.445);
+}
+
+.btn-spinner:hover {
+  background-color: #fcab41;
+  color: #eae2b7;
+  box-shadow: 0.1rem 1rem - 1rem rgba(0, 0, 0, 0.445);
+}
+
+.btn-text {
+  margin-left: 0.8rem;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  margin-right: 40px;
+  display: inline-block;
+  border: 15px solid #3a4750;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  animation: spin 1s infinite;
+  -webkit-animation: spin 1s infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+  }
+  50% {
+    transform: rotate(100deg);
+    -webkit-transform: rotate(100deg);
+    -moz-transform: rotate(100deg);
+    -ms-transform: rotate(100deg);
+    -o-transform: rotate(100deg);
+    border-top-color: #ffa800;
+    border-bottom-color: #ffa800;
+    border-right-color: transparent;
+    border-left-color: transparent;
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+/* END LOADING SPINNER */

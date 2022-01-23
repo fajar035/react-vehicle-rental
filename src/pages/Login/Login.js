@@ -7,6 +7,7 @@ import Footer from "../../components/Footer"
 import iconGoogle from "../../assets/icons/icon_google.png"
 import { connect } from "react-redux"
 import { loginAction } from "../../redux/actions/auth"
+import Swal from "sweetalert2"
 
 class Login extends React.Component {
   submitLogin = (e) => {
@@ -27,9 +28,24 @@ class Login extends React.Component {
         this.props.auth.userData.photo
       )
       localStorage["user-role"] = JSON.stringify(this.props.auth.userData.role)
-
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "BERHASIL LOGIN",
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.props.history.push("/")
     }
+
+    if (this.props.auth.isRejected === true) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Email atau Password Salah !!"
+      })
+    }
+    console.log("CEK DATA", this.props.auth)
   }
   render() {
     return (

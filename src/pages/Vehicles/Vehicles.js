@@ -186,7 +186,9 @@ function Vehicles() {
           {vehiclesPopular.map((item, idx) => {
             return (
               <div key={idx} className="col-lg-3 col-md-6 card  ">
-                <Link to={`${url}/popular/detail/${item.id}`}>
+                <Link
+                  to={`${url}/popular/detail/${item.id}`}
+                  className="wrapper-img-home">
                   <img
                     src={`${hostBackend}${item.photo}`}
                     className="img-size"
@@ -217,7 +219,9 @@ function Vehicles() {
           {vehiclesBike.map((item, idx) => {
             return (
               <div key={idx} className="col-lg-3 col-md-6 card  ">
-                <Link to={`${url}/bike/detail/${item.id}`}>
+                <Link
+                  to={`${url}/bike/detail/${item.id}`}
+                  className="wrapper-img-home">
                   <img
                     src={`${hostBackend}${item.photo}`}
                     className="img-size"
@@ -248,7 +252,9 @@ function Vehicles() {
           {vehiclesMotorBike.map((item, idx) => {
             return (
               <div key={idx} className="col-lg-3 col-md-6 card  ">
-                <Link to={`${url}/motorbike/detail/${item.id}`}>
+                <Link
+                  to={`${url}/motorbike/detail/${item.id}`}
+                  className="wrapper-img-home">
                   <img
                     src={`${hostBackend}${item.photo}`}
                     className="img-size"
@@ -279,7 +285,9 @@ function Vehicles() {
           {vehiclesCars.map((item, idx) => {
             return (
               <div key={idx} className="col-lg-3 col-md-6 card  ">
-                <Link to={`${url}/cars/detail/${item.id}`}>
+                <Link
+                  to={`${url}/cars/detail/${item.id}`}
+                  className="wrapper-img-home">
                   <img
                     src={`${hostBackend}${item.photo}`}
                     className="img-size"
