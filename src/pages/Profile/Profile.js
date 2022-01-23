@@ -183,6 +183,7 @@ class Profile extends React.Component {
 
     if (gender === "Pria") isGender = true
     console.log("ISGENDER", isGender, gender)
+    console.log("ISSCUCCESS", isSuccess)
 
     return (
       <>
