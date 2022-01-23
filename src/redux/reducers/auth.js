@@ -1,6 +1,6 @@
 import { ACTION_STRING } from "../actions/actionString"
 import { ActionType } from "redux-promise-middleware"
-import Swal from "sweetalert2"
+// import Swal from "sweetalert2"
 
 // import photoDefault from "../../assets/images/userProfile.webp"
 
