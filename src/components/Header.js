@@ -25,7 +25,7 @@ class Header extends React.Component {
 
   render() {
     const token = this.props.auth.userData.token
-    const photo = this.props.auth.userData.photo
+    const photo = this.props.auth.userData.photo || userProfile
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
