@@ -35,7 +35,7 @@ function VehiclePopular(props) {
       })
   }
 
-  const hostBackend = process.env.REACT_APP_HOST
+  // const hostBackend = process.env.REACT_APP_HOST
   console.log("ROLE-VEHICLE-POPULAR-COMPONENT", role)
   return (
     <main>

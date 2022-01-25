@@ -29,7 +29,7 @@ class VehicleMotorbike extends React.Component {
   }
   render() {
     const { url } = this.props.match
-    const hostBackend = process.env.REACT_APP_HOST
+    // const hostBackend = process.env.REACT_APP_HOST
     const vehiclesMotorBike = this.state.vehiclesMotorbike
     if (!localStorage["user-role"]) {
       localStorage.setItem("user-role", "1")

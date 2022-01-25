@@ -86,7 +86,7 @@ function Vehicles() {
       })
   }
 
-  const hostBackend = process.env.REACT_APP_HOST
+  // const hostBackend = process.env.REACT_APP_HOST
 
   // function SampleNextArrow(props) {
   //   const { className, style, onClick } = props

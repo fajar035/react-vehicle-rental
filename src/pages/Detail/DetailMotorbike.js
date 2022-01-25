@@ -1,6 +1,6 @@
 import React from "react"
 import "./Detail.css"
-import motorbike from "../../assets/images/motorbike-default.jpg"
+// import motorbike from "../../assets/images/motorbike-default.jpg"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { Link } from "react-router-dom"

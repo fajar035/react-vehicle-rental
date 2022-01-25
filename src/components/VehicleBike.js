@@ -34,9 +34,9 @@ class VehicleBike extends React.Component {
 
   render() {
     const { url } = this.props.match
-    const hostBackend = process.env.REACT_APP_HOST
+    // const hostBackend = process.env.REACT_APP_HOST
     const vehiclesBike = this.state.vehiclesBike
-    const photo = this.state.photo
+    // const photo = this.state.photo
     if (!localStorage["user-role"]) {
       localStorage.setItem("user-role", "1")
     }
