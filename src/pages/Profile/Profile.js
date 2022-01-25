@@ -33,7 +33,7 @@ class Profile extends React.Component {
 
   getDatauser = () => {
     const userToken = this.props.auth.userData.token
-    const url = "http://localhost:8000/users/detail"
+    const url = `${process.env.REACT_APP_HOST}/users/detail`
     axios
       .get(url, { headers: { "x-access-token": userToken } })
       .then((res) => {
@@ -42,7 +42,7 @@ class Profile extends React.Component {
         console.log("PHOTO", photo)
         if (photo !== null && typeof photo !== "undefined" && photo !== "")
           this.setState({
-            photoProfile: `http://localhost:8000/${photo}`
+            photoProfile: `${process.env.REACT_APP_HOST}/${photo}`
           })
         this.setState({
           dataUser: res.data.result,
@@ -94,7 +94,7 @@ class Profile extends React.Component {
     const photo = this.state.dataUser.photo
     if (photo !== null && typeof photo !== "undefined") {
       this.setState({
-        photoProfile: `http://localhost:8000${photo}`
+        photoProfile: `${process.env.REACT_APP_HOST}${photo}`
       })
     }
     console.log("DATAUSER-CANSEL", this.state.dataUser.gender)
