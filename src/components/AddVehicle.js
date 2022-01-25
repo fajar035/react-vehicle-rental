@@ -6,7 +6,7 @@ import cameraIcon from "../assets/icons/camera-icon.png"
 import "../pages/Vehicles/Vehicles.css"
 import axios from "axios"
 import { connect } from "react-redux"
-import { toast } from "react-toastify"
+// import { toast } from "react-toastify"
 
 export class Additem extends Component {
   constructor(props) {
@@ -139,8 +139,8 @@ export class Additem extends Component {
   submitAddItem = (e) => {
     e.preventDefault()
     const body = new FormData()
-    const url = process.env.REACT_APP_HOST + "/vehicles"
-    const userToken = this.props.auth.userData.token
+    // const url = process.env.REACT_APP_HOST + "/vehicles"
+    // const userToken = this.props.auth.userData.token
     const vehicleImg = this.state.selectedFile
     console.log(vehicleImg)
 
@@ -160,7 +160,7 @@ export class Additem extends Component {
     console.log("data-body", body.get("stock"))
     console.log("EVENT-BODY", e)
 
-    const config = { Headers: { "x-access-token": userToken } }
+    // const config = { Headers: { "x-access-token": userToken } }
 
     console.log(body)
   }
