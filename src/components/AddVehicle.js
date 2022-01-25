@@ -157,8 +157,8 @@ export class Additem extends Component {
     body.append("category", e.target.category.value)
     body.append("location", e.target.location.value)
     body.append("status", e.target.status.value)
-    console.log("data-body", body.get("stock"))
-    console.log("EVENT-BODY", e)
+    // console.log("data-body", body.get("stock"))
+    // console.log("EVENT-BODY", e)
 
     // const config = { Headers: { "x-access-token": userToken } }
 
