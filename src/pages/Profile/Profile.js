@@ -158,7 +158,7 @@ class Profile extends React.Component {
         }).then((result) => {
           if (result.isConfirmed) {
             // Swal.fire("Deleted!", "Your file has been deleted.", "success")
-            window.location.reload(true)
+            // window.location.reload(true)
             this.getDataUser()
           }
         })
