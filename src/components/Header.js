@@ -35,7 +35,6 @@ class Header extends React.Component {
   }
 
   getDatauser = () => {
-    
     const userToken = this.props.auth.userData.token
     const url = `${process.env.REACT_APP_HOST}/users/detail`
     axios
@@ -43,7 +42,7 @@ class Header extends React.Component {
       .then((res) => {
         const photo = res.data.result.photo
         this.setState({
-          photoProfile: `${process.env.REACT_APP_HOST}/${photo}`
+          photoProfile: `${process.env.REACT_APP_HOST}${photo}`
         })
       })
       .catch((err) => {
