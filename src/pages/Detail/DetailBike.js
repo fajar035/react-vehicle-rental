@@ -10,7 +10,8 @@ class DetailBike extends React.Component {
   state = {
     counter: 0,
     price: 70,
-    vehiclesBike: []
+    vehiclesBike: [],
+    photo: []
   }
 
   onClickPrev = () => {
@@ -44,7 +45,10 @@ class DetailBike extends React.Component {
           ...this.state,
           vehiclesBike: res.data.result
         })
-        // console.log(res)
+
+        this.setState({
+          photo: JSON.parse(res.data.result[0].photo)
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -54,6 +58,11 @@ class DetailBike extends React.Component {
   render() {
     const vehiclesBike = this.state.vehiclesBike
     const hostBackend = process.env.REACT_APP_HOST
+    // const photo = vehiclesBike
+    // console.log("VEHICLE-BIKE-DETAIL-photo", vehiclesBike[0])
+    // const { name } = vehiclesBike[0]
+    const photo = this.state.photo
+    console.log("PHOTO", photo[0])
 
     return (
       <main>
@@ -70,16 +79,11 @@ class DetailBike extends React.Component {
           </div>
 
           <div className="col-lg-6 col-md-10 wrapper-img">
-            {vehiclesBike.map((item, idx) => {
-              return (
-                <img
-                  key={idx}
-                  src={`${hostBackend}${item.photo}`}
-                  alt="vehicle"
-                  className="img-thumb1 img-fluid p-0"
-                />
-              )
-            })}
+            <img
+              src={`${hostBackend}${photo[0]}`}
+              alt="vehicle"
+              className="img-thumb1 img-fluid p-0"
+            />
           </div>
 
           <div className="col-lg-6 wrapper-text-detail col-md-10 mt-lg-0 mt-md-5">
@@ -113,23 +117,16 @@ class DetailBike extends React.Component {
             <button className="btn-left">
               <i className="fas fa-chevron-left"></i>
             </button>
-            {vehiclesBike.map((item, idx) => {
-              return (
-                <>
-                  <img
-                    key={idx}
-                    src={`${hostBackend}${item.photo}`}
-                    alt="bike"
-                    className="img-fluid img-thumb2"
-                  />
-                  <img
-                    src={`${hostBackend}${item.photo}`}
-                    alt="bike"
-                    className="img-fluid img-thumb2"
-                  />
-                </>
-              )
-            })}
+            <img
+              src={`${hostBackend}${photo[1]}`}
+              alt="bike"
+              className="img-fluid img-thumb2"
+            />
+            <img
+              src={`${hostBackend}${photo[2]}`}
+              alt="bike"
+              className="img-fluid img-thumb2"
+            />
 
             <button className="btn-right">
               <i className="fas fa-chevron-right"></i>

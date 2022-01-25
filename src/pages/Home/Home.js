@@ -7,6 +7,13 @@ import Footer from "../../components/Footer"
 import { connect } from "react-redux"
 import { cardAction } from "../../redux/actions/card"
 import Loading from "../../components/Loading"
+import popularDefault from "../../assets/images/popular-default.jpg"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import "swiper/css/scrollbar"
 
 class Home extends React.Component {
   constructor(props) {
@@ -36,9 +43,10 @@ class Home extends React.Component {
   }
 
   render() {
-    const history = this.props.history
+    // const history = this.props.history
+
     const success = this.state.isOk
-    const hostBackend = process.env.REACT_APP_HOST
+    // const hostBackend = process.env.REACT_APP_HOST
     const popular = this.state.dataPopular
     if (!localStorage["user-role"]) {
       localStorage.setItem("user-role", "1")
@@ -57,7 +65,7 @@ class Home extends React.Component {
 
     return (
       <main>
-        <Header history={history} />
+        <Header />
         {success ? (
           <>
             <div className="row bg-image p-5 jumbotron">
@@ -128,7 +136,6 @@ class Home extends React.Component {
                     {/* <div className="next">
                       <i className="fas fa-angle-right"></i>
                     </div> */}
-
                     {popular.map((item, idx) => {
                       return (
                         <div
@@ -138,7 +145,7 @@ class Home extends React.Component {
                             to={`/vehicles/popular/detail/${item.id}`}
                             className="wrapper-img-home">
                             <img
-                              src={`${hostBackend}${item.photo}`}
+                              src={popularDefault}
                               className="img-size "
                               alt="van_login"
                             />

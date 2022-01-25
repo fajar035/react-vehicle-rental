@@ -1,6 +1,6 @@
 import React from "react"
 import "./Detail.css"
-// import Bike from "../../assets/images/sepeda_detail.webp"
+import popular from "../../assets/images/popular-default.jpg"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { Link } from "react-router-dom"
@@ -11,7 +11,8 @@ class Detail extends React.Component {
   state = {
     counter: 0,
     price: 70,
-    vehiclesPopular: []
+    vehiclesPopular: [],
+    photo: []
   }
 
   onClickPrev = () => {
@@ -45,6 +46,9 @@ class Detail extends React.Component {
           ...this.state,
           vehiclesPopular: res.data.result
         })
+        this.setState({
+          photo: JSON.parse(res.data.result[0].photo) || null
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -55,12 +59,14 @@ class Detail extends React.Component {
     // const { match } = this.props
     const vehiclesPopular = this.state.vehiclesPopular
     const hostBackend = process.env.REACT_APP_HOST
+    const photo = this.state.photo
+    console.log("PHOTO STATE DETAIL", photo)
 
     return (
       <main>
         <Header />
 
-        <div className="row mt-5 ms-lg-5 d-md-flex justify-content-md-center container-main mb-lg-5">
+        <div className="row mt-3 ms-lg-5 d-md-flex justify-content-md-center container-main mb-lg-5">
           <div className="col-lg-12 p-0">
             <div className="col-lg-3 mb-5 d-flex flex-row align-items-center wrapper-link-detail">
               <Link to={`/vehicles/popular`} className="link-detail-0">
@@ -70,17 +76,12 @@ class Detail extends React.Component {
             </div>
           </div>
 
-          <div className="col-lg-6 col-md-10 wrapper-img">
-            {vehiclesPopular.map((item, idx) => {
-              return (
-                <img
-                  key={idx}
-                  src={`${hostBackend}${item.photo}`}
-                  alt="vehicle"
-                  className="img-thumb1 img-fluid p-0"
-                />
-              )
-            })}
+          <div className="col-lg-6 col-md-10  wrapper-img">
+            <img
+              src={photo ? hostBackend + photo[0] : popular}
+              alt="vehicle"
+              className="img-thumb1  p-0"
+            />
           </div>
 
           <div className="col-lg-6 wrapper-text-detail col-md-10 mt-lg-0 mt-md-5">
@@ -114,30 +115,23 @@ class Detail extends React.Component {
             <button className="btn-left">
               <i className="fas fa-chevron-left"></i>
             </button>
-            {vehiclesPopular.map((item, idx) => {
-              return (
-                <>
-                  <img
-                    key={idx}
-                    src={`${hostBackend}${item.photo}`}
-                    alt="bike"
-                    className="img-fluid img-thumb2"
-                  />
-                  <img
-                    src={`${hostBackend}${item.photo}`}
-                    alt="bike"
-                    className="img-fluid img-thumb2"
-                  />
-                </>
-              )
-            })}
+            <img
+              src={hostBackend + photo[1]}
+              alt="bike"
+              className="img-fluid img-thumb2"
+            />
+            <img
+              src={hostBackend + photo[2]}
+              alt="bike"
+              className="img-fluid img-thumb2"
+            />
 
             <button className="btn-right">
               <i className="fas fa-chevron-right"></i>
             </button>
           </div>
 
-          <div className="col-lg-6 d-flex flex-row justify-content-around align-items-center  ps-5 pe-5">
+          <div className="col-lg-6 d-flex flex-row justify-content-around align-items-center  ps-5 pe-5 wrapper-counter">
             <button className="btn-minus" onClick={this.onClickPrev}>
               <i className="fas fa-minus"></i>
             </button>
@@ -147,7 +141,7 @@ class Detail extends React.Component {
             </button>
           </div>
 
-          <div className="col-lg-12 d-flex justify-content-around">
+          <div className="col-lg-12  d-flex justify-content-around wrapper-btn">
             <Link to="/vehicles/popular/chat">
               <button className="btn-chat-admin">Chat Admin</button>
             </Link>

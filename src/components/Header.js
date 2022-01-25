@@ -7,8 +7,16 @@ import React from "react"
 import { connect } from "react-redux"
 import Swal from "sweetalert2"
 import { logoutAction } from "../redux/actions/logout"
+import axios from "axios"
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      photoProfile: ""
+    }
+  }
+
   onClickLogout = () => {
     // localStorage.removeItem("vehicle-token")
     Swal.fire({
@@ -19,14 +27,36 @@ class Header extends React.Component {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.props.logoutDispatch()
+      }
     })
-    this.props.logoutDispatch()
+  }
+
+  getDatauser = () => {
+    const userToken = this.props.auth.userData.token
+    const url = "http://localhost:8000/users/detail"
+    axios
+      .get(url, { headers: { "x-access-token": userToken } })
+      .then((res) => {
+        const photo = res.data.result.photo
+        this.setState({
+          photoProfile: `http://localhost:8000${photo}`
+        })
+      })
+      .catch((err) => {
+        console.log("ERROR", err)
+      })
+  }
+
+  componentDidMount() {
+    this.getDatauser()
   }
 
   render() {
     const token = this.props.auth.userData.token
-    const photo = this.props.auth.userData.photo
-    console.log(photo)
+    const photo = this.state.photoProfile
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -95,9 +125,7 @@ class Header extends React.Component {
                 <div className="dropdown profile">
                   <img
                     className="img-profile img-fluid rounded-circle dropdown-toggle"
-                    src={
-                      !photo ? userProfile : process.env.REACT_APP_HOST + photo
-                    }
+                    src={!photo ? userProfile : photo}
                     id="dropdownMenuLink"
                     data-bs-toggle="dropdown"
                     alt="icon-profile"

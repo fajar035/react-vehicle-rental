@@ -3,16 +3,15 @@ import { Link, useRouteMatch } from "react-router-dom"
 import axios from "axios"
 import "./Vehicles.css"
 import Header from "../../components/Header"
-// import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-// import vanLogin from "../../assets/images/van_login.webp"
-// import motorcross from "../../assets/images/motocross.webp"
-// import zeep from "../../assets/images/zeep.webp"
-// import matic from "../../assets/images/matic.webp"
+import popular from "../../assets/images/popular-default.jpg"
+import car from "../../assets/images/car-default.jpg"
+import bike from "../../assets/images/bike-default.jpeg"
+import motorbike from "../../assets/images/motorbike-default.jpg"
+
 import Footer from "../../components/Footer"
 import Loading from "../../components/Loading"
-// import Modal from "../../components/Modal"
 
 function Vehicles() {
   let { url } = useRouteMatch()
@@ -37,6 +36,7 @@ function Vehicles() {
       .then((res) => {
         const vehiclesBike = res.data.result
         setVehiclesBike(vehiclesBike)
+
         setisOk(true)
       })
       .catch((err) => {
@@ -190,11 +190,7 @@ function Vehicles() {
                   <Link
                     to={`${url}/popular/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={popular} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.vehicle} <br />
@@ -223,11 +219,7 @@ function Vehicles() {
                   <Link
                     to={`${url}/bike/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={bike} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />
@@ -256,11 +248,7 @@ function Vehicles() {
                   <Link
                     to={`${url}/motorbike/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={motorbike} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />
@@ -289,11 +277,7 @@ function Vehicles() {
                   <Link
                     to={`${url}/cars/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={car} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />

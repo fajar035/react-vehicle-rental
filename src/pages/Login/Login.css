@@ -1,7 +1,7 @@
 /* Start Border Line */
 .border-line-login {
   padding: 0;
-  height: 600px;
+  height: 500px;
   width: 0%;
   z-index: 1;
   border-left: 1px solid #fff;

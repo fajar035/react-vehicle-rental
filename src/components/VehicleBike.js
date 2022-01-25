@@ -1,10 +1,8 @@
 import React from "react"
 import Header from "../components/Header"
 import { Link } from "react-router-dom"
-// import vanLogin from "../assets/images/van_login.webp"
-// import motorcross from "../assets/images/motocross.webp"
-// import zeep from "../assets/images/zeep.webp"
-// import matic from "../assets/images/matic.webp"
+import bike from "../assets/images/bike-default.jpeg"
+
 import Footer from "../components/Footer"
 import { getVeihcleBike } from "../utils/https/vehicleBike"
 
@@ -13,7 +11,8 @@ class VehicleBike extends React.Component {
     super(props)
     this.state = {
       vehiclesBike: [],
-      isOk: false
+      isOk: false,
+      photo: []
     }
   }
 
@@ -23,6 +22,9 @@ class VehicleBike extends React.Component {
         this.setState({
           vehiclesBike: res.data.result,
           isOke: true
+        })
+        this.setState({
+          photo: JSON.parse(res.data.result[0].photo)
         })
       })
       .catch((err) => {
@@ -34,6 +36,7 @@ class VehicleBike extends React.Component {
     const { url } = this.props.match
     const hostBackend = process.env.REACT_APP_HOST
     const vehiclesBike = this.state.vehiclesBike
+    const photo = this.state.photo
     if (!localStorage["user-role"]) {
       localStorage.setItem("user-role", "1")
     }
@@ -77,11 +80,7 @@ class VehicleBike extends React.Component {
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link to={`${url}/detail/${item.id}`}>
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={bike} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />

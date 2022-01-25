@@ -28,7 +28,7 @@ import vehicleBike from "./components/VehicleBike"
 import History from "./pages/History/History"
 import Reservation from "./pages/Reservation/Reservation"
 import Chat from "./pages/Chat/Chat"
-import Additem from "./components/Additem"
+import AddVehicle from "./components/AddVehicle"
 
 class MainRouter extends React.Component {
   render() {
@@ -84,7 +84,7 @@ class MainRouter extends React.Component {
               component={Reservation}
             />
 
-            <Route path="/add-item" component={Additem} />
+            <Route path="/add-item" component={AddVehicle} />
             <Route path="/history" component={History} />
             <Route path="/profile" component={Profile} />
             <Route path="/addcart" component={Example} />

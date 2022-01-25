@@ -2,10 +2,8 @@ import React from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { Link } from "react-router-dom"
-// import vanLogin from "../assets/images/van_login.webp"
-// import motorcross from "../assets/images/motocross.webp"
-// import zeep from "../assets/images/zeep.webp"
-// import matic from "../assets/images/matic.webp"
+import motorbike from "../assets/images/motorbike-default.jpg"
+
 import { getVehiclesMotorBike } from "../utils/https/vehicleMotorbike"
 
 class VehicleMotorbike extends React.Component {
@@ -76,11 +74,7 @@ class VehicleMotorbike extends React.Component {
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link to={`${url}/detail/${item.id}`}>
-                    <img
-                      src={`${hostBackend}${item.photo}`}
-                      className="img-size"
-                      alt="van_login"
-                    />
+                    <img src={motorbike} className="img-size" alt="van_login" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />

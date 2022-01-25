@@ -10,6 +10,7 @@ import axios from "axios"
 import { connect } from "react-redux"
 import { toast } from "react-toastify"
 import FormData from "form-data"
+import Swal from "sweetalert2"
 
 // import DataProfile from "../../components/DataProfile"
 
@@ -17,6 +18,7 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     this.inputFileRef = React.createRef()
+    this.scrollTop = React.createRef()
     this.onFileChange = this.handleFileChange.bind(this)
     this.onBtnClick = this.inputImage.bind(this)
   }
@@ -144,35 +146,33 @@ class Profile extends React.Component {
       .patch(url, body, config)
       .then((response) => {
         console.log(response)
-        toast.success("Update success.", {
-          position: "bottom-left",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined
+        // Swal.fire("Data Changed Successfuly !!", "", "success")
+        Swal.fire({
+          title: "Update Profile",
+          text: "Data Changed Successfuly !!",
+          icon: "success"
+          // showCancelButton: true,
+          // confirmButtonColor: "#3085d6",
+          // cancelButtonColor: "#d33",
+          // confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Swal.fire("Deleted!", "Your file has been deleted.", "success")
+            window.location.reload(true)
+            this.getDataUser()
+          }
         })
-        this.getDataUser()
       })
       .catch((error) => {
         console.log("error", error.response)
-        const errMsg = error.response.errMsg
-        console.log("err msg", errMsg)
-        toast.error(errMsg, {
-          position: "bottom-left",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined
-        })
       })
   }
 
   componentDidMount() {
     this.getDatauser()
+    console.log("state-photo-profil", this.state.photoProfile)
+    // console.log(this.scrollTop.current.scrollTo(0, 0))
+    // this.scrollTop.current.scrollTo(0, 0)
   }
 
   render() {
@@ -187,7 +187,7 @@ class Profile extends React.Component {
 
     return (
       <>
-        <Header />
+        <Header photoUser={photoProfile} />
 
         {isSuccess ? (
           <main className="row mt-lg-5">

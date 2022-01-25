@@ -10,7 +10,7 @@ import axios from "axios"
 class Signup extends React.Component {
   render() {
     const signUpSubmit = (e) => {
-      console.log(e)
+      // console.log(e)
       e.preventDefault()
       const body = {
         name: e.target.name.value,
@@ -22,7 +22,7 @@ class Signup extends React.Component {
       axios
         .post(url, body)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           return this.props.history.replace("/login")
         })
         .catch((err) => {
