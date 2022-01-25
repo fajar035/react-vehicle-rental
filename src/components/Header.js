@@ -35,14 +35,15 @@ class Header extends React.Component {
   }
 
   getDatauser = () => {
+    
     const userToken = this.props.auth.userData.token
-    const url = "https://vehicle-rental-ikeh.herokuapp.com/users/detail"
+    const url = `${process.env.REACT_APP_HOST}/users/detail`
     axios
       .get(url, { headers: { "x-access-token": userToken } })
       .then((res) => {
         const photo = res.data.result.photo
         this.setState({
-          photoProfile: `https://vehicle-rental-ikeh.herokuapp.com/${photo}`
+          photoProfile: `${process.env.REACT_APP_HOST}/${photo}`
         })
       })
       .catch((err) => {
