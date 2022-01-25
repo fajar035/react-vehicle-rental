@@ -46,7 +46,8 @@
   line-height: 25px;
   color: #000000;
   display: flex;
-  justify-content: end;
+  /* justify-content: end; */
+  float: right;
   margin-right: 40px;
 }
 
