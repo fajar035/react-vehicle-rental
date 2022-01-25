@@ -36,13 +36,13 @@ class Header extends React.Component {
 
   getDatauser = () => {
     const userToken = this.props.auth.userData.token
-    const url = "https://vehicle-rental-ikeh.herokuapp.com/users/detail"
+    const url = "http://localhost:8000/users/detail"
     axios
       .get(url, { headers: { "x-access-token": userToken } })
       .then((res) => {
         const photo = res.data.result.photo
         this.setState({
-          photoProfile: `https://vehicle-rental-ikeh.herokuapp.com/${photo}`
+          photoProfile: `http://localhost:8000/${photo}`
         })
       })
       .catch((err) => {
