@@ -42,7 +42,7 @@ class Profile extends React.Component {
         console.log("PHOTO", photo)
         if (photo !== null && typeof photo !== "undefined" && photo !== "")
           this.setState({
-            photoProfile: `${process.env.REACT_APP_HOST}/${photo}`
+            photoProfile: `${process.env.REACT_APP_HOST}${photo}`
           })
         this.setState({
           dataUser: res.data.result,
