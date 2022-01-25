@@ -42,7 +42,7 @@ class Profile extends React.Component {
         console.log("PHOTO", photo)
         if (photo !== null && typeof photo !== "undefined" && photo !== "")
           this.setState({
-            photoProfile: `http://localhost:8000${photo}`
+            photoProfile: `https://vehicle-rental-ikeh.herokuapp.com/${photo}`
           })
         this.setState({
           dataUser: res.data.result,
