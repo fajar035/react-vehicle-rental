@@ -36,7 +36,7 @@ class Header extends React.Component {
 
   getDatauser = () => {
     const userToken = this.props.auth.userData.token
-    const url = "https://vehicle-react.netlify.app//users/detail"
+    const url = "https://vehicle-react.netlify.app/users/detail"
     axios
       .get(url, { headers: { "x-access-token": userToken } })
       .then((res) => {
