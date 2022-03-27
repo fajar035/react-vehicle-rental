@@ -20,6 +20,6 @@ export const getVehiclesPopularApi = () => {
   return axios.get(url);
 };
 
-export const getVehicleSearchApi = (keyword, filter) => {
-  const url = process.env.REACT_APP_HOST + "";
-};
+// export const getVehicleSearchApi = (keyword, filter) => {
+//   const url = process.env.REACT_APP_HOST + "";
+// };

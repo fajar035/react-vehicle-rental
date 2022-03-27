@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSelector } from "react-redux";
 import Loading from "../../components/Loading";
-import popularDefault from "../../assets/images/popular-default.jpg";
+// import popularDefault from "../../assets/images/popular-default.jpg";
 import { getVehiclesPopularApi } from "../../utils/https/vehicles";
 // import { Swiper, SwiperSlide } from "swiper/react"
 // import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
