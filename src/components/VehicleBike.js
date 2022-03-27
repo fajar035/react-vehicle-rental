@@ -1,46 +1,46 @@
-import React from "react"
-import Header from "../components/Header"
-import { Link } from "react-router-dom"
-import bike from "../assets/images/bike-default.jpeg"
+import React from "react";
+import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import bike from "../assets/images/bike-default.jpeg";
 
-import Footer from "../components/Footer"
-import { getVeihcleBike } from "../utils/https/vehicleBike"
+import Footer from "../components/Footer";
+import { getVeihcleBikeApi } from "../utils/https/vehicles";
 
 class VehicleBike extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       vehiclesBike: [],
       isOk: false,
       photo: []
-    }
+    };
   }
 
   componentDidMount() {
-    getVeihcleBike()
+    getVeihcleBikeApi()
       .then((res) => {
         this.setState({
           vehiclesBike: res.data.result,
           isOke: true
-        })
+        });
         this.setState({
           photo: JSON.parse(res.data.result[0].photo)
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   render() {
-    const { url } = this.props.match
+    const { url } = this.props.match;
     // const hostBackend = process.env.REACT_APP_HOST
-    const vehiclesBike = this.state.vehiclesBike
+    const vehiclesBike = this.state.vehiclesBike;
     // const photo = this.state.photo
     if (!localStorage["user-role"]) {
-      localStorage.setItem("user-role", "1")
+      localStorage.setItem("user-role", "1");
     }
-    const role = JSON.parse(localStorage["user-role"])
+    const role = JSON.parse(localStorage["user-role"]);
     return (
       <main>
         <Header />
@@ -89,15 +89,15 @@ class VehicleBike extends React.Component {
                     </div>
                   </Link>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
 
         <Footer />
       </main>
-    )
+    );
   }
 }
 
-export default VehicleBike
+export default VehicleBike;

@@ -1,40 +1,40 @@
-import React from "react"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import { Link } from "react-router-dom"
-import motorbike from "../assets/images/motorbike-default.jpg"
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
+import motorbike from "../assets/images/motorbike-default.jpg";
 
-import { getVehiclesMotorBike } from "../utils/https/vehicleMotorbike"
+import { getVehiclesMotorBikeApi } from "../utils/https/vehicles";
 
 class VehicleMotorbike extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       vehiclesMotorbike: [],
       isOk: false
-    }
+    };
   }
 
   componentDidMount() {
-    getVehiclesMotorBike()
+    getVehiclesMotorBikeApi()
       .then((res) => {
         this.setState({
           vehiclesMotorbike: res.data.result,
           isOke: true
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
   render() {
-    const { url } = this.props.match
+    const { url } = this.props.match;
     // const hostBackend = process.env.REACT_APP_HOST
-    const vehiclesMotorBike = this.state.vehiclesMotorbike
+    const vehiclesMotorBike = this.state.vehiclesMotorbike;
     if (!localStorage["user-role"]) {
-      localStorage.setItem("user-role", "1")
+      localStorage.setItem("user-role", "1");
     }
-    const role = JSON.parse(localStorage["user-role"])
+    const role = JSON.parse(localStorage["user-role"]);
     return (
       <main>
         <Header />
@@ -83,15 +83,15 @@ class VehicleMotorbike extends React.Component {
                     </div>
                   </Link>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
 
         <Footer />
       </main>
-    )
+    );
   }
 }
 
-export default VehicleMotorbike
+export default VehicleMotorbike;

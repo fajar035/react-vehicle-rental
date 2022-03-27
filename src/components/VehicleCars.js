@@ -1,42 +1,42 @@
-import React from "react"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import { Link } from "react-router-dom"
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 // import vanLogin from "../assets/images/van_login.webp"
 // import motorcross from "../assets/images/motocross.webp"
 // import zeep from "../assets/images/zeep.webp"
 // import matic from "../assets/images/matic.webp"
-import { getVehiclesCars } from "../utils/https/vehicleCars"
+import { getVehiclesCarsApi } from "../utils/https/vehicles";
 
 class VehicleCars extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       vehiclesCars: [],
       isOk: false
-    }
+    };
   }
   componentDidMount() {
-    getVehiclesCars()
+    getVehiclesCarsApi()
       .then((res) => {
         this.setState({
           vehiclesCars: res.data.result,
           isOke: true
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   render() {
-    const { url } = this.props.match
-    const hostBackend = process.env.REACT_APP_HOST
-    const vehiclesCars = this.state.vehiclesCars
+    const { url } = this.props.match;
+    const hostBackend = process.env.REACT_APP_HOST;
+    const vehiclesCars = this.state.vehiclesCars;
     if (!localStorage["user-role"]) {
-      localStorage.setItem("user-role", "1")
+      localStorage.setItem("user-role", "1");
     }
-    const role = JSON.parse(localStorage["user-role"])
+    const role = JSON.parse(localStorage["user-role"]);
 
     return (
       <main>
@@ -90,15 +90,15 @@ class VehicleCars extends React.Component {
                     </div>
                   </Link>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
 
         <Footer />
       </main>
-    )
+    );
   }
 }
 
-export default VehicleCars
+export default VehicleCars;

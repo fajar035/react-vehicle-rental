@@ -17,6 +17,7 @@
     "react-toastify": "^8.1.0",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
     "redux-promise-middleware": "^6.1.2",
     "slick-carousel": "^1.8.1",

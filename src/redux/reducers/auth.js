@@ -1,86 +1,62 @@
-import { ACTION_STRING } from "../actions/actionString"
-import { ActionType } from "redux-promise-middleware"
-// import Swal from "sweetalert2"
-
-// import photoDefault from "../../assets/images/userProfile.webp"
+import { ACTION_STRING } from "../actions/actionString";
+import { ActionType } from "redux-promise-middleware";
 
 const initialState = {
   userData: {
-    token: JSON.parse(localStorage["vehicle-token"] || null),
-    photo: JSON.parse(localStorage["user-photo"] || null),
-    role: JSON.parse(localStorage["user-role"] || null)
+    token: "",
+    photo: "",
+    role: ""
   },
   isPending: false,
   isFulfilled: false,
   isRejected: false,
   isLogout: false,
   err: {}
-}
+};
 const authReducer = (prevState = initialState, action) => {
-  const { authLogin, authLogout } = ACTION_STRING
-  const { Pending, Fulfilled, Rejected } = ActionType
+  const { authLogin } = ACTION_STRING;
+  const { Pending, Fulfilled, Rejected } = ActionType;
+
   // membuat logic berdasarkan action
   switch (action.type) {
     // case authLogin + pending:
-    case authLogout:
-      // if (prevState.isLogout === true) {
-      localStorage.removeItem("vehicle-token")
-      localStorage.removeItem("user-photo")
-      localStorage.removeItem("user-role")
-
-      // }
-      // this.props.history.push("/")
-      var userData = {
-        ...prevState.userData,
-        token: null
-      }
-      return {
-        ...prevState,
-        isLogout: true,
-        userData
-      }
-
     case authLogin.concat("_", Pending):
       return {
         ...prevState,
         isPending: true,
         isFulfilled: false,
         isRejected: false
-      }
+      };
 
-    // case authLogin + fulfilled:
     case authLogin.concat("_", Fulfilled):
-      const data = action.payload.data
+      const data = action.payload.data;
 
-      userData = {
-        ...prevState.userData,
+      var userData = {
         token: data.result.token,
         photo: data.result.photo,
         role: data.result.role
-      }
+      };
       return {
         ...prevState,
-        isLogout: false,
         isRejected: false,
         isPending: false,
         isFulfilled: true,
         userData
-      }
+      };
 
-    // case authLogin + rejected:
     case authLogin.concat("_", Rejected):
-      const err = action.payload
+      const err = action.payload;
 
       return {
         ...prevState,
         isPending: false,
         isRejected: true,
         err
-      }
+      };
 
     default:
-      return prevState
+      return prevState;
   }
-}
+};
 
-export default authReducer
+export default authReducer;

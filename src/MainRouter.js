@@ -1,39 +1,40 @@
-import React from "react"
+import React from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch
-} from "react-router-dom"
+} from "react-router-dom";
 
-import { Provider as ReduxProvider } from "react-redux"
-import store from "./redux/store"
+import { PersistGate } from "redux-persist/es/integration/react";
+import { persistor, store } from "./redux/store";
+import { Provider } from "react-redux";
 
-import Home from "./pages/Home/Home"
-import Login from "./pages/Login/Login"
-import Profile from "./pages/Profile/Profile"
-import Vehicles from "./pages/Vehicles/Vehicles"
-import Signup from "./pages/Signup/Signup"
-import Forgot from "./pages/Forgot/Forgot"
-import DetailPopular from "./pages/Detail/DetailPopular"
-import DetailBike from "./pages/Detail/DetailBike"
-import DetailMotorbike from "./pages/Detail/DetailMotorbike"
-import DetailCars from "./pages/Detail/DetailCars"
-import Example from "./pages/Example/Example"
-import NotFound from "./pages/404/404"
-import VehiclePopular from "./components/VehiclePopular"
-import vehicleCars from "./components/VehicleCars"
-import VehicleMotorbike from "./components/VehicleMotorbike"
-import vehicleBike from "./components/VehicleBike"
-import History from "./pages/History/History"
-import Reservation from "./pages/Reservation/Reservation"
-import Chat from "./pages/Chat/Chat"
-import AddVehicle from "./components/AddVehicle"
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import Vehicles from "./pages/Vehicles/Vehicles";
+import Signup from "./pages/Signup/Signup";
+import Forgot from "./pages/Forgot/Forgot";
+import DetailPopular from "./pages/Detail/DetailPopular";
+import DetailBike from "./pages/Detail/DetailBike";
+import DetailMotorbike from "./pages/Detail/DetailMotorbike";
+import DetailCars from "./pages/Detail/DetailCars";
+import Example from "./pages/Example/Example";
+import NotFound from "./pages/404/404";
+import VehiclePopular from "./components/VehiclePopular";
+import vehicleCars from "./components/VehicleCars";
+import VehicleMotorbike from "./components/VehicleMotorbike";
+import vehicleBike from "./components/VehicleBike";
+import History from "./pages/History/History";
+import Reservation from "./pages/Reservation/Reservation";
+import Chat from "./pages/Chat/Chat";
+import AddVehicle from "./components/AddVehicle";
 
-class MainRouter extends React.Component {
-  render() {
-    return (
-      <ReduxProvider store={store}>
+function MainRouter(props) {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -93,9 +94,9 @@ class MainRouter extends React.Component {
             <Redirect to="/404" />
           </Switch>
         </Router>
-      </ReduxProvider>
-    )
-  }
+      </PersistGate>
+    </Provider>
+  );
 }
 
-export default MainRouter
+export default MainRouter;

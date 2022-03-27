@@ -1,9 +1,16 @@
-import { ACTION_STRING } from "./actionString"
-import { login } from "../../utils/https/auth"
+import { ACTION_STRING } from "./actionString";
+import { loginApi, logoutApi } from "../../utils/https/auth";
 
 export const loginAction = (body) => {
   return {
     type: ACTION_STRING.authLogin,
-    payload: login(body)
-  }
-}
+    payload: loginApi(body)
+  };
+};
+
+export const logoutAction = (token) => {
+  return {
+    type: ACTION_STRING.authLogout,
+    payload: logoutApi(token)
+  };
+};
