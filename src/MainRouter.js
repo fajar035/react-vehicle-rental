@@ -41,7 +41,7 @@ function MainRouter(props) {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/profile" component={Profile} />
-            <Route path="/profile/forgot" component={Forgot} />
+            <Route path="/forgot" component={Forgot} />
             <Route exact path="/vehicles" component={Vehicles} />
 
             {/* Popular */}

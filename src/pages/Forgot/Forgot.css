@@ -42,13 +42,25 @@
   font-size: 64px;
   line-height: 85px;
   color: #ffffff;
-  margin: 50px 0px;
+  margin-bottom: 50px;
 }
 
 .body-forgot {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .input-email-forgot {
@@ -64,6 +76,7 @@
   line-height: 33px;
   text-align: center;
   border: none;
+  color: #fff;
 }
 
 /*support google chrome*/

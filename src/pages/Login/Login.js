@@ -29,7 +29,7 @@ class Login extends React.Component {
       // )
       // localStorage["user-role"] = JSON.stringify(this.props.auth.userData.role)
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "success",
         title: "BERHASIL LOGIN",
         showConfirmButton: false,

@@ -1,34 +1,50 @@
-import React from "react"
+import React from "react";
 // import axios from "axios"
-import "./Signup.css"
-import Footer from "../../components/Footer"
-import { Link } from "react-router-dom"
-import iconGoogle from "../../assets/icons/icon_google.png"
-import axios from "axios"
-// import Modal from "../../components/Modal"
+import "./Signup.css";
+import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
+import iconGoogle from "../../assets/icons/icon_google.png";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 class Signup extends React.Component {
   render() {
     const signUpSubmit = (e) => {
       // console.log(e)
-      e.preventDefault()
+      e.preventDefault();
       const body = {
         name: e.target.name.value,
         email: e.target.email.value,
         password: e.target.password.value
-      }
+      };
 
-      const url = `${process.env.REACT_APP_HOST}/auth/register`
+      const url = `${process.env.REACT_APP_HOST}/auth/register`;
       axios
         .post(url, body)
         .then((res) => {
           // console.log(res)
-          return this.props.history.replace("/login")
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Successfully Registered",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return this.props.history.replace("/login");
         })
         .catch((err) => {
-          console.log(err)
-        })
-    }
+          console.log(err.response);
+          if (err.response.status === 406) {
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: err.response.data.message,
+              timer: 2000,
+              showConfirmButton: false
+            });
+          }
+        });
+    };
     return (
       <main className="container-fluid m-0 p-0">
         <section className="row position-relative bg-img">
@@ -80,11 +96,7 @@ class Signup extends React.Component {
               </div>
 
               <div className="col-12 p-3 ">
-                <button
-                  className="btn-login-login"
-                  type="submit"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal">
+                <button className="btn-login-login" type="submit">
                   Sign Up
                 </button>
               </div>
@@ -109,8 +121,8 @@ class Signup extends React.Component {
           </div>
         </section>
       </main>
-    )
+    );
   }
 }
 
-export default Signup
+export default Signup;
