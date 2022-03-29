@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getVeihcleBikeApi = () => {
+export const getVehicleBikeApi = () => {
   const url = `${process.env.REACT_APP_HOST}/vehicles?filter=bike`;
   return axios.get(url);
 };
@@ -32,4 +32,29 @@ export const updateVehicleApi = (body, token) => {
     }
   };
   return axios.patch(url, body, config);
+};
+
+export const getCategoryApi = () => {
+  const url = process.env.REACT_APP_HOST + "/category";
+  return axios.get(url);
+};
+
+export const getStatusApi = () => {
+  const url = process.env.REACT_APP_HOST + "/status";
+  return axios.get(url);
+};
+
+export const getLocationApi = () => {
+  const url = process.env.REACT_APP_HOST + "/location";
+  return axios.get(url);
+};
+
+export const addVehicleApi = (body, token) => {
+  const url = process.env.REACT_APP_HOST + "/vehicles/";
+  const config = {
+    headers: {
+      "x-access-token": token
+    }
+  };
+  return axios.post(url, body, config);
 };

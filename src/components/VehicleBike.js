@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import bike from "../assets/images/bike-default.jpeg";
 
 import Footer from "../components/Footer";
-import { getVeihcleBikeApi } from "../utils/https/vehicles";
+import { getVehicleBikeApi } from "../utils/https/vehicles";
 
 class VehicleBike extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class VehicleBike extends React.Component {
   }
 
   componentDidMount() {
-    getVeihcleBikeApi()
+    getVehicleBikeApi()
       .then((res) => {
         this.setState({
           vehiclesBike: res.data.result,

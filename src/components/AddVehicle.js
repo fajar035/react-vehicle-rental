@@ -1,29 +1,34 @@
-import React, { Component } from "react"
-import Header from "./Header"
-import Footer from "./Footer"
-import { Link } from "react-router-dom"
-import cameraIcon from "../assets/icons/camera-icon.png"
-import "../pages/Vehicles/Vehicles.css"
-import axios from "axios"
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
+import cameraIcon from "../assets/icons/camera-icon.png";
+import "../pages/Vehicles/Vehicles.css";
+import { connect } from "react-redux";
+import {
+  getStatusApi,
+  getLocationApi,
+  getCategoryApi,
+  addVehicleApi
+} from "../utils/https/vehicles";
 // import { toast } from "react-toastify"
+import Swal from "sweetalert2";
 
 export class Additem extends Component {
   constructor(props) {
-    super(props)
-    this.inputFileRef = React.createRef()
-    this.inputFileSelectHandler = this.handleFileChange.bind(this)
-    // this.onBtnImage = this.inputImage.bind(this)
+    super(props);
+    this.inputFileRef = React.createRef();
+    this.inputFileSelectHandler = this.handleFileChange.bind(this);
     this.handleDropdownChangeCategory =
-      this.handleDropdownChangeCategory.bind(this)
-
-    this.handleDropdownChangeStatus = this.handleDropdownChangeStatus.bind(this)
+      this.handleDropdownChangeCategory.bind(this);
+    this.handleDropdownChangeStatus =
+      this.handleDropdownChangeStatus.bind(this);
     this.handleDropdownChangeLocation =
-      this.handleDropdownChangeLocation.bind(this)
+      this.handleDropdownChangeLocation.bind(this);
   }
 
   state = {
-    stock: 0,
+    stock: 1,
     vehiclesBike: [],
     selectValueCategory: "",
     selectValueStatus: "",
@@ -33,145 +38,187 @@ export class Additem extends Component {
     category: [],
     selectedFile: [],
     isSuccess: false,
-    imgUpload: cameraIcon
-  }
+    imgUpload: cameraIcon,
+    isError: false
+  };
 
   getCategory = () => {
-    const url = process.env.REACT_APP_HOST + "/category"
-    axios
-      .get(url)
+    getCategoryApi()
       .then((res) => {
         this.setState({
           category: res.data.result
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   getStatus = () => {
-    const url = process.env.REACT_APP_HOST + "/status"
-    axios
-      .get(url)
+    getStatusApi()
       .then((res) => {
         this.setState({
           status: res.data.result
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   getLocation = () => {
-    const url = process.env.REACT_APP_HOST + "/location"
-    axios
-      .get(url)
+    getLocationApi()
       .then((res) => {
         this.setState({
           location: res.data.result
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   componentDidMount() {
-    this.getCategory()
-    this.getStatus()
-    this.getLocation()
+    this.getCategory();
+    this.getStatus();
+    this.getLocation();
   }
 
   handleDropdownChangeCategory(e) {
-    this.setState({ ...this.state, selectValueCategory: e.target.value })
+    this.setState({ ...this.state, selectValueCategory: e.target.value });
   }
 
   handleDropdownChangeStatus(e) {
-    this.setState({ ...this.state, selectValueStatus: e.target.value })
+    this.setState({ ...this.state, selectValueStatus: e.target.value });
   }
 
   handleDropdownChangeLocation(e) {
-    this.setState({ ...this.state, selectValueLocation: e.target.value })
+    this.setState({ ...this.state, selectValueLocation: e.target.value });
   }
 
   onClickPrev = () => {
-    const number = this.state.stock
-    this.setState({
-      stock: number - 1
-    })
-  }
+    const number = this.state.stock;
+    if (this.state.stock !== 0) {
+      this.setState({
+        stock: number - 1
+      });
+    }
+  };
 
   onClickNext = () => {
-    const number = this.state.stock
+    const number = this.state.stock;
     this.setState({
       stock: number + 1
-    })
-  }
+    });
+  };
 
   getBase64(e) {
-    var file = e.target.files[0]
-    let reader = new FileReader()
-    reader.readAsDataURL(file)
+    var file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onload = () => {
       this.setState({
         imgUpload: reader.result
-      })
-    }
+      });
+    };
     reader.onerror = function (error) {
-      console.log("Error: ", error)
-    }
+      console.log("Error: ", error);
+    };
   }
 
   handleFileChange(e) {
-    this.getBase64(e)
+    this.getBase64(e);
     this.setState({
       // selectedFile: [...this.state.selectedFile, ...e.target.files]
       selectedFile: [e.target.files]
-    })
+    });
   }
 
   inputImage = (e) => {
-    this.inputFileRef.current.click()
-  }
+    this.inputFileRef.current.click();
+  };
 
   submitAddItem = (e) => {
-    e.preventDefault()
-    const body = new FormData()
+    e.preventDefault();
+    const token = this.props.auth.userData.token;
+    const body = new FormData();
     // const url = process.env.REACT_APP_HOST + "/vehicles"
     // const userToken = this.props.auth.userData.token
-    const vehicleImg = this.state.selectedFile
-    console.log(vehicleImg)
+    const vehicleImg = this.state.selectedFile;
 
     if (this.state.selectedFile !== null) {
-      ;[...vehicleImg].forEach((img) => {
-        body.append("uploadPhotoVehicle", img)
-      })
+      [...vehicleImg].forEach((img) => {
+        body.append("uploadPhotoVehicle", img);
+      });
     }
-    body.append("name", e.target.name.value)
-    body.append("description", e.target.description.value)
-    body.append("capacity", e.target.capacity.value)
-    body.append("price", e.target.price.value)
-    // body.append("stock", this.state.stock)
-    body.append("category", e.target.category.value)
-    body.append("location", e.target.location.value)
-    body.append("status", e.target.status.value)
-    // console.log("data-body", body.get("stock"))
-    // console.log("EVENT-BODY", e)
 
-    // const config = { Headers: { "x-access-token": userToken } }
+    if (this.state.name !== null) {
+      body.append("name", e.target.name.value);
+    }
+    if (this.state.description !== null) {
+      body.append("description", e.target.description.value);
+    }
+    if (this.state.capacity !== null) {
+      body.append("capacity", e.target.capacity.value);
+    }
+    if (this.state.price !== null) {
+      body.append("price", e.target.price.value);
+    }
+    // body.append("stock", this.state.stock);
+    if (this.state.category !== null) {
+      body.append("category", e.target.category.value);
+    }
+    if (this.state.location !== null) {
+      body.append("location", e.target.location.value);
+    }
+    if (this.state.status !== null) {
+      body.append("status", e.target.status.value);
+    }
 
-    console.log(body)
-  }
+    if (
+      this.state.selectedFile !== null &&
+      this.state.name !== null &&
+      this.state.description !== null &&
+      this.state.capacity !== null &&
+      this.state.price !== null &&
+      this.state.capacity !== null &&
+      this.state.category !== null &&
+      this.state.location !== null &&
+      this.state.status !== null
+    ) {
+      addVehicleApi(body, token)
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Successfully added vehicle",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return this.props.history.push("/");
+        })
+        .catch((err) => {
+          console.log(err.response);
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "ERROR",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        });
+    }
+
+    // console.log(body);
+  };
 
   render() {
     // console.log("SELECT-IMG", this.state.selectedFile)
 
-    const { imgUpload } = this.state
-    const category = this.state.category
-    const status = this.state.status
-    const location = this.state.location
+    const { imgUpload } = this.state;
+    const category = this.state.category;
+    const status = this.state.status;
+    const location = this.state.location;
 
     return (
       <>
@@ -244,7 +291,7 @@ export class Additem extends Component {
                     <option key={index} value={item.id}>
                       {item.status}
                     </option>
-                  )
+                  );
                 })}
               </select>
 
@@ -263,7 +310,7 @@ export class Additem extends Component {
                     <option key={index} value={item.id}>
                       {item.location}
                     </option>
-                  )
+                  );
                 })}
               </select>
             </div>
@@ -273,13 +320,17 @@ export class Additem extends Component {
                   <label className="label-add me-5">Stock :</label>
                 </div>
                 <div className="col-lg-6 d-flex flex-row justify-content-around align-items-center">
-                  <button className="btn-minus-add" onClick={this.onClickPrev}>
+                  <div
+                    className="btn-minus-add d-flex justify-content-center align-items-center"
+                    onClick={this.onClickPrev}>
                     <i className="fas fa-minus"></i>
-                  </button>
+                  </div>
                   <p className="number-add">{this.state.stock}</p>
-                  <button className="btn-plus-add" onClick={this.onClickNext}>
+                  <div
+                    className="btn-plus-add d-flex justify-content-center align-items-center"
+                    onClick={this.onClickNext}>
                     <i className="fas fa-plus"></i>
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,7 +351,7 @@ export class Additem extends Component {
                       <option key={index} value={item.id}>
                         {item.category}
                       </option>
-                    )
+                    );
                   })}
                 </select>
               </div>
@@ -312,15 +363,15 @@ export class Additem extends Component {
         </div>
         <Footer />
       </>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     auth: state.auth
-  }
-}
+  };
+};
 
-const AppWithRedux = connect(mapStateToProps, null)(Additem)
-export default AppWithRedux
+const AppWithRedux = connect(mapStateToProps, null)(Additem);
+export default AppWithRedux;
