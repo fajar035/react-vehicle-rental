@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { getVehiclesPopularApi } from "../../utils/https/vehicles";
+// import { getVehiclesPopularApi } from "../../utils/https/vehicles";
 // import VehiclePopular from "../../components/VehiclePopular"
 
 class Detail extends React.Component {
