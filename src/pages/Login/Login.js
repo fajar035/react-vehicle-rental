@@ -1,41 +1,41 @@
-import "./Login.css"
-import React from "react"
+import "./Login.css";
+import React from "react";
 // import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 // import { login } from "../../utils/https/auth"
-import Footer from "../../components/Footer"
-import iconGoogle from "../../assets/icons/icon_google.png"
-import { connect } from "react-redux"
-import { loginAction } from "../../redux/actions/auth"
-import Swal from "sweetalert2"
+import Footer from "../../components/Footer";
+import iconGoogle from "../../assets/icons/icon_google.png";
+import { connect } from "react-redux";
+import { loginAction } from "../../redux/actions/auth";
+import Swal from "sweetalert2";
 
 class Login extends React.Component {
   submitLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const body = {
       email: e.target.email.value,
       password: e.target.password.value
-    }
-    this.props.loginDispatch(body)
-  }
+    };
+    this.props.loginDispatch(body);
+  };
 
   componentDidUpdate() {
     if (this.props.auth.isFulfilled === true) {
-      localStorage["vehicle-token"] = JSON.stringify(
-        this.props.auth.userData.token
-      )
-      localStorage["user-photo"] = JSON.stringify(
-        this.props.auth.userData.photo
-      )
-      localStorage["user-role"] = JSON.stringify(this.props.auth.userData.role)
+      // localStorage["vehicle-token"] = JSON.stringify(
+      //   this.props.auth.userData.token
+      // )
+      // localStorage["user-photo"] = JSON.stringify(
+      //   this.props.auth.userData.photo
+      // )
+      // localStorage["user-role"] = JSON.stringify(this.props.auth.userData.role)
       Swal.fire({
         position: "top-end",
         icon: "success",
         title: "BERHASIL LOGIN",
         showConfirmButton: false,
         timer: 1500
-      })
-      this.props.history.push("/")
+      });
+      this.props.history.push("/");
     }
 
     if (this.props.auth.isRejected === true) {
@@ -43,9 +43,9 @@ class Login extends React.Component {
         icon: "error",
         title: "Oops...",
         text: "Email atau Password Salah !!"
-      })
+      });
     }
-    console.log("CEK DATA", this.props.auth)
+    console.log("CEK DATA", this.props.auth);
   }
   render() {
     return (
@@ -111,24 +111,24 @@ class Login extends React.Component {
           </div>
         </section>
       </main>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     auth: state.auth
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loginDispatch: (body) => {
-      dispatch(loginAction(body))
+      dispatch(loginAction(body));
     }
-  }
-}
+  };
+};
 
-const AppWithRedux = connect(mapStateToProps, mapDispatchToProps)(Login)
+const AppWithRedux = connect(mapStateToProps, mapDispatchToProps)(Login);
 
-export default AppWithRedux
+export default AppWithRedux;

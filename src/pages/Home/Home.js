@@ -30,7 +30,7 @@ function Home(props) {
     getVehiclesPopularApi()
       .then((res) => {
         console.log("HIT GET POPULAR");
-        setDataPopular(res.data.popular);
+        setDataPopular(res.data.result);
         setSuccess(true);
       })
       .catch((err) => {
@@ -111,40 +111,45 @@ function Home(props) {
             <div className="col-lg-12 mb-5 ">
               <div className="container px-4 ">
                 <h3 className="mb-5 mt-5 f-playfair-main">Popular in town</h3>
-                <div className="row position-relative">
+                <div className="row position-relative d-flex justify-content-center">
                   {/* <div className="next">
                       <i className="fas fa-angle-right"></i>
                     </div> */}
-                  {dataPopular.map((item, idx) => {
-                    // console.log("DATA POPULAR", item.photo);
-                    const photo =
-                      process.env.REACT_APP_HOST + JSON.parse(item.photo);
-                    console.log("PHOTO", photo);
 
-                    return (
-                      <div
-                        key={idx}
-                        className="col-lg-3 col-md-6 card position-relative ">
-                        <Link
-                          to={`/vehicles/popular/detail/${item.id}`}
-                          className="wrapper-img-home">
-                          <img
-                            src={photo}
-                            className="img-size "
-                            alt="van_login"
-                          />
-                        </Link>
-                        <div className="city-home col-9  shadow ">
-                          <p className="mt-3">
-                            {item.vehicle} <br />
-                            <span className="color-subtitle">
-                              {item.location}
-                            </span>
-                          </p>
+                  {Array.isArray(dataPopular).length !== 0 &&
+                  dataPopular !== undefined ? (
+                    dataPopular.map((item, idx) => {
+                      // console.log("DATA POPULAR", item);
+                      const photo = JSON.parse(item.photo);
+                      // console.log("ID", item);
+
+                      return (
+                        <div
+                          key={idx}
+                          className="col-lg-3 col-md-6 card position-relative ">
+                          <Link
+                            to={`/vehicles/popular/detail/${item.id}`}
+                            className="wrapper-img-home">
+                            <img
+                              src={process.env.REACT_APP_HOST + photo[0]}
+                              className="img-size "
+                              alt="photo_vehicle"
+                            />
+                          </Link>
+                          <div className="city-home col-9  shadow ">
+                            <p className="m-0">
+                              {item.vehicle} <br />
+                              <span className="color-subtitle">
+                                {item.location}
+                              </span>
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })
+                  ) : (
+                    <p className="no-data">No data</p>
+                  )}
 
                   {role === "2" ? (
                     <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">

@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { ACTION_STRING } from "../actions/actionString";
 import { ActionType } from "redux-promise-middleware";
 
@@ -14,11 +15,23 @@ const initialState = {
   err: {}
 };
 const authReducer = (prevState = initialState, action) => {
-  const { authLogin } = ACTION_STRING;
+  const { authLogin, updateImageUser } = ACTION_STRING;
   const { Pending, Fulfilled, Rejected } = ActionType;
 
   // membuat logic berdasarkan action
   switch (action.type) {
+    case updateImageUser.concat("_", Fulfilled):
+      const newPhoto = action.payload.data.result.photo;
+
+      var userData = {
+        ...prevState.userData,
+        photo: newPhoto
+      };
+      return {
+        ...prevState,
+        userData
+      };
+
     // case authLogin + pending:
     case authLogin.concat("_", Pending):
       return {

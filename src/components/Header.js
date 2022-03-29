@@ -16,7 +16,9 @@ function Header() {
   const [photoProfile, setPhotoProfile] = useState(userProfile);
 
   useEffect(() => {
-    if (Object.values(userData).length !== 0) {
+    // console.log("PHOTO HEADER", userData.photo);
+
+    if (Object.values(userData).length !== 0 && userData) {
       setPhotoProfile(process.env.REACT_APP_HOST + userData.photo);
     }
   }, [userData]);
@@ -36,7 +38,7 @@ function Header() {
       }
     });
   };
-
+  // console.log("PHOTO PROFILE HEADER >> ", photoProfile);
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <main className="container-fluid p-0">

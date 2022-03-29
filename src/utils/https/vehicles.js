@@ -23,3 +23,13 @@ export const getVehiclesPopularApi = () => {
 // export const getVehicleSearchApi = (keyword, filter) => {
 //   const url = process.env.REACT_APP_HOST + "";
 // };
+
+export const updateVehicleApi = (body, token) => {
+  const url = process.env.REACT_APP_HOST + "/users/edit";
+  const config = {
+    headers: {
+      "x-ccess-token": token
+    }
+  };
+  return axios.patch(url, body, config);
+};
