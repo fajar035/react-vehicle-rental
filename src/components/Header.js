@@ -14,14 +14,14 @@ function Header() {
   const { userData } = auth;
   const token = userData.token;
   const [photoProfile, setPhotoProfile] = useState(userProfile);
+  const photo = userData.photo;
 
   useEffect(() => {
     // console.log("PHOTO HEADER", userData.photo);
-
-    if (Object.values(userData).length !== 0 && userData) {
+    if (photo !== null) {
       setPhotoProfile(process.env.REACT_APP_HOST + userData.photo);
     }
-  }, [userData]);
+  }, [userData.photo, photo]);
 
   const onClickLogout = () => {
     Swal.fire({

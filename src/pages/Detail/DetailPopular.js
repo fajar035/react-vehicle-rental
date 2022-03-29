@@ -1,10 +1,11 @@
-import React from "react"
-import "./Detail.css"
-import popular from "../../assets/images/popular-default.jpg"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import { Link } from "react-router-dom"
-import axios from "axios"
+import React from "react";
+import "./Detail.css";
+import popular from "../../assets/images/popular-default.jpg";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { getVehiclesPopularApi } from "../../utils/https/vehicles";
 // import VehiclePopular from "../../components/VehiclePopular"
 
 class Detail extends React.Component {
@@ -13,54 +14,55 @@ class Detail extends React.Component {
     price: 70,
     vehiclesPopular: [],
     photo: []
-  }
+  };
 
   onClickPrev = () => {
-    const price = this.state.price
-    const number = this.state.counter
+    const price = this.state.price;
+    const number = this.state.counter;
     this.setState({
       counter: number - 1,
       price: price / 2
-    })
-  }
+    });
+  };
 
   onClickNext = () => {
-    const number = this.state.counter
-    const price = this.state.price
+    const number = this.state.counter;
+    const price = this.state.price;
     this.setState({
       counter: number + 1,
       price: price * 2
-    })
-  }
+    });
+  };
 
-  onClickReservaion = () => {}
+  onClickReservaion = () => {};
 
   componentDidMount() {
-    const { id } = this.props.match.params
+    const { id } = this.props.match.params;
+    console.log(id);
 
-    const url = `${process.env.REACT_APP_HOST}/history/popular/${id}`
+    const url = `${process.env.REACT_APP_HOST}/history/popular/${id}`;
     axios
       .get(url)
       .then((res) => {
         this.setState({
           ...this.state,
           vehiclesPopular: res.data.result
-        })
+        });
         this.setState({
           photo: JSON.parse(res.data.result[0].photo) || null
-        })
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   render() {
     // const { match } = this.props
-    const vehiclesPopular = this.state.vehiclesPopular
-    const hostBackend = process.env.REACT_APP_HOST
-    const photo = this.state.photo
-    console.log("PHOTO STATE DETAIL", photo)
+    const vehiclesPopular = this.state.vehiclesPopular;
+    const hostBackend = process.env.REACT_APP_HOST;
+    const photo = this.state.photo;
+    console.log("PHOTO STATE DETAIL", photo);
 
     return (
       <main>
@@ -107,7 +109,7 @@ class Detail extends React.Component {
                     <p>Rp.{this.state.price}.000/day</p>
                   </div>
                 </>
-              )
+              );
             })}
           </div>
 
@@ -158,8 +160,8 @@ class Detail extends React.Component {
 
         <Footer />
       </main>
-    )
+    );
   }
 }
 
-export default Detail
+export default Detail;
