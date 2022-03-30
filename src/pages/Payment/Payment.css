@@ -1,0 +1,236 @@
+.wrapper-image {
+  width: 350px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image-vehicle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name-vehicle {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  color: #042521;
+  margin: 0;
+}
+
+.location-vehicle {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  color: #042521;
+  /* margin: 0; */
+}
+
+.status-vehicle {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #b8becd;
+  margin-bottom: 30px;
+}
+
+.code-booking {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  color: #393939;
+}
+
+.btn-copy-booking {
+  background-color: #ffcd61;
+  width: 250px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-copy-booking > p {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+}
+/* 
+.btn-copy-booking:hover {
+} */
+
+.wrapper-quantity,
+.wrapper-reservation-date {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-order-detail {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  /* padding: 20px; */
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrapper-identity {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  /* padding: 20px; */
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 100px;
+}
+
+.wrapper-quantity > p,
+.wrapper-reservation-date > p {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  color: #393939;
+}
+
+.title-payment {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  color: #393939;
+}
+
+.value-payment {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 17px;
+  color: #393939;
+  margin: 0;
+}
+
+.wrapper-title-payment {
+  /* border: 1px solid #80918e; */
+  border-radius: 10px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-title-payment > p {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #393939;
+}
+
+.wrapper-copy-code {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.wrapper-copy-code > p {
+  margin: 0;
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  color: #393939;
+}
+
+.btn-copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 30px;
+  background: #393939;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn-copy > p {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  color: #ffcd61;
+}
+
+.select-method {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.btn-payment-now {
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  height: 60px;
+  background-color: #ffcd61;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-payment-now:hover {
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper-text {
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-btn-payment {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 17px;
+  color: #393939;
+}
+.time {
+  margin: 0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 17px;
+  color: red;
+}

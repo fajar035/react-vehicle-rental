@@ -1,17 +1,17 @@
 import axios from "axios";
 
-export const getVehicleBikeApi = () => {
-  const url = `${process.env.REACT_APP_HOST}/vehicles?filter=bike`;
+export const getVehiclesBikeApi = () => {
+  const url = `${process.env.REACT_APP_HOST}/vehicles?filterCategory=bike`;
   return axios.get(url);
 };
 
 export const getVehiclesMotorBikeApi = () => {
-  const url = `${process.env.REACT_APP_HOST}/vehicles?filter=motorbike`;
+  const url = `${process.env.REACT_APP_HOST}/vehicles?filterCategory=motorbike`;
   return axios.get(url);
 };
 
 export const getVehiclesCarsApi = () => {
-  const url = `${process.env.REACT_APP_HOST}/vehicles?filter=cars`;
+  const url = `${process.env.REACT_APP_HOST}/vehicles?filterCategory=cars`;
   return axios.get(url);
 };
 
@@ -57,4 +57,14 @@ export const addVehicleApi = (body, token) => {
     }
   };
   return axios.post(url, body, config);
+};
+
+export const getVehicleApi = (id) => {
+  const url = process.env.REACT_APP_HOST + "/vehicles/" + id;
+  return axios.get(url);
+};
+
+export const getVehiclePopularIdApi = (id) => {
+  const url = process.env.REACT_APP_HOST + "/history/popular/" + id;
+  return axios.get(url);
 };

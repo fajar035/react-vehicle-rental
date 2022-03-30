@@ -4,16 +4,13 @@ import {
   getVehiclesPopularApi,
   getVehiclesCarsApi,
   getVehiclesMotorBikeApi,
-  getVehicleBikeApi
+  getVehiclesBikeApi
 } from "../../utils/https/vehicles";
 import "./Vehicles.css";
 import Header from "../../components/Header";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import popular from "../../assets/images/popular-default.jpg";
-import car from "../../assets/images/car-default.jpg";
-import bike from "../../assets/images/bike-default.jpeg";
-import motorbike from "../../assets/images/motorbike-default.jpg";
+import vehicleDefault from "../../assets/images/vehicle-default.jpg";
 
 import Footer from "../../components/Footer";
 import Loading from "../../components/Loading";
@@ -27,7 +24,7 @@ function Vehicles() {
   const [isOk, setisOk] = useState(false);
 
   const getVehiclesBike = useCallback(() => {
-    getVehicleBikeApi()
+    getVehiclesBikeApi()
       .then((res) => {
         const vehiclesBike = res.data.result;
         setVehiclesBike(vehiclesBike);
@@ -86,7 +83,7 @@ function Vehicles() {
     getVehiclesMotorBike,
     getVehiclesCars
   ]);
-
+  // console.log(photoError);
   return (
     <main>
       <Header />
@@ -116,12 +113,16 @@ function Vehicles() {
           {/* Card */}
           <div className="row position-relative mb-lg-5 wrapper-card">
             {vehiclesPopular.map((item, idx) => {
+              const photos = item.photo;
+              const photo = JSON.parse(photos);
+              const photoUrl = process.env.REACT_APP_HOST + photo[0];
+
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/popular/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img src={popular} className="img-size" alt="van_login" />
+                    <img src={photoUrl} className="img-size" alt="Vehicle" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.vehicle} <br />
@@ -145,12 +146,25 @@ function Vehicles() {
           {/* Card */}
           <div className="row position-relative mb-lg-5 wrapper-card">
             {vehiclesBike.map((item, idx) => {
+              // console.log(item);
+              const photos = item.photo;
+              const photo = JSON.parse(photos);
+              // console.log(photo);
+              if (photo !== null) {
+                var photoUrl = process.env.REACT_APP_HOST + photo[0];
+              }
+              // console.log(photoUrl);
+              // console.log(photoUrl);
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/bike/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img src={bike} className="img-size" alt="van_login" />
+                    <img
+                      src={!photoUrl ? vehicleDefault : photoUrl}
+                      className="img-size"
+                      alt="van_login"
+                    />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />
@@ -174,12 +188,23 @@ function Vehicles() {
           {/* Card */}
           <div className="row position-relative mb-lg-5 wrapper-card">
             {vehiclesMotorBike.map((item, idx) => {
+              const photos = item.photo;
+              const photo = JSON.parse(photos);
+              // console.log(photo);
+              if (photo !== null) {
+                var photoUrl = process.env.REACT_APP_HOST + photo[0];
+              }
+              // console.log(photoUrl);
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/motorbike/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img src={motorbike} className="img-size" alt="van_login" />
+                    <img
+                      src={!photoUrl ? vehicleDefault : photoUrl}
+                      className="img-size"
+                      alt="van_login"
+                    />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />
@@ -203,12 +228,22 @@ function Vehicles() {
           {/* Card */}
           <div className="row position-relative mb-lg-5 wrapper-card">
             {vehiclesCars.map((item, idx) => {
+              const photos = item.photo;
+              const photo = JSON.parse(photos);
+              // console.log(photo);
+              if (photo !== null) {
+                var photoUrl = process.env.REACT_APP_HOST + photo[0];
+              }
               return (
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/cars/detail/${item.id}`}
                     className="wrapper-img-home">
-                    <img src={car} className="img-size" alt="van_login" />
+                    <img
+                      src={!photoUrl ? vehicleDefault : photoUrl}
+                      className="img-size"
+                      alt="van_login"
+                    />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
                         {item.name} <br />

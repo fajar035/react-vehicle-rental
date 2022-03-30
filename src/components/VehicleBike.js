@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import bike from "../assets/images/bike-default.jpeg";
 
 import Footer from "../components/Footer";
-import { getVehicleBikeApi } from "../utils/https/vehicles";
+import { getVehiclesBikeApi } from "../utils/https/vehicles";
 
 class VehicleBike extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class VehicleBike extends React.Component {
   }
 
   componentDidMount() {
-    getVehicleBikeApi()
+    getVehiclesBikeApi()
       .then((res) => {
         this.setState({
           vehiclesBike: res.data.result,
@@ -41,6 +41,7 @@ class VehicleBike extends React.Component {
       localStorage.setItem("user-role", "1");
     }
     const role = JSON.parse(localStorage["user-role"]);
+    console.log(role);
     return (
       <main>
         <Header />
@@ -59,7 +60,7 @@ class VehicleBike extends React.Component {
             </div>
           </div>
 
-          {role === "2" ? (
+          {role === "1" ? (
             <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
               <button className="add-item">
                 Click item to see details and reservation

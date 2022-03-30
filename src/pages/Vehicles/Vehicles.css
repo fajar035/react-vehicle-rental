@@ -62,11 +62,25 @@
   color: #000000;
 }
 
+.wrapper-card {
+  /* border: 1px solid black; */
+  justify-content: center;
+}
+
 .card {
+  height: 176px;
+  width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid black;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.43);
 }
 
 .card-type-vehicles {
@@ -94,6 +108,13 @@
   display: flex;
   flex-direction: column;
 }
+
+/* .wrapper-img-home {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+} */
+
 .img-size {
   width: 100%;
   height: 100%;

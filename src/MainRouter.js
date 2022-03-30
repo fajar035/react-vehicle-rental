@@ -28,6 +28,7 @@ import VehicleMotorbike from "./components/VehicleMotorbike";
 import vehicleBike from "./components/VehicleBike";
 import History from "./pages/History/History";
 import Reservation from "./pages/Reservation/Reservation";
+import Payment from "./pages/Payment/Payment";
 import Chat from "./pages/Chat/Chat";
 import AddVehicle from "./components/AddVehicle";
 
@@ -43,6 +44,8 @@ function MainRouter(props) {
             <Route exact path="/profile" component={Profile} />
             <Route path="/forgot" component={Forgot} />
             <Route exact path="/vehicles" component={Vehicles} />
+            <Route path="/vehicles/reservation" component={Reservation} />
+            <Route path="/vehicles/payment" component={Payment} />
 
             {/* Popular */}
             <Route exact path="/vehicles/popular" component={VehiclePopular} />
@@ -56,10 +59,6 @@ function MainRouter(props) {
 
             {/* END DETAIL */}
 
-            <Route
-              path="/vehicles/popular/reservation"
-              component={Reservation}
-            />
             <Route path="/vehicles/popular/chat" component={Chat} />
 
             {/* cars */}
