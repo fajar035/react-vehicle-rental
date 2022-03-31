@@ -39,7 +39,7 @@ function History(props) {
           console.log(err.response);
         });
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     if (token.length === 0) {
