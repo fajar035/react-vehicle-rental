@@ -41,31 +41,25 @@ function MainRouter(props) {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+
             <Route exact path="/profile" component={Profile} />
             <Route path="/forgot" component={Forgot} />
+
             <Route exact path="/vehicles" component={Vehicles} />
             <Route path="/vehicles/reservation" component={Reservation} />
             <Route path="/vehicles/payment" component={Payment} />
 
-            {/* Popular */}
             <Route exact path="/vehicles/popular" component={VehiclePopular} />
-
-            {/* START DETAIL */}
             <Route
               exact
               path="/vehicles/popular/detail/:id"
               component={DetailPopular}
             />
-
-            {/* END DETAIL */}
-
             <Route path="/vehicles/popular/chat" component={Chat} />
 
-            {/* cars */}
             <Route exact path="/vehicles/cars" component={vehicleCars} />
             <Route path="/vehicles/cars/detail/:id" component={DetailCars} />
 
-            {/* Motorbike */}
             <Route
               exact
               path="/vehicles/motorbike"
@@ -75,8 +69,9 @@ function MainRouter(props) {
               path="/vehicles/motorbike/detail/:id"
               component={DetailMotorbike}
             />
+            <Route path="/vehicles/reservation" component={Reservation} />
+            <Route path="/vehicles/payment" component={Payment} />
 
-            {/* Bike */}
             <Route exact path="/vehicles/bike/" component={vehicleBike} />
             <Route path="/vehicles/bike/detail/:id" component={DetailBike} />
 

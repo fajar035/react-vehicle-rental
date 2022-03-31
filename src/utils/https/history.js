@@ -6,5 +6,6 @@ export const getHistoryApi = (nameUser) => {
 };
 
 export const addHistoryApi = (body) => {
+  const URL = process.env.REACT_APP_HOST + "/history";
   return axios.post(URL, body);
 };

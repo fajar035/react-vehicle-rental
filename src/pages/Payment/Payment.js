@@ -151,7 +151,7 @@ function Payment(props) {
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   };
 
