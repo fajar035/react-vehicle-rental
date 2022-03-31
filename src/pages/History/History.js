@@ -6,8 +6,8 @@ import "./History.css";
 import { getHistoryApi } from "../../utils/https/history";
 import { getUserIdApi } from "../../utils/https/user";
 import Loading from "../../components/Loading";
-// import Splitter from "../../components/Splitter"
 import Swal from "sweetalert2";
+import defaultImage from "../../assets/images/vehicle-default.jpg";
 
 function History(props) {
   const token = useSelector((state) => state.auth.userData.token);
@@ -33,6 +33,7 @@ function History(props) {
       getHistoryApi(userData.name)
         .then((res) => {
           setDataHistory(res.data.result);
+
           setIsOk(true);
         })
         .catch((err) => {
@@ -58,14 +59,12 @@ function History(props) {
     getHistory();
   }, [getHistory, getUser]);
 
-  console.log(userData);
-  const history = dataHistory;
-  const success = isOk;
+  // console.log(userData);
 
   return (
     <>
       <Header />
-      {success ? (
+      {isOk ? (
         <div className="row mb-5">
           <div className="col-lg-9 col-md-6 m-0 p-0 d-flex">
             <div className="container-fluid m-0 p-0 ">
@@ -129,7 +128,7 @@ function History(props) {
               </div>
 
               {/* Card history */}
-              {history.map((item, idx) => {
+              {dataHistory.map((item, idx) => {
                 const date_return = item.return_date;
                 const date_booking = item.booking_date;
                 const dateArr_booking = date_booking.split("-");
@@ -137,16 +136,20 @@ function History(props) {
                 const tanggal_return = dateArr_return[2].slice(0, 2);
                 const tanggal_booking = dateArr_booking[2].slice(0, 2);
                 const tahun_return = dateArr_return[0];
+                const photo = JSON.parse(item.photo);
 
-                const hostBackend = process.env.REACT_APP_HOST;
                 return (
                   <div key={idx} className="row">
                     <div className="col-lg-4 p-5">
                       <div className="wrapper-img-history rounded-3">
                         <img
-                          src={hostBackend + item.photo}
-                          alt="img-vehicle"
-                          className="rounded-3"
+                          src={
+                            photo !== null && photo.length !== 0
+                              ? process.env.REACT_APP_HOST + photo[0]
+                              : defaultImage
+                          }
+                          alt="vehicle"
+                          className="image-vehicle"
                         />
                       </div>
                     </div>
