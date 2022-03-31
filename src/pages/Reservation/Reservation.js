@@ -86,6 +86,19 @@ function Reservation(props) {
   };
 
   useEffect(() => {
+    if (token.length === 0) {
+      Swal.fire({
+        title: "You are not logged in, please login first",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+      return props.history.push("/");
+    }
+  }, [token.length, props.history]);
+
+  useEffect(() => {
     getUser();
     getBike();
   }, [getBike, getUser]);

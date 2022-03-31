@@ -79,10 +79,6 @@ function MainRouter(props) {
             {/* Bike */}
             <Route exact path="/vehicles/bike/" component={vehicleBike} />
             <Route path="/vehicles/bike/detail/:id" component={DetailBike} />
-            <Route
-              path="/vehicles/bike/detail/reservation"
-              component={Reservation}
-            />
 
             <Route path="/add-item" component={AddVehicle} />
             <Route path="/history" component={History} />

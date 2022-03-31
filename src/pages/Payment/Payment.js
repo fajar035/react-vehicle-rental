@@ -9,7 +9,7 @@ import {
   getVehiclePopularIdApi
 } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
-import { addHistory } from "../../utils/https/history";
+import { addHistoryApi } from "../../utils/https/history";
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading";
 
@@ -137,7 +137,7 @@ function Payment(props) {
 
     // console.log(body);
 
-    addHistory(body)
+    addHistoryApi(body)
       .then((res) => {
         console.log(res);
         if (res.status === 201) {

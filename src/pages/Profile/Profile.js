@@ -168,7 +168,7 @@ function Profile(props) {
       <Header photoUser={photoProfile} />
 
       {isSuccess ? (
-        <main className="row mt-lg-5">
+        <main className="row mt-lg-5 mb-5">
           <div className=".d-none .d-sm-block col-sm-1"></div>
           <div className="col-12 col-sm-10">
             <div className="col-12 col-sm-10 col-md-10"></div>

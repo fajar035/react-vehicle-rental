@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const URL = process.env.REACT_APP_HOST + "/history/";
-export const history = () => {
+export const getHistoryApi = (nameUser) => {
+  const URL = process.env.REACT_APP_HOST + "/history?cari=" + nameUser;
   return axios.get(URL);
 };
 
-export const addHistory = (body) => {
+export const addHistoryApi = (body) => {
   return axios.post(URL, body);
 };
