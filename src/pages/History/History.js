@@ -16,17 +16,19 @@ function History(props) {
   const [isOk, setIsOk] = useState(false);
 
   const getUser = useCallback(() => {
-    getUserIdApi(token)
-      .then((res) => {
-        // console.log(res);
-        if (res.status === 200) {
-          setUserData(res.data.result);
-        }
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  }, [token]);
+    if (Object.keys(userData).length === 0) {
+      getUserIdApi(token)
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 200) {
+            setUserData(res.data.result);
+          }
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
+  }, [token, userData]);
 
   const getHistory = useCallback(() => {
     if (Object.keys(userData).length !== 0) {
@@ -41,6 +43,7 @@ function History(props) {
         });
     }
   }, [userData]);
+  console.log("test");
 
   useEffect(() => {
     if (token.length === 0) {
@@ -48,8 +51,9 @@ function History(props) {
         title: "You are not logged in, please login first",
         icon: "warning",
         showConfirmButton: false,
-        timer: 2000
+        timer: 2000,
       });
+
       return props.history.push("/");
     }
   }, [token.length, props.history]);
@@ -80,17 +84,18 @@ function History(props) {
                     />
                     <button
                       typeof="submit"
-                      className="btn-search-type float-end">
+                      className="btn-search-type float-end"
+                    >
                       <i className="fas fa-search"></i>
                     </button>
                   </div>
                 </div>
-
                 {/* Radio button */}
                 <div className="col-lg-2 d-flex align-self-end flex-column">
                   <label
                     className="form-check-label d-flex justify-content-center mb-3"
-                    htmlFor="flexCheckDefault">
+                    htmlFor="flexCheckDefault"
+                  >
                     Select
                   </label>
                   <div className="form-check d-flex justify-content-center">
@@ -112,7 +117,8 @@ function History(props) {
                     className="input-select dropdown-toggle p-2 ms-3 filter-history"
                     // value={this.state.selectValue}
                     // onChange={this.handleDropdownChange}
-                    name="location">
+                    name="location"
+                  >
                     <option disabled>Filter</option>
                     <option defaultValue="type">Type</option>
                     <option defaultValue="data-added">Date Added</option>

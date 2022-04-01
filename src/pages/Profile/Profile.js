@@ -85,7 +85,18 @@ function Profile(props) {
         setSelectedSex(res.data.result.gender);
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", err.response);
+        if (err.response.status === 403) {
+          Swal.fire({
+            title: "TOKEN EXPIRED",
+            text: "Please login again",
+            showConfirmButton: true,
+            icon: "warning",
+            confirmButtonText: "Login",
+          }).then(function (isConfirm) {
+            props.history.push("/login");
+          });
+        }
         const errMsg = err;
         toast.error(errMsg, {
           position: "top-left",
@@ -94,10 +105,10 @@ function Profile(props) {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined
+          progress: undefined,
         });
       });
-  }, [auth.userData.token]);
+  }, [auth.userData.token, props.history]);
 
   useEffect(() => {
     getDataUser();
@@ -128,7 +139,7 @@ function Profile(props) {
           Swal.fire({
             title: "Update Profile",
             text: "Data Changed Successfuly !!",
-            icon: "success"
+            icon: "success",
           }).then((result) => {
             if (result.isConfirmed) {
               // Swal.fire("Deleted!", "Your file has been deleted.", "success")
@@ -149,7 +160,7 @@ function Profile(props) {
       goTop,
       selectedFile,
       selectedSex,
-      dispatch
+      dispatch,
     ]
   );
 
@@ -178,8 +189,9 @@ function Profile(props) {
                 style={{
                   fontFamily: `'Nunito', sans-serif`,
                   fontWeight: "900",
-                  fontSize: "40px"
-                }}>
+                  fontSize: "40px",
+                }}
+              >
                 Profile
               </div>
               <div className="col-12 profile-info">
@@ -197,7 +209,8 @@ function Profile(props) {
                         <button
                           type="button"
                           onClick={inputImage}
-                          className="btn-pencil">
+                          className="btn-pencil"
+                        >
                           <img
                             src={pencilSvg}
                             width="50px"
@@ -329,7 +342,8 @@ function Profile(props) {
                           <div className="col-12 col-md-4 col-sm-4 wrapper-btn">
                             <Link
                               to="/profile/forgot"
-                              className="btn-edit-password">
+                              className="btn-edit-password"
+                            >
                               Edit Password
                             </Link>
                           </div>

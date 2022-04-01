@@ -4,17 +4,37 @@ import logo from "./../assets/icons/logo.svg";
 import { Link } from "react-router-dom";
 import "../pages/Home/Home.css";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { logoutAction } from "../redux/actions/auth";
+import jwtDecode from "jwt-decode";
 
-function Header() {
+function Header(props) {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { userData } = auth;
   const token = userData.token;
   const [photoProfile, setPhotoProfile] = useState(userProfile);
   const photo = userData.photo;
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token.length !== 0) {
+      const expired = jwtDecode(token).exp < Date.now() / 1000;
+      if (expired) {
+        Swal.fire({
+          title: "TOKEN EXPIRED",
+          text: "Please login again",
+          showConfirmButton: true,
+          icon: "warning",
+          confirmButtonText: "Login",
+        }).then(function (isConfirm) {
+          history.push("/login");
+        });
+      }
+    }
+  }, [token, history]);
 
   useEffect(() => {
     // console.log("PHOTO HEADER", userData.photo);
@@ -31,7 +51,7 @@ function Header() {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes!"
+      confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(logoutAction(userData.token));
@@ -52,13 +72,15 @@ function Header() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         <div
           className="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent">
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav mb-5 mt-5 mb-lg-0 mt-lg-0 align-items-center">
             <li className="nav-item align-content-center">
               <Link to="/" className="navbar-font">
@@ -114,7 +136,8 @@ function Header() {
 
                 <ul
                   className="dropdown-menu "
-                  aria-labelledby="dropdownMenuLink">
+                  aria-labelledby="dropdownMenuLink"
+                >
                   <li>
                     <Link to="/profile" className="dropdown-item">
                       <i className="fas fa-angle-right float-end me-4"></i>
@@ -132,7 +155,8 @@ function Header() {
                     <Link
                       to=""
                       className="dropdown-item btn-logout"
-                      onClick={onClickLogout}>
+                      onClick={onClickLogout}
+                    >
                       <i className="fas fa-angle-right float-end me-4"></i>
                       Logout
                     </Link>

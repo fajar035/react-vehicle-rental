@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSelector } from "react-redux";
 import Loading from "../../components/Loading";
-// import popularDefault from "../../assets/images/popular-default.jpg";
+import ScrollToTop from "react-scroll-to-top";
 import { getVehiclesPopularApi } from "../../utils/https/vehicles";
 // import { Swiper, SwiperSlide } from "swiper/react"
 // import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
@@ -44,6 +44,7 @@ function Home(props) {
 
   return (
     <main>
+      <ScrollToTop smooth />
       <Header />
       {success ? (
         <>
@@ -77,7 +78,8 @@ function Home(props) {
                       className="input-select dropdown-toggle p-2 ms-3"
                       value={selectValue}
                       onChange={handleDropdownChange}
-                      name="location">
+                      name="location"
+                    >
                       <option disabled>Location</option>
                       <option value="Jakarta">Jakarta</option>
                       <option value="Depok">Depok</option>
@@ -126,10 +128,12 @@ function Home(props) {
                       return (
                         <div
                           key={idx}
-                          className="col-lg-3 col-md-6 card position-relative ">
+                          className="col-lg-3 col-md-6 card position-relative "
+                        >
                           <Link
                             to={`/vehicles/popular/detail/${item.id}`}
-                            className="wrapper-img-home">
+                            className="wrapper-img-home"
+                          >
                             <img
                               src={process.env.REACT_APP_HOST + photo[0]}
                               className="img-size "

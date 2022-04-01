@@ -37,6 +37,13 @@ function DetailBike(props) {
   }, [id]);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
     getBike();
   }, [getBike]);
 
