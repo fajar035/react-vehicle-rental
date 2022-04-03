@@ -20,16 +20,23 @@ export const getVehiclesPopularApi = () => {
   return axios.get(url);
 };
 
-// export const getVehicleSearchApi = (keyword, filter) => {
-//   const url = process.env.REACT_APP_HOST + "";
-// };
+export const searchVehicleHomeApi = (
+  keyword,
+  filterLocation,
+  filterCategory
+) => {
+  const url =
+    process.env.REACT_APP_HOST +
+    `/vehicles?search=${keyword}&filterLocation=${filterLocation}`;
+  return axios.get(url);
+};
 
 export const updateVehicleApi = (body, token) => {
   const url = process.env.REACT_APP_HOST + "/users/edit";
   const config = {
     headers: {
-      "x-ccess-token": token
-    }
+      "x-ccess-token": token,
+    },
   };
   return axios.patch(url, body, config);
 };
@@ -53,8 +60,8 @@ export const addVehicleApi = (body, token) => {
   const url = process.env.REACT_APP_HOST + "/vehicles/";
   const config = {
     headers: {
-      "x-access-token": token
-    }
+      "x-access-token": token,
+    },
   };
   return axios.post(url, body, config);
 };

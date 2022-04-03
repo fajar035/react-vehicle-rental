@@ -39,6 +39,10 @@ function DetailPopular(props) {
 
   useEffect(() => {
     getPopular();
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [getPopular]);
 
   return (
@@ -143,7 +147,8 @@ function DetailPopular(props) {
             <button className="btn-chat-admin">Chat Admin</button>
           </Link>
           <Link
-            to={{ pathname: "/vehicles/reservation", state: { id, popular } }}>
+            to={{ pathname: "/vehicles/reservation", state: { id, popular } }}
+          >
             <button className="btn-reservation">Reservation</button>
           </Link>
           {/* <Link to="/reservation">Reservation</Link> */}

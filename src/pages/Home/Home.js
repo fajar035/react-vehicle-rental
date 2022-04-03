@@ -1,24 +1,29 @@
 import "./Home.css";
-
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSelector } from "react-redux";
 import Loading from "../../components/Loading";
-import ScrollToTop from "react-scroll-to-top";
-import { getVehiclesPopularApi } from "../../utils/https/vehicles";
-// import { Swiper, SwiperSlide } from "swiper/react"
-// import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import {
+  getVehiclesPopularApi,
+  getLocationApi,
+} from "../../utils/https/vehicles";
+import SearchVehicle from "../../components/SearchVehicle";
 
 function Home(props) {
   const [dataPopular, setDataPopular] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [dataSearch, setDataSearch] = useState({
+    keyword: "",
+    location: "",
+    date: "",
+  });
   const [selectValue, setSelectValue] = useState("Location");
+  const [locationArr, setLocationArr] = useState([]);
+  const [location, setLocation] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
   const user = useSelector((state) => state.auth);
   const role = user.userData.role;
 
@@ -38,13 +43,84 @@ function Home(props) {
       });
   }, []);
 
+  const getLocation = useCallback(() => {
+    getLocationApi()
+      .then((res) => {
+        const location = res.data.result;
+        setLocationArr(location);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const cbSearching = (newValue) => {
+    setIsSearching(newValue);
+  };
+
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    const keyword = e.target[0].value;
+    const location = selectValue;
+    const date = e.target[2].value;
+    setDataSearch({
+      keyword: keyword,
+      location: location === "Location" ? "" : location,
+      date: date,
+    });
+    setIsSearching(true);
+    return window.scrollTo({
+      top: 850,
+      behavior: "smooth",
+    });
+
+    // console.log(keyword.length, location.length, date.length);
+    // if (
+    //   (keyword.length === 0 && location.length === 0) ||
+    //   (location === "Location" && date.length === 0)
+    // ) {
+    //   setIsSearching(false);
+    // }
+  };
+
+  const handlerClear = () => {
+    setDataSearch({
+      keyword: "",
+      location: "",
+      date: "",
+    });
+    setSelectValue("Location");
+    setIsSearching(false);
+    // return window.scrollTo({
+    //   top: 0,
+    //   behavior: "smooth",
+    // });
+  };
+
   useEffect(() => {
     getPopular();
-  }, [getPopular]);
+    getLocation();
+  }, [getPopular, getLocation]);
+
+  useEffect(() => {
+    let arr = [];
+    if (locationArr !== 0) {
+      locationArr.map((item) => {
+        return arr.push(item.location);
+      });
+    }
+    if (arr.length !== 0) {
+      setLocation(arr);
+    }
+    return window.scrollTo({
+      top: 0,
+    });
+  }, [locationArr]);
+
+  // console.log("DATA-SEARCH", dataSearch);
 
   return (
     <main>
-      <ScrollToTop smooth />
       <Header />
       {success ? (
         <>
@@ -61,7 +137,7 @@ function Home(props) {
                 <div className="line-jumbroton col-1 ms-3"></div>
               </div>
 
-              <form className="row mb-5">
+              <form className="row mb-5" onSubmit={onSubmitSearch}>
                 {/* input Search */}
                 <div className="col-lg-12 p-0">
                   <input
@@ -81,10 +157,14 @@ function Home(props) {
                       name="location"
                     >
                       <option disabled>Location</option>
-                      <option value="Jakarta">Jakarta</option>
-                      <option value="Depok">Depok</option>
-                      <option value="Bogor">Bogor</option>
-                      <option value="Bandung">Bandung</option>
+                      {location.length !== 0 &&
+                        location.map((item, idx) => {
+                          return (
+                            <option value={item} key={idx}>
+                              {item}
+                            </option>
+                          );
+                        })}
                     </select>
                   </div>
 
@@ -100,8 +180,13 @@ function Home(props) {
                 </div>
 
                 {/* Button Search */}
-                <div className="col-12 p-0">
-                  <button className="btn-search" type="submit">
+                <div className="col-6 p-0">
+                  <div className="btn-clear" onClick={handlerClear}>
+                    Clear
+                  </div>
+                </div>
+                <div className="col-6 p-0 d-flex justify-content-end">
+                  <button className="btn-search " type="submit">
                     Search
                   </button>
                 </div>
@@ -111,117 +196,127 @@ function Home(props) {
 
           <div className="row mb-5 ">
             <div className="col-lg-12 mb-5 ">
-              <div className="container px-4 ">
-                <h3 className="mb-5 mt-5 f-playfair-main">Popular in town</h3>
-                <div className="row position-relative d-flex justify-content-center">
-                  {/* <div className="next">
+              {isSearching ? (
+                <div className="container px-4">
+                  <SearchVehicle
+                    dataSearch={dataSearch}
+                    isSearching={isSearching}
+                    onChange={cbSearching}
+                  />
+                </div>
+              ) : (
+                <div className="container px-4">
+                  <h3 className="mb-5 mt-5 f-playfair-main">Popular in town</h3>
+                  <div className="row position-relative d-flex justify-content-center">
+                    {/* <div className="next">
                       <i className="fas fa-angle-right"></i>
                     </div> */}
 
-                  {Array.isArray(dataPopular).length !== 0 &&
-                  dataPopular !== undefined ? (
-                    dataPopular.map((item, idx) => {
-                      // console.log("DATA POPULAR", item);
-                      const photo = JSON.parse(item.photo);
-                      // console.log("ID", item);
+                    {Array.isArray(dataPopular).length !== 0 &&
+                    dataPopular !== undefined ? (
+                      dataPopular.map((item, idx) => {
+                        // console.log("DATA POPULAR", item);
+                        const photo = JSON.parse(item.photo);
+                        // console.log("ID", item);
 
-                      return (
-                        <div
-                          key={idx}
-                          className="col-lg-3 col-md-6 card position-relative "
-                        >
-                          <Link
-                            to={`/vehicles/popular/detail/${item.id}`}
-                            className="wrapper-img-home"
+                        return (
+                          <div
+                            key={idx}
+                            className="col-lg-3 col-md-6 card position-relative "
                           >
-                            <img
-                              src={process.env.REACT_APP_HOST + photo[0]}
-                              className="img-size "
-                              alt="photo_vehicle"
-                            />
-                          </Link>
-                          <div className="city-home col-9  shadow ">
-                            <p className="m-0">
-                              {item.vehicle} <br />
-                              <span className="color-subtitle">
-                                {item.location}
-                              </span>
-                            </p>
+                            <Link
+                              to={`/vehicles/popular/detail/${item.id}`}
+                              className="wrapper-img-home"
+                            >
+                              <img
+                                src={process.env.REACT_APP_HOST + photo[0]}
+                                className="img-size "
+                                alt="photo_vehicle"
+                              />
+                            </Link>
+                            <div className="city-home col-9  shadow ">
+                              <p className="m-0">
+                                {item.vehicle} <br />
+                                <span className="color-subtitle">
+                                  {item.location}
+                                </span>
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <p className="no-data">No data</p>
-                  )}
+                        );
+                      })
+                    ) : (
+                      <p className="no-data">No data</p>
+                    )}
 
-                  {role === "2" ? (
-                    <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
-                      <Link to="/add-item" className="btn-add-item">
-                        Add New Items
-                      </Link>
-                    </div>
-                  ) : role === null ? (
-                    <div></div>
-                  ) : (
-                    <div></div>
-                  )}
+                    {role === "2" ? (
+                      <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
+                        <Link to="/add" className="btn-add-item">
+                          Add New Items
+                        </Link>
+                      </div>
+                    ) : role === null ? (
+                      <div></div>
+                    ) : (
+                      <div></div>
+                    )}
 
-                  {/* Testimonial */}
-                  <div className="col-lg-12 mt-5">
-                    <div className="container">
-                      <div className="row d-flex flex-row justify-content-center align-item-center p-5">
-                        <h3 className="f-playfair-main">Testimonials</h3>
+                    {/* Testimonial */}
+                    <div className="col-lg-12 mt-5">
+                      <div className="container">
+                        <div className="row d-flex flex-row justify-content-center align-item-center p-5">
+                          <h3 className="f-playfair-main">Testimonials</h3>
 
-                        <div className="col-lg-6 mt-5 d-flex flex-column justify-content-center">
-                          <ul className="list-group d-flex flex-row align-item-center mb-3">
-                            <li className="list-group-item border-0">
-                              <i className="fas fa-star text-warning"></i>
-                            </li>
-                            <li className="list-group-item border-0">
-                              <i className="fas fa-star text-warning"></i>
-                            </li>
-                            <li className="list-group-item border-0">
-                              <i className="fas fa-star text-warning"></i>
-                            </li>
-                            <li className="list-group-item border-0">
-                              <i className="fas fa-star text-warning"></i>
-                            </li>
-                            <li className="list-group-item border-0">
-                              <i className="fas fa-star text-warning"></i>
-                            </li>
-                          </ul>
+                          <div className="col-lg-6 mt-5 d-flex flex-column justify-content-center">
+                            <ul className="list-group d-flex flex-row align-item-center mb-3">
+                              <li className="list-group-item border-0">
+                                <i className="fas fa-star text-warning"></i>
+                              </li>
+                              <li className="list-group-item border-0">
+                                <i className="fas fa-star text-warning"></i>
+                              </li>
+                              <li className="list-group-item border-0">
+                                <i className="fas fa-star text-warning"></i>
+                              </li>
+                              <li className="list-group-item border-0">
+                                <i className="fas fa-star text-warning"></i>
+                              </li>
+                              <li className="list-group-item border-0">
+                                <i className="fas fa-star text-warning"></i>
+                              </li>
+                            </ul>
 
-                          <div className="col-lg-8 mb-5">
-                            <p className="f-mulish">
-                              ”It was the right decision to rent vehicle here, I
-                              spent less money and enjoy the trip. It was an
-                              amazing experience to have a ride for wildlife
-                              trip!”
-                            </p>
-                          </div>
-
-                          <div className="col-lg-8">
-                            <p className="f-nunito">Edward Newgate</p>
-                            <p>Founder Circle</p>
-                          </div>
-                        </div>
-
-                        <div className="col-lg-6 mt-5 d-flex flex-row justify-content-center">
-                          <div className="bg-image img-cs position-relative">
-                            <div className="circle-testimonial position-circle"></div>
-
-                            <div className="plus">
-                              <div className="vertikal"></div>
-                              <div className="horizontal"></div>
+                            <div className="col-lg-8 mb-5">
+                              <p className="f-mulish">
+                                ”It was the right decision to rent vehicle here,
+                                I spent less money and enjoy the trip. It was an
+                                amazing experience to have a ride for wildlife
+                                trip!”
+                              </p>
                             </div>
 
-                            <div className="rectangle">
-                              <div className="left">
-                                <i className="fas fa-angle-left"></i>
+                            <div className="col-lg-8">
+                              <p className="f-nunito">Edward Newgate</p>
+                              <p>Founder Circle</p>
+                            </div>
+                          </div>
+
+                          <div className="col-lg-6 mt-5 d-flex flex-row justify-content-center">
+                            <div className="bg-image img-cs position-relative">
+                              <div className="circle-testimonial position-circle"></div>
+
+                              <div className="plus">
+                                <div className="vertikal"></div>
+                                <div className="horizontal"></div>
                               </div>
-                              <div className="right">
-                                <i className="fas fa-angle-right"></i>
+
+                              <div className="rectangle">
+                                <div className="left">
+                                  <i className="fas fa-angle-left"></i>
+                                </div>
+                                <div className="right">
+                                  <i className="fas fa-angle-right"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -230,7 +325,7 @@ function Home(props) {
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </>

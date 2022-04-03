@@ -194,6 +194,13 @@
 
 /* END ADD VEHICLES */
 
+/* START SEARCH VEHICLE */
+.cobaSearch {
+  color: red;
+}
+
+/* END SEARCH VEHICLE */
+
 /* RESPONSIVE */
 @media only screen and (max-width: 425px) {
   .input-search-type {

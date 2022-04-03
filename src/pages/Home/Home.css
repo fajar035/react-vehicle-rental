@@ -77,11 +77,48 @@ img {
 }
 
 .btn-search {
-  width: 100%;
+  width: 82%;
   height: 52.01px;
   background: #ffcd61;
   border-radius: 8px;
   border: none;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 33px;
+  color: #393939;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-clear {
+  background-color: #393939;
+  width: 84%;
+  height: 52.01px;
+  border-radius: 8px;
+  border: none;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 33px;
+  color: #ffcd61;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.text-no-vehicle {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 33px;
+  color: #b8becd;
 }
 
 .jumbotron {
@@ -499,10 +536,6 @@ img {
 
 .input-img-additem::-webkit-file-upload-button {
   display: none;
-}
-
-.wrapper-img-upload {
-  /* margin-left: 150px; */
 }
 
 .input-add {

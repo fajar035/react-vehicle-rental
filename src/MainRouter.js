@@ -31,6 +31,7 @@ import Reservation from "./pages/Reservation/Reservation";
 import Payment from "./pages/Payment/Payment";
 import Chat from "./pages/Chat/Chat";
 import AddVehicle from "./components/AddVehicle";
+import EditVehicle from "./components/EditItem";
 
 function MainRouter(props) {
   return (
@@ -75,7 +76,8 @@ function MainRouter(props) {
             <Route exact path="/vehicles/bike/" component={vehicleBike} />
             <Route path="/vehicles/bike/detail/:id" component={DetailBike} />
 
-            <Route path="/add-item" component={AddVehicle} />
+            <Route path="/vehicles/add" component={AddVehicle} />
+            <Route path="/vehicles/edit" component={EditVehicle} />
             <Route path="/history" component={History} />
             <Route path="/profile" component={Profile} />
             <Route path="/addcart" component={Example} />

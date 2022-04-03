@@ -38,6 +38,10 @@ function DetailMotorbike(props) {
 
   useEffect(() => {
     getMotorBike();
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [getMotorBike]);
 
   return (

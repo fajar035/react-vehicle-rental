@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
 import "./Detail.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,6 +9,7 @@ import { getVehicleApi } from "../../utils/https/vehicles";
 import { numberToRupiah } from "../../utils/helper/currency";
 
 function DetailBike(props) {
+  const role = useSelector((state) => state.auth.userData.role);
   const [vehicleBike, setVehicleBike] = useState([]);
   const [stock, setStock] = useState(null);
   const [photo, setPhoto] = useState([]);
@@ -37,6 +39,7 @@ function DetailBike(props) {
   }, [id]);
 
   useEffect(() => {
+    console.log("DETEAIL BIKE");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -148,9 +151,15 @@ function DetailBike(props) {
           <Link to="/vehicles/popular/chat">
             <button className="btn-chat-admin">Chat Admin</button>
           </Link>
-          <Link to={{ pathname: "/vehicles/reservation", state: { id } }}>
-            <button className="btn-reservation">Reservation</button>
-          </Link>
+          {role !== "2" ? (
+            <Link to={{ pathname: "/vehicles/reservation", state: { id } }}>
+              <button className="btn-reservation">Reservation</button>
+            </Link>
+          ) : (
+            <Link to={{ pathname: "/vehicles/edit", state: { id } }}>
+              <button className="btn-reservation">Edit Item</button>
+            </Link>
+          )}
           {/* <Link to="/reservation">Reservation</Link> */}
           <button className="btn-like">
             <i className="fas fa-heart me-2"></i>

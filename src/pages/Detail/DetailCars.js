@@ -38,6 +38,10 @@ function DetailCars(props) {
 
   useEffect(() => {
     getCar();
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [getCar]);
 
   return (

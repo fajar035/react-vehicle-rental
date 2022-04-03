@@ -4,14 +4,11 @@ import {
   getVehiclesPopularApi,
   getVehiclesCarsApi,
   getVehiclesMotorBikeApi,
-  getVehiclesBikeApi
+  getVehiclesBikeApi,
 } from "../../utils/https/vehicles";
 import "./Vehicles.css";
 import Header from "../../components/Header";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import vehicleDefault from "../../assets/images/vehicle-default.jpg";
-
 import Footer from "../../components/Footer";
 import Loading from "../../components/Loading";
 
@@ -81,7 +78,7 @@ function Vehicles() {
     getVehiclesBike,
     getVehiclesPopular,
     getVehiclesMotorBike,
-    getVehiclesCars
+    getVehiclesCars,
   ]);
   // console.log(photoError);
   return (
@@ -121,7 +118,8 @@ function Vehicles() {
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/popular/detail/${item.id}`}
-                    className="wrapper-img-home">
+                    className="wrapper-img-home"
+                  >
                     <img src={photoUrl} className="img-size" alt="Vehicle" />
                     <div className="city-type-vehicles  bg-light rounded shadow ">
                       <p className="mt-3">
@@ -159,7 +157,8 @@ function Vehicles() {
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/bike/detail/${item.id}`}
-                    className="wrapper-img-home">
+                    className="wrapper-img-home"
+                  >
                     <img
                       src={!photoUrl ? vehicleDefault : photoUrl}
                       className="img-size"
@@ -199,7 +198,8 @@ function Vehicles() {
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/motorbike/detail/${item.id}`}
-                    className="wrapper-img-home">
+                    className="wrapper-img-home"
+                  >
                     <img
                       src={!photoUrl ? vehicleDefault : photoUrl}
                       className="img-size"
@@ -238,7 +238,8 @@ function Vehicles() {
                 <div key={idx} className="col-lg-3 col-md-6 card  ">
                   <Link
                     to={`${url}/cars/detail/${item.id}`}
-                    className="wrapper-img-home">
+                    className="wrapper-img-home"
+                  >
                     <img
                       src={!photoUrl ? vehicleDefault : photoUrl}
                       className="img-size"
