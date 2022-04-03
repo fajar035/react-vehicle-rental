@@ -251,7 +251,7 @@ function Home(props) {
 
                     {role === "2" ? (
                       <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
-                        <Link to="/add" className="btn-add-item">
+                        <Link to="/vehicles/add" className="btn-add-item">
                           Add New Items
                         </Link>
                       </div>
