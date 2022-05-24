@@ -7,7 +7,7 @@ import defaultImage from "../../assets/images/vehicle-default.jpg";
 import { numberToRupiah } from "../../utils/helper/currency";
 import {
   getVehicleApi,
-  getVehiclePopularIdApi
+  getVehiclePopularIdApi,
 } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
 import "./Reservation.css";
@@ -91,7 +91,7 @@ function Reservation(props) {
         title: "You are not logged in, please login first",
         icon: "warning",
         showConfirmButton: false,
-        timer: 2000
+        timer: 2000,
       });
 
       return props.history.push("/");
@@ -133,7 +133,7 @@ function Reservation(props) {
     // console.log("RETURN DATE", returnDate);
     const dataDate = {
       startDate: dateApi,
-      returnDate: returnDate
+      returnDate: returnDate,
     };
     return dataDate;
   };
@@ -147,21 +147,22 @@ function Reservation(props) {
     qty: stock,
     start_date: startAndReturnDate(startDate, day).startDate,
     return_date: startAndReturnDate(startDate, day).returnDate,
-    price: numberToRupiah(vehicleBike.price * stock * day)
+    price: numberToRupiah(vehicleBike.price * stock * day),
   };
+  console.log(userData);
 
   const onSubmitPayment = () => {
     if (day.length === 0) {
       Swal.fire({
         title: "Please fill in the planned date and day of booking",
-        icon: "warning"
+        icon: "warning",
       });
     } else {
       // console.log("DATA FOR API", dataForApi);
       // console.log(props.history);
       return props.history.push("/vehicles/payment", {
         dataForApi: dataForApi,
-        isPopular: isPopular
+        isPopular: isPopular,
       });
     }
   };

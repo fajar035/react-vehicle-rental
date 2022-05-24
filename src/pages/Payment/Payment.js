@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import defaultImage from "../../assets/images/vehicle-default.jpg";
 import {
   getVehicleApi,
-  getVehiclePopularIdApi
+  getVehiclePopularIdApi,
 } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
 import { addHistoryApi } from "../../utils/https/history";
@@ -79,7 +79,7 @@ function Payment(props) {
       position: "center",
       showConfirmButton: false,
       timer: 2000,
-      icon: "success"
+      icon: "success",
     });
   };
   const copyPaymentCode = (paymentCode) => {
@@ -89,7 +89,7 @@ function Payment(props) {
       position: "center",
       showConfirmButton: false,
       timer: 2000,
-      icon: "success"
+      icon: "success",
     });
   };
 
@@ -114,7 +114,7 @@ function Payment(props) {
     const returnDateNew = dateLocal(returnDate);
     const dateForReservation = {
       bookingDate: bookingDateNew,
-      returnDate: returnDateNew
+      returnDate: returnDateNew,
     };
     return dateForReservation;
   };
@@ -124,15 +124,15 @@ function Payment(props) {
     getBike();
   }, [getBike, getUser]);
 
+  console.log(dataPayment);
   const paymentNow = () => {
-    console.log(dataPayment);
     const body = {
       id_users: dataPayment.id_users,
       id_vehicles: dataPayment.id_vehicles,
       qty: dataPayment.qty,
       start_date: dataPayment.start_date,
       return_date: dataPayment.return_date,
-      total_price: dataPayment.price
+      total_price: dataPayment.price,
     };
 
     // console.log(body);
@@ -145,7 +145,7 @@ function Payment(props) {
             title: "Payment Success",
             icon: "success",
             showConfirmButton: false,
-            timer: 2000
+            timer: 2000,
           });
           return props.history.push("/history");
         }
@@ -167,7 +167,8 @@ function Payment(props) {
             onClick={() => {
               return props.history.goBack();
             }}
-            className="col-lg-4 mb-5 d-flex flex-row align-items-center wrapper-link-detail link-detail">
+            className="col-lg-4 mb-5 d-flex flex-row align-items-center wrapper-link-detail link-detail"
+          >
             <i className="fas fa-chevron-left fs-2 "></i>
             <p className="ms-4 link-detail">Payment</p>
           </div>
@@ -199,7 +200,8 @@ function Payment(props) {
             <p className="code-booking">{bookingCode}</p>
             <div
               className="btn-copy-booking"
-              onClick={() => copyBookingCode(bookingCode)}>
+              onClick={() => copyBookingCode(bookingCode)}
+            >
               <p>Copy Booking Code</p>
             </div>
           </div>
@@ -284,7 +286,8 @@ function Payment(props) {
                   className="btn-copy"
                   onClick={() => {
                     copyPaymentCode(paymentCode);
-                  }}>
+                  }}
+                >
                   <p>copy</p>
                 </div>
               </div>

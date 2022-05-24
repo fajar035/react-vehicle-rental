@@ -45,6 +45,8 @@ function DetailPopular(props) {
     });
   }, [getPopular]);
 
+  console.log(vehiclePopular);
+
   return (
     <main>
       <Header />
@@ -78,7 +80,7 @@ function DetailPopular(props) {
         ) : (
           <div className="col-lg-6 wrapper-text-detail col-md-10 mt-lg-0 mt-md-5">
             <h1 className="title-detail">
-              {vehiclePopular.name} <br />
+              {vehiclePopular.vehicle} <br />
               <span className="detail-title-location">
                 {vehiclePopular.location}
               </span>

@@ -27,7 +27,7 @@ export const searchVehicleHomeApi = (
 ) => {
   const url =
     process.env.REACT_APP_HOST +
-    `/vehicles?search=${keyword}&filterLocation=${filterLocation}`;
+    `/vehicles?search=${keyword}&filterLocation=${filterLocation}&filterCategory=${filterCategory}`;
   return axios.get(url);
 };
 

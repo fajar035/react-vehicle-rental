@@ -3,7 +3,7 @@ import iconMessage from "./../assets/icons/email.png";
 import logo from "./../assets/icons/logo.svg";
 import { Link } from "react-router-dom";
 import "../pages/Home/Home.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -18,6 +18,7 @@ function Header(props) {
   const [photoProfile, setPhotoProfile] = useState(userProfile);
   const photo = userData.photo;
   const history = useHistory();
+  const [photo404, setPhoto404] = useState(false);
 
   useEffect(() => {
     if (token.length !== 0) {
@@ -36,13 +37,26 @@ function Header(props) {
     }
   }, [token, history]);
 
+  const getPhotoProfile = useCallback(async () => {
+    if (userData.photo !== null) {
+      const response = await fetch(process.env.REACT_APP_HOST + userData.photo);
+      // const data = await response.json();
+      if (response.status === 404) {
+        setPhoto404(true);
+      }
+      // console.log(response.status);
+    }
+  }, [userData.photo]);
+
   useEffect(() => {
-    // console.log("PHOTO HEADER", userData.photo);
     if (photo !== null) {
       setPhotoProfile(process.env.REACT_APP_HOST + userData.photo);
     }
-  }, [userData.photo, photo]);
 
+    getPhotoProfile();
+  }, [userData.photo, photo, getPhotoProfile]);
+
+  // console.log(photo404);
   const onClickLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -128,7 +142,7 @@ function Header(props) {
               <div className="dropdown profile">
                 <img
                   className="img-profile img-fluid rounded-circle dropdown-toggle"
-                  src={photoProfile}
+                  src={photo404 ? userProfile : photoProfile}
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   alt="icon-profile"

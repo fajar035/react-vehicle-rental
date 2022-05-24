@@ -14,6 +14,29 @@ function History(props) {
   const [dataHistory, setDataHistory] = useState([]);
   const [userData, setUserData] = useState({});
   const [isOk, setIsOk] = useState(false);
+  const [checked, setChecked] = useState([]);
+  const [notLogin, setNotLogin] = useState(false);
+  const [isNull, setIsNull] = useState(false);
+  const checkList = dataHistory;
+
+  // add/remove checked item from list
+  const handleCheck = (event) => {
+    let updateList = [...checked];
+    if (event.target.checked) {
+      updateList = [...checked, event.target.checked];
+    } else {
+      updateList.splice(checked.indexOf(event.target.value), 1);
+    }
+    setChecked(updateList);
+  };
+  // console.log("check item", checked);
+
+  // generate string of checked items
+  // var checkItems = checked.length
+  //   ? checked.reduce((total, item) => {
+  //       return total + ", " + item;
+  //     })
+  //   : "";
 
   const getUser = useCallback(() => {
     if (Object.keys(userData).length === 0) {
@@ -22,31 +45,44 @@ function History(props) {
           // console.log(res);
           if (res.status === 200) {
             setUserData(res.data.result);
+            setNotLogin(false);
           }
         })
         .catch((err) => {
-          console.log(err.response);
+          console.log(err.response.data.err);
+          if (err.response.status === 403) {
+            setNotLogin(true);
+          }
         });
     }
   }, [token, userData]);
 
   const getHistory = useCallback(() => {
     if (Object.keys(userData).length !== 0) {
-      getHistoryApi(userData.name)
+      getHistoryApi(userData.id, token)
         .then((res) => {
           setDataHistory(res.data.result);
-
+          setNotLogin(false);
+          setIsNull(false);
           setIsOk(true);
         })
         .catch((err) => {
           console.log(err.response);
+          if (err.response.status === 403) {
+            setNotLogin(true);
+          }
+          if (err.response.status === 400) {
+            setIsNull(true);
+            setIsOk(true);
+          }
         });
     }
-  }, [userData]);
-  console.log("test");
+  }, [userData, token]);
+
+  // console.log("HISTORY - DATA", dataHistory);
 
   useEffect(() => {
-    if (token.length === 0) {
+    if (notLogin) {
       Swal.fire({
         title: "You are not logged in, please login first",
         icon: "warning",
@@ -56,14 +92,12 @@ function History(props) {
 
       return props.history.push("/");
     }
-  }, [token.length, props.history]);
+  }, [props.history, notLogin]);
 
   useEffect(() => {
     getUser();
     getHistory();
   }, [getHistory, getUser]);
-
-  // console.log(userData);
 
   return (
     <>
@@ -134,7 +168,7 @@ function History(props) {
               </div>
 
               {/* Card history */}
-              {dataHistory.map((item, idx) => {
+              {checkList.map((item, idx) => {
                 const date_return = item.return_date;
                 const date_booking = item.booking_date;
                 const dateArr_booking = date_booking.split("-");
@@ -174,7 +208,8 @@ function History(props) {
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          value=""
+                          value={item}
+                          onChange={handleCheck}
                           id="flexCheckDefault"
                         />
                       </div>

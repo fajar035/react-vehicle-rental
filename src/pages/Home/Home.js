@@ -8,6 +8,7 @@ import Loading from "../../components/Loading";
 import {
   getVehiclesPopularApi,
   getLocationApi,
+  getCategoryApi,
 } from "../../utils/https/vehicles";
 import SearchVehicle from "../../components/SearchVehicle";
 
@@ -17,26 +18,43 @@ function Home(props) {
   const [dataSearch, setDataSearch] = useState({
     keyword: "",
     location: "",
-    date: "",
+    category: "",
   });
-  const [selectValue, setSelectValue] = useState("Location");
+  const [selectLocation, setSelectLocation] = useState("Location");
   const [locationArr, setLocationArr] = useState([]);
   const [location, setLocation] = useState([]);
+  const [selectCategory, setSelectCategory] = useState([]);
+  const [categoryArr, setCategoryArr] = useState([]);
+  const [category, setCategory] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
   const user = useSelector((state) => state.auth);
   const role = user.userData.role;
 
-  const handleDropdownChange = (e) => {
-    setSelectValue(e.target.value);
+  const handleDropdownChangeLocation = (e) => {
+    setSelectLocation(e.target.value);
+  };
+
+  const handleDropdownChangeCategory = (e) => {
+    setSelectCategory(e.target.value);
   };
 
   const getPopular = useCallback(() => {
     getVehiclesPopularApi()
       .then((res) => {
-        console.log("HIT GET POPULAR");
+        // console.log("HIT GET POPULAR");
         setDataPopular(res.data.result);
         setSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const getCategory = useCallback(() => {
+    getCategoryApi()
+      .then((res) => {
+        setCategoryArr(res.data.result);
       })
       .catch((err) => {
         console.log(err);
@@ -61,63 +79,73 @@ function Home(props) {
   const onSubmitSearch = (e) => {
     e.preventDefault();
     const keyword = e.target[0].value;
-    const location = selectValue;
-    const date = e.target[2].value;
+    const location = selectLocation;
+    const category = e.target[2].value;
     setDataSearch({
       keyword: keyword,
       location: location === "Location" ? "" : location,
-      date: date,
+      category: category === "Category" ? "" : category,
     });
     setIsSearching(true);
     return window.scrollTo({
       top: 850,
       behavior: "smooth",
     });
-
-    // console.log(keyword.length, location.length, date.length);
-    // if (
-    //   (keyword.length === 0 && location.length === 0) ||
-    //   (location === "Location" && date.length === 0)
-    // ) {
-    //   setIsSearching(false);
-    // }
   };
 
   const handlerClear = () => {
     setDataSearch({
       keyword: "",
       location: "",
-      date: "",
+      category: "",
     });
-    setSelectValue("Location");
+    setSelectLocation("Location");
+    setSelectCategory("Category");
     setIsSearching(false);
-    // return window.scrollTo({
-    //   top: 0,
-    //   behavior: "smooth",
-    // });
   };
 
   useEffect(() => {
     getPopular();
     getLocation();
-  }, [getPopular, getLocation]);
+    getCategory();
+  }, [getPopular, getLocation, getCategory]);
+
+  // console.log(categoryArr);
 
   useEffect(() => {
-    let arr = [];
+    let arrLocation = [];
     if (locationArr !== 0) {
       locationArr.map((item) => {
-        return arr.push(item.location);
+        return arrLocation.push(item.location);
       });
     }
-    if (arr.length !== 0) {
-      setLocation(arr);
+    if (arrLocation.length !== 0) {
+      setLocation(arrLocation);
     }
     return window.scrollTo({
       top: 0,
     });
   }, [locationArr]);
 
+  useEffect(() => {
+    let arrCategory = [];
+
+    if (categoryArr !== 0) {
+      categoryArr.map((item) => {
+        console.log(item);
+        return arrCategory.push(item.category);
+      });
+    }
+    if (arrCategory.length !== 0) {
+      setCategory(arrCategory);
+    }
+    return window.scrollTo({
+      top: 0,
+    });
+  }, [categoryArr]);
+
   // console.log("DATA-SEARCH", dataSearch);
+  // console.log("LOCATION ARR", category);
 
   return (
     <main>
@@ -152,8 +180,8 @@ function Home(props) {
                   <div className="col-lg-5 mb-5 p-0">
                     <select
                       className="input-select dropdown-toggle p-2 ms-3"
-                      value={selectValue}
-                      onChange={handleDropdownChange}
+                      value={selectLocation}
+                      onChange={handleDropdownChangeLocation}
                       name="location"
                     >
                       <option disabled>Location</option>
@@ -168,14 +196,24 @@ function Home(props) {
                     </select>
                   </div>
 
-                  {/* Input Date */}
+                  {/* Category*/}
                   <div className="col-lg-5 mb-5 p-0">
-                    <input
-                      type="date"
-                      className="input-date ms-3"
-                      placeholder="Date"
-                      name="date"
-                    />
+                    <select
+                      className="input-select dropdown-toggle p-2 ms-3"
+                      value={selectCategory}
+                      onChange={handleDropdownChangeCategory}
+                      name="category"
+                    >
+                      <option disabled>Category</option>
+                      {category.length !== 0 &&
+                        category.map((item, idx) => {
+                          return (
+                            <option value={item} key={idx}>
+                              {item}
+                            </option>
+                          );
+                        })}
+                    </select>
                   </div>
                 </div>
 
@@ -220,14 +258,8 @@ function Home(props) {
                         // console.log("ID", item);
 
                         return (
-                          <div
-                            key={idx}
-                            className="col-lg-3 col-md-6 card position-relative "
-                          >
-                            <Link
-                              to={`/vehicles/popular/detail/${item.id}`}
-                              className="wrapper-img-home"
-                            >
+                          <div key={idx} className="col-lg-3 col-md-6 card  ">
+                            <Link to={`/vehicles/popular/detail/${item.id}`}>
                               <img
                                 src={process.env.REACT_APP_HOST + photo[0]}
                                 className="img-size "

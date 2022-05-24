@@ -18,6 +18,7 @@ function Profile(props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedSex, setSelectedSex] = useState("");
   const [photoProfile, setPhotoProfile] = useState(photoProfileDefault);
+  const [photo404, setPhoto404] = useState(false);
   const auth = useSelector((state) => state.auth);
   // console.log("DATA PERSIST", auth);
   const dispatch = useDispatch();
@@ -110,9 +111,18 @@ function Profile(props) {
       });
   }, [auth.userData.token, props.history]);
 
+  const getPhotoPrfile = useCallback(async () => {
+    // console.log(photoProfile);
+    const response = await fetch(photoProfile);
+    if (response.status === 404) {
+      setPhoto404(true);
+    }
+  }, [photoProfile]);
+
   useEffect(() => {
     getDataUser();
-  }, [getDataUser]);
+    getPhotoPrfile();
+  }, [getDataUser, getPhotoPrfile]);
 
   const handleSubmit = useCallback(
     (e) => {
@@ -176,7 +186,7 @@ function Profile(props) {
   return (
     <>
       <div ref={refScrollTop}></div>
-      <Header photoUser={photoProfile} />
+      <Header photoUser={photo404 ? photoProfileDefault : photoProfile} />
 
       {isSuccess ? (
         <main className="row mt-lg-5 mb-5">

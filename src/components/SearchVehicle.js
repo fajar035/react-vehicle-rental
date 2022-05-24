@@ -8,6 +8,7 @@ function SearchVehicle(props) {
   const [result, setResult] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [isDataNull, setIsDataNull] = useState(false);
+  console.log("PROPS", props);
 
   // const url = useLocation();
 
