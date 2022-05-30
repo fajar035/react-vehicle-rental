@@ -16,7 +16,7 @@ function History(props) {
   const [isOk, setIsOk] = useState(false);
   const [checked, setChecked] = useState([]);
   const [notLogin, setNotLogin] = useState(false);
-  const [isNull, setIsNull] = useState(false);
+  const [setIsNull] = useState(false);
   const checkList = dataHistory;
 
   // add/remove checked item from list
@@ -77,7 +77,7 @@ function History(props) {
           }
         });
     }
-  }, [userData, token]);
+  }, [userData, token, setIsNull]);
 
   // console.log("HISTORY - DATA", dataHistory);
 

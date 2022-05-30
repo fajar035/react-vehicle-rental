@@ -92,7 +92,7 @@ function Home(props) {
       behavior: "smooth",
     });
   };
-
+  console.log(dataSearch);
   const handlerClear = () => {
     setDataSearch({
       keyword: "",
@@ -132,7 +132,6 @@ function Home(props) {
 
     if (categoryArr !== 0) {
       categoryArr.map((item) => {
-        console.log(item);
         return arrCategory.push(item.category);
       });
     }
