@@ -105,11 +105,11 @@ function Home(props) {
     setIsSearching(false);
   };
 
-  // useEffect(() => {
-  //   getPopular();
-  //   getLocation();
-  //   getCategory();
-  // }, [getPopular, getLocation, getCategory]);
+  useEffect(() => {
+    getPopular();
+    getLocation();
+    getCategory();
+  }, [getPopular, getLocation, getCategory]);
 
   // console.log(categoryArr);
 
