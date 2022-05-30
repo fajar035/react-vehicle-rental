@@ -22,10 +22,10 @@ function Home(props) {
   });
   const [selectLocation, setSelectLocation] = useState("Location");
   const [locationArr, setLocationArr] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [selectCategory, setSelectCategory] = useState([]);
+  const [location, setLocation] = useState("");
+  const [selectCategory, setSelectCategory] = useState("Category");
   const [categoryArr, setCategoryArr] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
   const user = useSelector((state) => state.auth);
@@ -78,6 +78,7 @@ function Home(props) {
 
   const onSubmitSearch = (e) => {
     e.preventDefault();
+    // console.log("event", e.target);
     const keyword = e.target[0].value;
     const location = selectLocation;
     const category = e.target[2].value;
@@ -92,7 +93,7 @@ function Home(props) {
       behavior: "smooth",
     });
   };
-  console.log(dataSearch);
+  // console.log(dataSearch);
   const handlerClear = () => {
     setDataSearch({
       keyword: "",
@@ -144,7 +145,7 @@ function Home(props) {
   }, [categoryArr]);
 
   // console.log("DATA-SEARCH", dataSearch);
-  // console.log("LOCATION ARR", category);
+  // console.log("LOCATION ARR", selectCategory);
 
   return (
     <main>
@@ -186,8 +187,10 @@ function Home(props) {
                       <option disabled>Location</option>
                       {location.length !== 0 &&
                         location.map((item, idx) => {
+                          // console.log("LOCATION-ITEM", item);
                           return (
                             <option value={item} key={idx}>
+                              {/* {console.log(item, idx)} */}
                               {item}
                             </option>
                           );
@@ -206,6 +209,7 @@ function Home(props) {
                       <option disabled>Category</option>
                       {category.length !== 0 &&
                         category.map((item, idx) => {
+                          // console.log("CATEGORY-ITEM", item);
                           return (
                             <option value={item} key={idx}>
                               {item}
