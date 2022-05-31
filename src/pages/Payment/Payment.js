@@ -23,6 +23,8 @@ function Payment(props) {
   const isPopular = props.location.state.isPopular;
   const dataPayment = props.location.state.dataForApi;
 
+  // console.log(token);
+
   const getBike = useCallback(() => {
     if (isPopular) {
       getVehiclePopularIdApi(idVehicle)
@@ -71,6 +73,8 @@ function Payment(props) {
         setIsLoading(true);
       });
   }, [token]);
+
+  console.log("DATA USER", userData);
 
   const copyBookingCode = (bookingCode) => {
     navigator.clipboard.writeText(bookingCode);
@@ -124,7 +128,7 @@ function Payment(props) {
     getBike();
   }, [getBike, getUser]);
 
-  console.log(dataPayment);
+  // console.log(dataPayment);
   const paymentNow = () => {
     const body = {
       id_users: dataPayment.id_users,
@@ -137,9 +141,9 @@ function Payment(props) {
 
     // console.log(body);
 
-    addHistoryApi(body)
+    addHistoryApi(body, token)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.status === 201) {
           Swal.fire({
             title: "Payment Success",

@@ -149,7 +149,7 @@ function Reservation(props) {
     return_date: startAndReturnDate(startDate, day).returnDate,
     price: numberToRupiah(vehicleBike.price * stock * day),
   };
-  console.log(userData);
+  // console.log(userData);
 
   const onSubmitPayment = () => {
     if (day.length === 0) {

@@ -16,10 +16,11 @@ function History(props) {
   const [isOk, setIsOk] = useState(false);
   const [checked, setChecked] = useState([]);
   const [notLogin, setNotLogin] = useState(false);
-  const [setIsNull] = useState(false);
+  const [isNull, setIsNull] = useState(false);
   const checkList = dataHistory;
 
   // add/remove checked item from list
+  // console.log(token);
   const handleCheck = (event) => {
     let updateList = [...checked];
     if (event.target.checked) {
@@ -30,13 +31,6 @@ function History(props) {
     setChecked(updateList);
   };
   // console.log("check item", checked);
-
-  // generate string of checked items
-  // var checkItems = checked.length
-  //   ? checked.reduce((total, item) => {
-  //       return total + ", " + item;
-  //     })
-  //   : "";
 
   const getUser = useCallback(() => {
     if (Object.keys(userData).length === 0) {
@@ -68,10 +62,11 @@ function History(props) {
         })
         .catch((err) => {
           console.log(err.response);
-          if (err.response.status === 403) {
+          if (err.response.status === 403 && err !== undefined) {
             setNotLogin(true);
           }
-          if (err.response.status === 400) {
+          if (err.response.status === 400 && err !== undefined) {
+            setNotLogin(false);
             setIsNull(true);
             setIsOk(true);
           }
@@ -80,6 +75,7 @@ function History(props) {
   }, [userData, token, setIsNull]);
 
   // console.log("HISTORY - DATA", dataHistory);
+  console.log("ISNULL", isNull);
 
   useEffect(() => {
     if (notLogin) {
@@ -168,55 +164,69 @@ function History(props) {
               </div>
 
               {/* Card history */}
-              {checkList.map((item, idx) => {
-                const date_return = item.return_date;
-                const date_booking = item.booking_date;
-                const dateArr_booking = date_booking.split("-");
-                const dateArr_return = date_return.split("-");
-                const tanggal_return = dateArr_return[2].slice(0, 2);
-                const tanggal_booking = dateArr_booking[2].slice(0, 2);
-                const tahun_return = dateArr_return[0];
-                const photo = JSON.parse(item.photo);
 
-                return (
-                  <div key={idx} className="row">
-                    <div className="col-lg-4 p-5">
-                      <div className="wrapper-img-history rounded-3">
-                        <img
-                          src={
-                            photo !== null && photo.length !== 0
-                              ? process.env.REACT_APP_HOST + photo[0]
-                              : defaultImage
-                          }
-                          alt="vehicle"
-                          className="image-vehicle"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-6 p-5">
-                      <div className="wrapper-detail-history">
-                        <p className="title-history-detail">{item.vehicle}</p>
-                        <p className="date-history-detail">{`${tanggal_booking} To ${tanggal_return} ${tahun_return}`}</p>
-                        <p className="prepayment-history-detail">
-                          Prepayment : Rp. {item.price}
-                        </p>
-                        <p className="status-history-detail">Has Been Return</p>
-                      </div>
-                    </div>
-                    <div className="col-lg-2  d-flex justify-content-center align-items-center">
-                      <div className="form-check ">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={item}
-                          onChange={handleCheck}
-                          id="flexCheckDefault"
-                        />
-                      </div>
-                    </div>
+              {isNull ? (
+                <div className="row h-50">
+                  <div className="col-lg-12 d-flex justify-content-center align-items-center ">
+                    <h1 className="text-datanull">
+                      Your history doesn't exist yet
+                    </h1>
                   </div>
-                );
-              })}
+                </div>
+              ) : (
+                checkList.length !== 0 &&
+                checkList.map((item, idx) => {
+                  const date_return = item.return_date;
+                  const date_booking = item.booking_date;
+                  const dateArr_booking = date_booking.split("-");
+                  const dateArr_return = date_return.split("-");
+                  const tanggal_return = dateArr_return[2].slice(0, 2);
+                  const tanggal_booking = dateArr_booking[2].slice(0, 2);
+                  const tahun_return = dateArr_return[0];
+                  const photo = JSON.parse(item.photo);
+
+                  return (
+                    <div key={idx} className="row">
+                      <div className="col-lg-4 p-5">
+                        <div className="wrapper-img-history rounded-3">
+                          <img
+                            src={
+                              photo !== null && photo.length !== 0
+                                ? process.env.REACT_APP_HOST + photo[0]
+                                : defaultImage
+                            }
+                            alt="vehicle"
+                            className="image-vehicle"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-lg-6 p-5">
+                        <div className="wrapper-detail-history">
+                          <p className="title-history-detail">{item.vehicle}</p>
+                          <p className="date-history-detail">{`${tanggal_booking} To ${tanggal_return} ${tahun_return}`}</p>
+                          <p className="prepayment-history-detail">
+                            Prepayment : Rp. {item.price}
+                          </p>
+                          <p className="status-history-detail">
+                            Has Been Return
+                          </p>
+                        </div>
+                      </div>
+                      <div className="col-lg-2  d-flex justify-content-center align-items-center">
+                        <div className="form-check ">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            value={item}
+                            onChange={handleCheck}
+                            id="flexCheckDefault"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
 

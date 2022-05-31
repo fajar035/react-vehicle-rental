@@ -23,6 +23,15 @@
   color: #c4c4c4;
 }
 
+.text-datanull {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 180%;
+  letter-spacing: -0.02em;
+  color: #c4c4c4;
+}
+
 .input-search-type-history {
   width: 90%;
   height: 72px;
