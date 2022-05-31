@@ -93,7 +93,10 @@ function VehiclesMotorBike(props) {
                   // </div>
 
                   <div key={idx} className="col-lg-3 col-md-6 card  ">
-                    <Link to={`motorbike/detail/${item.id}`}>
+                    <Link
+                      to={`motorbike/detail/${item.id}`}
+                      className="wrapper-img-home"
+                    >
                       <img
                         src={photoUrl}
                         className="img-size "
