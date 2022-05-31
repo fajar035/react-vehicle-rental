@@ -64,7 +64,7 @@ function VehiclesBike(props) {
             <h3 className="mb-5 mt-5 f-playfair-main">Bike</h3>
 
             {/* Card */}
-            <div className="row position-relative mb-lg-5 wrapper-card">
+            <div className="row position-relative mb-lg-5">
               {VehiclesBike.map((item, idx) => {
                 const photos = item.photo;
                 const photo = JSON.parse(photos);
@@ -78,18 +78,16 @@ function VehiclesBike(props) {
                     <Link to={`bike/detail/${item.id}`}>
                       <img
                         src={photoUrl}
-                        className="img-size"
-                        alt="van_login"
+                        className="img-size "
+                        alt="photo_vehicle"
                       />
-                      <div className="city-type-vehicles  bg-light rounded shadow ">
-                        <p className="mt-3">
-                          {item.name} <br />
-                          <span className="color-subtitle">
-                            {item.location}
-                          </span>
-                        </p>
-                      </div>
                     </Link>
+                    <div className="city-home col-9  shadow ">
+                      <p className="m-0">
+                        {item.name} <br />
+                        <span className="color-subtitle">{item.location}</span>
+                      </p>
+                    </div>
                   </div>
                 );
               })}

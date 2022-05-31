@@ -64,7 +64,7 @@ function VehiclesMotorBike(props) {
             <h3 className="mb-5 mt-5 f-playfair-main">Motorbike</h3>
 
             {/* Card */}
-            <div className="row position-relative mb-lg-5 wrapper-card">
+            <div className="row position-relative d-flex justify-content-center">
               {VehiclesMotorBike.map((item, idx) => {
                 const photos = item.photo;
                 const photo = JSON.parse(photos);
@@ -74,22 +74,38 @@ function VehiclesMotorBike(props) {
                     : defaultImage;
 
                 return (
+                  // <div key={idx} className="col-lg-3 col-md-6 card  ">
+                  //   <Link to={`motorbike/detail/${item.id}`}>
+                  //     <img
+                  //       src={photoUrl}
+                  //       className="img-size"
+                  //       alt="van_login"
+                  //     />
+                  //     <div className="city-type-vehicles  bg-light rounded shadow ">
+                  //       <p className="mt-3">
+                  //         {item.name} <br />
+                  //         <span className="color-subtitle">
+                  //           {item.location}
+                  //         </span>
+                  //       </p>
+                  //     </div>
+                  //   </Link>
+                  // </div>
+
                   <div key={idx} className="col-lg-3 col-md-6 card  ">
                     <Link to={`motorbike/detail/${item.id}`}>
                       <img
                         src={photoUrl}
-                        className="img-size"
-                        alt="van_login"
+                        className="img-size "
+                        alt="photo_vehicle"
                       />
-                      <div className="city-type-vehicles  bg-light rounded shadow ">
-                        <p className="mt-3">
-                          {item.name} <br />
-                          <span className="color-subtitle">
-                            {item.location}
-                          </span>
-                        </p>
-                      </div>
                     </Link>
+                    <div className="city-home col-9  shadow ">
+                      <p className="m-0">
+                        {item.name} <br />
+                        <span className="color-subtitle">{item.location}</span>
+                      </p>
+                    </div>
                   </div>
                 );
               })}
