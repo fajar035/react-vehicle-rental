@@ -22,7 +22,7 @@ function History(props) {
 
   // add/remove checked item from list
   const handleCheck = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     let updateList = [...checked];
     if (event.target.checked) {
       updateList = [...checked, event.target.checked];
@@ -93,7 +93,8 @@ function History(props) {
       return props.history.push("/");
     }
   }, [props.history, notLogin]);
-  console.log("CHECKLIST", checked);
+  // console.log("CHECKLIST", checked);
+  // console.log("SELECT ITEM", selectItem);
 
   const deleteHistory = () => {
     if (checked.length !== 1 || !onDelete) {
@@ -117,6 +118,7 @@ function History(props) {
           }).then((isConfirm) => {
             setOnDelete(false);
             setChecked([]);
+            setSelectItem([]);
             getHistory();
             return window.scrollTo({
               top: 0,
@@ -281,7 +283,7 @@ function History(props) {
               <div className="row ">
                 <div
                   className="col-lg-12 position-relative d-flex justify-content-center align-items-center"
-                  style={{ "margin-bottom": 150 }}
+                  style={{ "margin-bottom": 200 }}
                 >
                   <div
                     className={

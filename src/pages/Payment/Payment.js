@@ -74,7 +74,7 @@ function Payment(props) {
       });
   }, [token]);
 
-  console.log("DATA USER", userData);
+  // console.log("DATA USER", userData);
 
   const copyBookingCode = (bookingCode) => {
     navigator.clipboard.writeText(bookingCode);
