@@ -97,6 +97,34 @@
   color: #0ea800;
 }
 
+.btn-delete-history {
+  width: 70%;
+  height: 70%;
+  background-color: #ffcd61;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete-history:hover {
+  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.75);
+}
+
+.btn-delete-history-disable {
+  background-color: #a0a6ab;
+  color: #ffffff;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
 @media only screen and (min-width: 1024) {
   /* .input-search-type-history {
     width: 90%;

@@ -15,6 +15,6 @@ export const addHistoryApi = (body, token) => {
 };
 
 export const deleteHistoryApi = (id, token) => {
-  const URL = process.env.REACT_APP_HOST + "/history" + id;
+  const URL = process.env.REACT_APP_HOST + "/history/" + id;
   return axios.delete(URL, { headers: { "x-access-token": token } });
 };

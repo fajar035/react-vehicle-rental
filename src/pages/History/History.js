@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./History.css";
-import { getHistoryApi } from "../../utils/https/history";
+import { getHistoryApi, deleteHistoryApi } from "../../utils/https/history";
 import { getUserIdApi } from "../../utils/https/user";
 import Loading from "../../components/Loading";
 import Swal from "sweetalert2";
@@ -17,18 +17,22 @@ function History(props) {
   const [checked, setChecked] = useState([]);
   const [notLogin, setNotLogin] = useState(false);
   const [isNull, setIsNull] = useState(false);
-  const checkList = dataHistory;
+  const [onDelete, setOnDelete] = useState(false);
+  const [selectItem, setSelectItem] = useState([]);
 
   // add/remove checked item from list
-  // console.log(token);
   const handleCheck = (event) => {
+    console.log(event.target.value);
     let updateList = [...checked];
     if (event.target.checked) {
       updateList = [...checked, event.target.checked];
+      setSelectItem(event.target.value);
     } else {
       updateList.splice(checked.indexOf(event.target.value), 1);
+      setSelectItem(null);
     }
     setChecked(updateList);
+    setOnDelete(true);
   };
   // console.log("check item", checked);
 
@@ -75,7 +79,7 @@ function History(props) {
   }, [userData, token, setIsNull]);
 
   // console.log("HISTORY - DATA", dataHistory);
-  console.log("ISNULL", isNull);
+  // console.log("ISNULL", isNull);
 
   useEffect(() => {
     if (notLogin) {
@@ -89,10 +93,57 @@ function History(props) {
       return props.history.push("/");
     }
   }, [props.history, notLogin]);
+  console.log("CHECKLIST", checked);
+
+  const deleteHistory = () => {
+    if (checked.length !== 1 || !onDelete) {
+      setOnDelete(false);
+      return Swal.fire({
+        title: "Please delete 1 vehicle item",
+        icon: "warning",
+      });
+    }
+    // console.log("SELECT ITEM", selectItem);
+    // console.log("ON DELETE", onDelete);
+    if (checked.length === 1 && onDelete) {
+      const idHistory = dataHistory[selectItem].id;
+      deleteHistoryApi(idHistory, token)
+        .then((res) => {
+          console.log(res);
+          Swal.fire({
+            title: res.data.message,
+            icon: "success",
+            showConfirmButton: true,
+          }).then((isConfirm) => {
+            setOnDelete(false);
+            setChecked([]);
+            getHistory();
+            return window.scrollTo({
+              top: 0,
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  // console.log("MODE DELETE > ", onDelete);
+  // console.log("CHECKED", checked);
+
+  useEffect(() => {
+    if (checked.length === 0) {
+      setOnDelete(false);
+    }
+  }, [checked.length]);
 
   useEffect(() => {
     getUser();
     getHistory();
+    return window.scrollTo({
+      top: 0,
+    });
   }, [getHistory, getUser]);
 
   return (
@@ -174,8 +225,8 @@ function History(props) {
                   </div>
                 </div>
               ) : (
-                checkList.length !== 0 &&
-                checkList.map((item, idx) => {
+                dataHistory.length !== 0 &&
+                dataHistory.map((item, idx) => {
                   const date_return = item.return_date;
                   const date_booking = item.booking_date;
                   const dateArr_booking = date_booking.split("-");
@@ -207,9 +258,9 @@ function History(props) {
                           <p className="prepayment-history-detail">
                             Prepayment : Rp. {item.price}
                           </p>
-                          <p className="status-history-detail">
+                          {/* <p className="status-history-detail">
                             Has Been Return
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                       <div className="col-lg-2  d-flex justify-content-center align-items-center">
@@ -217,9 +268,9 @@ function History(props) {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value={item}
+                            value={idx}
                             onChange={handleCheck}
-                            id="flexCheckDefault"
+                            id="historyId"
                           />
                         </div>
                       </div>
@@ -227,6 +278,23 @@ function History(props) {
                   );
                 })
               )}
+              <div className="row ">
+                <div
+                  className="col-lg-12 position-relative d-flex justify-content-center align-items-center"
+                  style={{ "margin-bottom": 150 }}
+                >
+                  <div
+                    className={
+                      onDelete
+                        ? "btn-delete-history"
+                        : "btn-delete-history-disable"
+                    }
+                    onClick={deleteHistory}
+                  >
+                    <p className="p-0 m-3">Delete History</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
