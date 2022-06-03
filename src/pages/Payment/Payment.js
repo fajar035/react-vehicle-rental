@@ -4,10 +4,7 @@ import "./Payment.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import defaultImage from "../../assets/images/vehicle-default.jpg";
-import {
-  getVehicleApi,
-  getVehiclePopularIdApi,
-} from "../../utils/https/vehicles";
+import { getVehicleApi } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
 import { addHistoryApi } from "../../utils/https/history";
 import Swal from "sweetalert2";
@@ -86,24 +83,24 @@ function Payment(props) {
     .slice(0, 8)
     .toUpperCase();
 
-  const dateLocal = (iso8601) => {
-    const date = new Date(iso8601).toString();
-    const newDate = new Date(date);
-    const day = ("0" + newDate.getDate()).slice(-2);
-    const mnth = ("0" + (newDate.getMonth() + 1)).slice(-2);
-    const year = newDate.getFullYear();
-    return [day, mnth, year].join("-");
-  };
+  // const dateLocal = (iso8601) => {
+  //   const date = new Date(iso8601).toString();
+  //   const newDate = new Date(date);
+  //   const day = ("0" + newDate.getDate()).slice(-2);
+  //   const mnth = ("0" + (newDate.getMonth() + 1)).slice(-2);
+  //   const year = newDate.getFullYear();
+  //   return [day, mnth, year].join("-");
+  // };
 
-  const reservationDate = (bookingDate, returnDate) => {
-    const bookingDateNew = dateLocal(bookingDate);
-    const returnDateNew = dateLocal(returnDate);
-    const dateForReservation = {
-      bookingDate: bookingDateNew,
-      returnDate: returnDateNew,
-    };
-    return dateForReservation;
-  };
+  // const reservationDate = (bookingDate, returnDate) => {
+  //   const bookingDateNew = dateLocal(bookingDate);
+  //   const returnDateNew = dateLocal(returnDate);
+  //   const dateForReservation = {
+  //     bookingDate: bookingDateNew,
+  //     returnDate: returnDateNew,
+  //   };
+  //   return dateForReservation;
+  // };
 
   useEffect(() => {
     getUser();
