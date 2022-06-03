@@ -23,6 +23,7 @@ function Reservation(props) {
   const [stock, setStock] = useState(1);
   const [photo, setPhoto] = useState([]);
   const id = props.location.state.id;
+  const idPopular = props.location.state.idPopular;
   const [startDate, setStartDate] = useState(new Date());
   const [day, setDay] = useState("");
   const isPopular = props.location.state.popular;
@@ -39,7 +40,7 @@ function Reservation(props) {
 
   const getBike = useCallback(() => {
     if (isPopular) {
-      getVehiclePopularIdApi(id)
+      getVehicleApi(idPopular)
         .then((res) => {
           // console.log(res);
           if (res.status === 200) {

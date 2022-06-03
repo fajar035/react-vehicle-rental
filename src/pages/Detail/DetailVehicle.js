@@ -21,6 +21,7 @@ function DetailVehicle(props) {
   const [photo, setPhoto] = useState([]);
   const [stockPopular, setStockPopular] = useState(null);
   const [photoPopular, setPhotoPopular] = useState([]);
+  const [idPopular, setIdPopular] = useState(undefined);
   const id = props.match.params.id;
 
   // console.log(process.env.REACT_APP_HOST + photo[0]);
@@ -78,9 +79,15 @@ function DetailVehicle(props) {
   }, [checkUrlPopular, url]);
 
   useEffect(() => {
-    if (checkUrlPopular(url) !== "popular") return getVehicle();
-    if (checkUrlPopular(url) === "popular") return getVehiclePopular();
-  }, [getVehicle, getVehiclePopular, checkUrlPopular, url]);
+    if (checkUrlPopular(url) !== "popular") {
+      getVehicle();
+    }
+    if (checkUrlPopular(url) === "popular") {
+      getVehiclePopular();
+    }
+    if (vehiclePopular.id_vehicle !== undefined)
+      return setIdPopular(vehiclePopular.id_vehicle);
+  }, [getVehicle, getVehiclePopular, checkUrlPopular, url, vehiclePopular]);
 
   return (
     <main>
@@ -255,25 +262,67 @@ function DetailVehicle(props) {
           </div>
         )}
 
-        <div className="col-lg-12 d-flex justify-content-around">
-          <Link to="/vehicles/popular/chat">
-            <button className="btn-chat-admin">Chat Admin</button>
-          </Link>
-          {role !== "2" ? (
-            <Link to={{ pathname: "/vehicles/reservation", state: { id } }}>
-              <button className="btn-reservation">Reservation</button>
+        {checkUrlPopular(url) !== "popular" ? (
+          <div className="col-lg-12 d-flex justify-content-around">
+            <Link to="/vehicles/popular/chat">
+              <button className="btn-chat-admin">Chat Admin</button>
             </Link>
-          ) : (
-            <Link to={{ pathname: "/vehicles/edit", state: { id } }}>
-              <button className="btn-reservation">Edit Item</button>
+            {role !== "2" ? (
+              <Link
+                to={{
+                  pathname: "/vehicles/reservation",
+                  state: { id, popular: false },
+                }}
+              >
+                <button className="btn-reservation">Reservation</button>
+              </Link>
+            ) : (
+              <Link
+                to={{
+                  pathname: "/vehicles/edit",
+                  state: { id, popular: false },
+                }}
+              >
+                <button className="btn-reservation">Edit Item</button>
+              </Link>
+            )}
+            {/* <Link to="/reservation">Reservation</Link> */}
+            <button className="btn-like">
+              <i className="fas fa-heart me-2"></i>
+              Like
+            </button>
+          </div>
+        ) : (
+          <div className="col-lg-12 d-flex justify-content-around">
+            <Link to="/vehicles/popular/chat">
+              <button className="btn-chat-admin">Chat Admin</button>
             </Link>
-          )}
-          {/* <Link to="/reservation">Reservation</Link> */}
-          <button className="btn-like">
-            <i className="fas fa-heart me-2"></i>
-            Like
-          </button>
-        </div>
+            {role !== "2" ? (
+              <Link
+                to={{
+                  pathname: "/vehicles/reservation",
+                  state: { idPopular, popular: true },
+                }}
+              >
+                <button className="btn-reservation">Reservation</button>
+              </Link>
+            ) : (
+              <Link
+                to={{
+                  pathname: "/vehicles/edit",
+                  state: { idPopular, popular: true },
+                }}
+              >
+                <button className="btn-reservation">Edit Item</button>
+              </Link>
+            )}
+            {/* <Link to="/reservation">Reservation</Link> */}
+            <button className="btn-like">
+              <i className="fas fa-heart me-2"></i>
+              Like
+            </button>
+          </div>
+        )}
       </div>
 
       <Footer />
