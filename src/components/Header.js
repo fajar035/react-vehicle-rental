@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { logoutAction } from "../redux/actions/auth";
 import jwtDecode from "jwt-decode";
 
-function Header(props) {
+function Header() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { userData } = auth;
@@ -56,7 +56,6 @@ function Header(props) {
     getPhotoProfile();
   }, [userData.photo, photo, getPhotoProfile]);
 
-  // console.log(photo404);
   const onClickLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -69,6 +68,7 @@ function Header(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(logoutAction(userData.token));
+        history.push("/");
       }
     });
   };
@@ -166,14 +166,13 @@ function Header(props) {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to=""
+                    <div
                       className="dropdown-item btn-logout"
                       onClick={onClickLogout}
                     >
                       <i className="fas fa-angle-right float-end me-4"></i>
                       Logout
-                    </Link>
+                    </div>
                   </li>
                 </ul>
               </div>

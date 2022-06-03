@@ -6,30 +6,37 @@ const initialState = {
   userData: {
     token: "",
     photo: "",
-    role: ""
+    role: "",
   },
   isPending: false,
   isFulfilled: false,
   isRejected: false,
   isLogout: false,
-  err: {}
+  err: {},
 };
 const authReducer = (prevState = initialState, action) => {
-  const { authLogin, updateImageUser } = ACTION_STRING;
+  const { authLogin, updateImageUser, authLogout } = ACTION_STRING;
   const { Pending, Fulfilled, Rejected } = ActionType;
 
   // membuat logic berdasarkan action
+
   switch (action.type) {
+    case authLogout.concat("_", Fulfilled):
+      return {
+        ...prevState,
+        isLogout: true,
+      };
+
     case updateImageUser.concat("_", Fulfilled):
       const newPhoto = action.payload.data.result.photo;
 
       var userData = {
         ...prevState.userData,
-        photo: newPhoto
+        photo: newPhoto,
       };
       return {
         ...prevState,
-        userData
+        userData,
       };
 
     // case authLogin + pending:
@@ -38,7 +45,7 @@ const authReducer = (prevState = initialState, action) => {
         ...prevState,
         isPending: true,
         isFulfilled: false,
-        isRejected: false
+        isRejected: false,
       };
 
     case authLogin.concat("_", Fulfilled):
@@ -47,14 +54,15 @@ const authReducer = (prevState = initialState, action) => {
       var userData = {
         token: data.result.token,
         photo: data.result.photo,
-        role: data.result.role
+        role: data.result.role,
       };
       return {
         ...prevState,
+        isLogout: false,
         isRejected: false,
         isPending: false,
         isFulfilled: true,
-        userData
+        userData,
       };
 
     case authLogin.concat("_", Rejected):
@@ -64,7 +72,7 @@ const authReducer = (prevState = initialState, action) => {
         ...prevState,
         isPending: false,
         isRejected: true,
-        err
+        err,
       };
 
     default:
