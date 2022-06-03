@@ -16,10 +16,11 @@ import Profile from "./pages/Profile/Profile";
 import Vehicles from "./pages/Vehicles/Vehicles";
 import Signup from "./pages/Signup/Signup";
 import Forgot from "./pages/Forgot/Forgot";
-import DetailPopular from "./pages/Detail/DetailPopular";
-import DetailBike from "./pages/Detail/DetailBike";
-import DetailMotorbike from "./pages/Detail/DetailMotorbike";
-import DetailCars from "./pages/Detail/DetailCars";
+import DetailVehicle from "./pages/Detail/DetailVehicle";
+// import DetailPopular from "./pages/Detail/DetailPopular";
+// import DetailBike from "./pages/Detail/DetailBike";
+// import DetailMotorbike from "./pages/Detail/DetailMotorbike";
+// import DetailCars from "./pages/Detail/DetailCars";
 import Example from "./pages/Example/Example";
 import NotFound from "./pages/404/404";
 import VehiclePopular from "./components/VehiclePopular";
@@ -54,12 +55,12 @@ function MainRouter(props) {
             <Route
               exact
               path="/vehicles/popular/detail/:id"
-              component={DetailPopular}
+              component={DetailVehicle}
             />
             <Route path="/vehicles/popular/chat" component={Chat} />
 
             <Route exact path="/vehicles/cars" component={vehicleCars} />
-            <Route path="/vehicles/cars/detail/:id" component={DetailCars} />
+            <Route path="/vehicles/cars/detail/:id" component={DetailVehicle} />
 
             <Route
               exact
@@ -68,13 +69,13 @@ function MainRouter(props) {
             />
             <Route
               path="/vehicles/motorbike/detail/:id"
-              component={DetailMotorbike}
+              component={DetailVehicle}
             />
             <Route path="/vehicles/reservation" component={Reservation} />
             <Route path="/vehicles/payment" component={Payment} />
 
             <Route exact path="/vehicles/bike/" component={vehicleBike} />
-            <Route path="/vehicles/bike/detail/:id" component={DetailBike} />
+            <Route path="/vehicles/bike/detail/:id" component={DetailVehicle} />
 
             <Route path="/vehicles/add" component={AddVehicle} />
             <Route path="/vehicles/edit" component={EditVehicle} />

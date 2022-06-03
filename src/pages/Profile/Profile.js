@@ -20,56 +20,10 @@ function Profile(props) {
   const [photoProfile, setPhotoProfile] = useState(photoProfileDefault);
   const [photo404, setPhoto404] = useState(false);
   const auth = useSelector((state) => state.auth);
-  // console.log("DATA PERSIST", auth);
   const dispatch = useDispatch();
-
   const inputFileRef = useRef(null);
-
-  const scrollToRef = (ref) => {
-    window.scrollTo(0, ref.current.offsetTop);
-  };
   const refScrollTop = useRef(null);
-  const goTop = useCallback(() => {
-    scrollToRef(refScrollTop);
-  }, []);
-
-  const getBase64 = (e) => {
-    var file = e.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setPhotoProfile(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-
-  const onFileChange = useCallback((e) => {
-    getBase64(e);
-    setSelectedFile(e.target.files[0]);
-  }, []);
-
-  const inputImage = (e) => {
-    // this.inputFileRef.current.click();
-    inputFileRef.current.click();
-  };
-
-  const cancel = () => {
-    const photo = dataUser.photo;
-    if (photo !== null && typeof photo !== "undefined") {
-      setPhotoProfile(`${process.env.REACT_APP_HOST}${photo}`);
-    }
-    // console.log("DATAUSER-CANCEL", dataUser.gender);
-    setSelectedSex(dataUser.gender);
-    goTop();
-  };
-
-  const onValueChange = (event) => {
-    // console.log("SEX", event.target.value);
-
-    setSelectedSex(event.target.value);
-  };
+  const [changePhoto, setChangePhoto] = useState(false);
 
   const getDataUser = useCallback(() => {
     const userToken = auth.userData.token;
@@ -78,7 +32,13 @@ function Profile(props) {
         // console.log("RESPONSE", res);
         const photo = res.data.result.photo;
         // console.log("PHOTO PROFILE >>>", photo);
-        if (photo !== null && typeof photo !== "undefined" && photo !== "") {
+        if (
+          photo !== null &&
+          typeof photo !== "undefined" &&
+          photo !== "" &&
+          photo404 === false &&
+          changePhoto === false
+        ) {
           setPhotoProfile(process.env.REACT_APP_HOST + photo);
         }
         setDataUser(res.data.result);
@@ -109,7 +69,58 @@ function Profile(props) {
           progress: undefined,
         });
       });
-  }, [auth.userData.token, props.history]);
+  }, [auth.userData.token, props.history, photo404, changePhoto]);
+
+  const scrollToRef = (ref) => {
+    window.scrollTo(0, ref.current.offsetTop);
+  };
+  const goTop = useCallback(() => {
+    scrollToRef(refScrollTop);
+  }, []);
+
+  const getBase64 = useCallback((e) => {
+    var file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPhotoProfile(reader.result);
+      // console.log(photoProfile);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  }, []);
+
+  const onFileChange = useCallback(
+    (e) => {
+      getBase64(e);
+      setSelectedFile(e.target.files[0]);
+    },
+    [getBase64]
+  );
+  // console.log(selectedFile);
+  const inputImage = (e) => {
+    // this.inputFileRef.current.click();
+    setChangePhoto(true);
+    inputFileRef.current.click();
+  };
+
+  const cancel = () => {
+    const photo = dataUser.photo;
+    if (photo !== null && typeof photo !== "undefined") {
+      setPhotoProfile(`${process.env.REACT_APP_HOST}${photo}`);
+    }
+    // console.log("DATAUSER-CANCEL", dataUser.gender);
+    setSelectedSex(dataUser.gender);
+    setChangePhoto(false);
+    goTop();
+  };
+
+  const onValueChange = (event) => {
+    // console.log("SEX", event.target.value);
+
+    setSelectedSex(event.target.value);
+  };
 
   const getPhotoPrfile = useCallback(async () => {
     // console.log(photoProfile);
@@ -128,6 +139,7 @@ function Profile(props) {
     (e) => {
       e.preventDefault();
       // console.log("EVENT BODY", e);
+
       const body = new FormData();
       const userToken = auth.userData.token;
 
@@ -156,6 +168,7 @@ function Profile(props) {
               // window.location.reload(true)
               getDataUser();
               dispatch(updateUserAction(userToken));
+              setChangePhoto(false);
               goTop();
             }
           });

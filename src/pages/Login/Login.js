@@ -14,7 +14,7 @@ class Login extends React.Component {
     e.preventDefault();
     const body = {
       email: e.target.email.value,
-      password: e.target.password.value
+      password: e.target.password.value,
     };
     this.props.loginDispatch(body);
   };
@@ -33,7 +33,7 @@ class Login extends React.Component {
         icon: "success",
         title: "BERHASIL LOGIN",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       this.props.history.push("/");
     }
@@ -42,10 +42,10 @@ class Login extends React.Component {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email atau Password Salah !!"
+        text: "Email atau Password Salah !!",
       });
     }
-    console.log("CEK DATA", this.props.auth);
+    // console.log("CEK DATA", this.props.auth);
   }
   render() {
     return (
@@ -117,7 +117,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 
@@ -125,7 +125,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginDispatch: (body) => {
       dispatch(loginAction(body));
-    }
+    },
   };
 };
 

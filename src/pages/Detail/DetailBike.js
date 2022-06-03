@@ -15,6 +15,9 @@ function DetailBike(props) {
   const [photo, setPhoto] = useState([]);
   const id = props.match.params.id;
 
+  // console.log(process.env.REACT_APP_HOST + photo[0]);
+  // console.log();
+
   const onClickPrev = () => {
     setStock(stock !== 0 ? stock - 1 : 0);
   };
@@ -141,7 +144,7 @@ function DetailBike(props) {
           <button className="btn-minus" onClick={onClickPrev}>
             <i className="fas fa-minus"></i>
           </button>
-          <p className="number">{stock}</p>
+          <p className="number">{isNaN(stock) ? 0 : stock}</p>
           <button className="btn-plus" onClick={onClickNext}>
             <i className="fas fa-plus"></i>
           </button>
