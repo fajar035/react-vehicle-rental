@@ -143,11 +143,11 @@ function Reservation(props) {
     id_users: userData.id,
     id_vehicles: vehicleBike.id,
     qty: stock,
+    day: day,
     start_date: startAndReturnDate(startDate, day).startDate,
     return_date: startAndReturnDate(startDate, day).returnDate,
-    price: numberToRupiah(vehicleBike.price * stock * day),
+    price: numberToRupiah(vehicleBike.price * day * stock),
   };
-  // console.log(userData);
 
   const onSubmitPayment = () => {
     if (day.length === 0) {

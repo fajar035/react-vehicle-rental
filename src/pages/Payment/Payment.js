@@ -20,44 +20,26 @@ function Payment(props) {
   const [photo, setPhoto] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const idVehicle = props.location.state.dataForApi.id_vehicles;
-  const isPopular = props.location.state.isPopular;
   const dataPayment = props.location.state.dataForApi;
 
-  // console.log(token);
+  // console.log(dataPayment);
 
   const getBike = useCallback(() => {
-    if (isPopular) {
-      getVehiclePopularIdApi(idVehicle)
-        .then((res) => {
-          // console.log(res);
-          if (res.status === 200) {
-            setVehicleBike(res.data.result[0]);
-            setPhoto(JSON.parse(res.data.result[0].photo));
-            // setStock(parseInt(res.data.result[0].stock));
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err.response);
-          setIsLoading(true);
-        });
-    } else {
-      getVehicleApi(idVehicle)
-        .then((res) => {
-          // console.log(res);
-          if (res.status === 200) {
-            setVehicleBike(res.data.result[0]);
-            setPhoto(JSON.parse(res.data.result[0].photo));
-            // setStock(parseInt(res.data.result[0].stock));
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err.response);
-          setIsLoading(true);
-        });
-    }
-  }, [idVehicle, isPopular]);
+    getVehicleApi(idVehicle)
+      .then((res) => {
+        // console.log(res);
+        if (res.status === 200) {
+          setVehicleBike(res.data.result[0]);
+          setPhoto(JSON.parse(res.data.result[0].photo));
+          // setStock(parseInt(res.data.result[0].stock));
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setIsLoading(true);
+      });
+  }, [idVehicle]);
 
   const getUser = useCallback(() => {
     getUserIdApi(token)
@@ -159,6 +141,8 @@ function Payment(props) {
       });
   };
 
+  // console.log(vehicleBike);
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -196,9 +180,7 @@ function Payment(props) {
           </div>
 
           <div className="col-lg-8 ps-lg-5 pb-5">
-            <p className="name-vehicle">
-              {isPopular ? vehicleBike.vehicle : vehicleBike.name}
-            </p>
+            <p className="name-vehicle">{vehicleBike.name}</p>
             <p className="location-vehicle">{vehicleBike.location}</p>
             <p className="status-vehicle">No Prepayment</p>
             <p className="code-booking">{bookingCode}</p>
@@ -213,7 +195,7 @@ function Payment(props) {
           <div className="col-lg-4 ps-5 pt-5 pb-3">
             <div className="wrapper-quantity">
               <p>
-                Quantity : {isPopular ? vehicleBike.qty : dataPayment.qty}{" "}
+                Quantity : {dataPayment.qty}{" "}
                 {vehicleBike.category === "Bike"
                   ? "Bikes"
                   : vehicleBike.category === "Motorbike"
@@ -229,15 +211,7 @@ function Payment(props) {
             <div className="wrapper-reservation-date">
               <div className="d-flex justify-content-around align-items-center w-50">
                 <p className="title-payment">Reservation date : </p>
-                <p className="value-payment">
-                  {" "}
-                  {isPopular
-                    ? reservationDate(
-                        vehicleBike.booking_date,
-                        vehicleBike.return_date
-                      ).bookingDate
-                    : dataPayment.start_date}
-                </p>
+                <p className="value-payment">{dataPayment.start_date}</p>
               </div>
             </div>
           </div>
@@ -246,7 +220,7 @@ function Payment(props) {
             <div className="wrapper-order-detail">
               <p className="title-payment pb-3">Order Detail :</p>
               <p className="value-payment">
-                {isPopular ? vehicleBike.qty : dataPayment.qty}{" "}
+                {dataPayment.qty}{" "}
                 {vehicleBike.category === "Bike"
                   ? "Bikes"
                   : vehicleBike.category === "MotorBike"
@@ -256,8 +230,12 @@ function Payment(props) {
                   : "Vehicles"}{" "}
                 : Rp. {vehicleBike.price}
               </p>
+              <p className="value-payment">
+                Booking : {dataPayment.day}{" "}
+                {dataPayment.day > 1 ? "Days" : "Day"}
+              </p>
 
-              <p className="title-payment pt-5">
+              <p className="title-payment pt-3">
                 Total : Rp. {dataPayment.price}
               </p>
             </div>

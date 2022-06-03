@@ -1,6 +1,6 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import logo from "../assets/icons/logo.svg"
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/icons/logo.svg";
 
 function Footer() {
   return (
@@ -139,7 +139,7 @@ function Footer() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

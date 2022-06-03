@@ -283,7 +283,7 @@ function History(props) {
               <div className="row ">
                 <div
                   className="col-lg-12 position-relative d-flex justify-content-center align-items-center"
-                  style={{ "margin-bottom": 200 }}
+                  style={{ marginBottom: 150 }}
                 >
                   <div
                     className={
