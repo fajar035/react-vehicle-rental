@@ -102,6 +102,7 @@ function Profile(props) {
   const inputImage = (e) => {
     // this.inputFileRef.current.click();
     setChangePhoto(true);
+    setPhoto404(false);
     inputFileRef.current.click();
   };
 
@@ -126,6 +127,7 @@ function Profile(props) {
     // console.log(photoProfile);
     const response = await fetch(photoProfile);
     if (response.status === 404) {
+      setPhotoProfile(photoProfileDefault);
       setPhoto404(true);
     }
   }, [photoProfile]);
