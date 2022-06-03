@@ -5,10 +5,7 @@ import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import defaultImage from "../../assets/images/vehicle-default.jpg";
 import { numberToRupiah } from "../../utils/helper/currency";
-import {
-  getVehicleApi,
-  getVehiclePopularIdApi,
-} from "../../utils/https/vehicles";
+import { getVehicleApi } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
 import "./Reservation.css";
 import DatePicker from "react-datepicker";
@@ -66,7 +63,7 @@ function Reservation(props) {
           console.log(err.response);
         });
     }
-  }, [id, isPopular]);
+  }, [id, isPopular, idPopular]);
 
   const getUser = useCallback(() => {
     getUserIdApi(token)
