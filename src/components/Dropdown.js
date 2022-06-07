@@ -1,10 +1,10 @@
 // using global css
 import React, { useState, useEffect, useCallback } from "react";
+import "../pages/Vehicles/Vehicles.css";
 
-function Dropdown({ selected, setSelected, data, dataVehicleApi }) {
+function Dropdown({ selected, setSelected, data }) {
   const [isActive, setisActive] = useState(false);
   const [values, setValues] = useState([]);
-  const [valueDropDown, setValueDropdown] = useState(null);
 
   const getValues = useCallback(() => {
     if (data.length !== 0) {
@@ -27,27 +27,28 @@ function Dropdown({ selected, setSelected, data, dataVehicleApi }) {
   }, [getValues]);
 
   return (
-    <div className="dropdown">
-      <div className="dropdown-btn" onClick={(e) => setisActive(!isActive)}>
+    <div className='dropdown'>
+      <div className='dropdown-btn' onClick={(e) => setisActive(!isActive)}>
         {selected}
         {isActive ? (
-          <i className="fa-solid fa-chevron-up fs-4"></i>
+          <i className='fa-solid fa-chevron-up fs-4'></i>
         ) : (
-          <i className="fa-solid fa-chevron-down fs-4"></i>
+          <i className='fa-solid fa-chevron-down fs-4'></i>
         )}
       </div>
       {isActive && (
-        <div className="dropdown-content">
+        <div className='dropdown-content'>
           {values.length !== 0 &&
             values.map((value, idx) => {
               return (
                 <div
-                  className="dropdown-item"
+                  className='dropdown-item'
                   onClick={(e) => {
                     setSelected(value);
                     setisActive(false);
                   }}
-                  key={idx}>
+                  key={idx}
+                >
                   {value}
                 </div>
               );

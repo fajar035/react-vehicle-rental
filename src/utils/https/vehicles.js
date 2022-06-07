@@ -46,6 +46,26 @@ export const getCategoryApi = () => {
   return axios.get(url);
 };
 
+export const newCategory = (body, token) => {
+  const url = process.env.REACT_APP_HOST + "/category";
+  const config = {
+    headers: {
+      "x-access-token": token
+    }
+  };
+  return axios.post(url, body, config);
+};
+
+export const deleteCategoryApi = (id, token) => {
+  const url = process.env.REACT_APP_HOST + "/category/" + id;
+  const config = {
+    headers: {
+      "x-access-token": token
+    }
+  };
+  return axios.delete(url, config);
+};
+
 export const getStatusApi = () => {
   const url = process.env.REACT_APP_HOST + "/status";
   return axios.get(url);

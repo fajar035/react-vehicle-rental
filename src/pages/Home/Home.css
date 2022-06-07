@@ -597,9 +597,16 @@ img {
   background: rgba(203, 203, 212, 0.2);
   border-radius: 10px;
   border: none;
+  cursor: pointer;
+}
+
+.btn-minus-add:hover,
+.btn-plus-add:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn-plus-add {
+  cursor: pointer;
   width: 30px;
   height: 30px;
   border: none;

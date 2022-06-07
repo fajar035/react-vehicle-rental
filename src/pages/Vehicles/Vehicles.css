@@ -165,7 +165,9 @@
 }
 
 .btn-save-item-add-vehicle,
-.dropwdown-category-add-vehicle {
+.dropwdown-category-add-vehicle,
+.btn-delete-item-edit-vehicle,
+.btn-save-item-edit-vehicle {
   width: 300px;
   height: 60px;
 }
@@ -211,6 +213,150 @@
 .wrapper-img-child {
   width: 250px;
   height: 200px;
+}
+
+/* START DROPDOWN COSTUM */
+.dropdown {
+  width: 100%;
+  margin: 20px auto;
+  position: relative;
+}
+
+.dropdown-btn {
+  padding: 15px 20px;
+  background-color: #f5f5f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: "Nunito";
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.dropdown-content {
+  position: absolute;
+  padding: 10px;
+  background-color: #f5f5f6;
+  cursor: pointer;
+  font-family: "Nunito";
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  width: 100%;
+  z-index: 100000;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+/* END DROPDOWN COSTUM */
+
+.dropdown-category {
+  width: 80%;
+  margin: 20px auto;
+  position: relative;
+}
+
+.dropdown-btn-category {
+  /* padding: 15px 20px; */
+  background-color: #ffcd61;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 20px;
+  padding-left: 30%;
+}
+
+.dropdown-content-category {
+  position: absolute;
+  padding: 10px;
+  background-color: #f5f5f6;
+  cursor: pointer;
+  font-family: "Nunito";
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  width: 100%;
+  z-index: 100000;
+  bottom: 120%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.dropdown-item-category {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-add-category {
+  display: flex;
+  justify-content: left;
+}
+
+.item-header {
+  font-weight: bold;
+}
+
+.icon-item {
+  color: white;
+}
+
+.icon-item:hover {
+  color: black;
+}
+
+.btn-save-item-edit-vehicle {
+  background: #ffcd61;
+  border: none;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+}
+
+.btn-save-item-edit-vehicle:hover,
+.btn-delete-item-edit-vehicle:hover,
+.dropdown-btn-category:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-delete-item-edit-vehicle {
+  background: #393939;
+  border: none;
+  border-radius: 10px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  color: #ffcd61;
+}
+
+.dropdown-item-category:hover {
+  background-color: #ffcd61;
 }
 /* END EDIT VEHICLE */
 
