@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import "./History.css";
 import { getHistoryApi, deleteHistoryApi } from "../../utils/https/history";
 import { getUserIdApi } from "../../utils/https/user";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading.js";
 import Swal from "sweetalert2";
 import defaultImage from "../../assets/images/vehicle-default.jpg";
 
@@ -167,8 +167,7 @@ function History(props) {
                     />
                     <button
                       typeof="submit"
-                      className="btn-search-type float-end"
-                    >
+                      className="btn-search-type float-end">
                       <i className="fas fa-search"></i>
                     </button>
                   </div>
@@ -177,8 +176,7 @@ function History(props) {
                 <div className="col-lg-2 d-flex align-self-end flex-column">
                   <label
                     className="form-check-label d-flex justify-content-center mb-3"
-                    htmlFor="flexCheckDefault"
-                  >
+                    htmlFor="flexCheckDefault">
                     Select
                   </label>
                   <div className="form-check d-flex justify-content-center">
@@ -200,8 +198,7 @@ function History(props) {
                     className="input-select dropdown-toggle p-2 ms-3 filter-history"
                     // value={this.state.selectValue}
                     // onChange={this.handleDropdownChange}
-                    name="location"
-                  >
+                    name="location">
                     <option disabled>Filter</option>
                     <option defaultValue="type">Type</option>
                     <option defaultValue="data-added">Date Added</option>
@@ -283,16 +280,14 @@ function History(props) {
               <div className="row ">
                 <div
                   className="col-lg-12 position-relative d-flex justify-content-center align-items-center"
-                  style={{ marginBottom: 150 }}
-                >
+                  style={{ marginBottom: 150 }}>
                   <div
                     className={
                       onDelete
                         ? "btn-delete-history"
                         : "btn-delete-history-disable"
                     }
-                    onClick={deleteHistory}
-                  >
+                    onClick={deleteHistory}>
                     <p className="p-0 m-3">Delete History</p>
                   </div>
                 </div>

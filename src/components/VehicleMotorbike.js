@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { getVehiclesMotorBikeApi } from "../utils/https/vehicles";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading.js";
 import defaultImage from "../assets/images/vehicle-default.jpg";
 
 function VehiclesMotorBike(props) {
@@ -95,8 +95,7 @@ function VehiclesMotorBike(props) {
                   <div key={idx} className="col-lg-3 col-md-6 card  ">
                     <Link
                       to={`motorbike/detail/${item.id}`}
-                      className="wrapper-img-home"
-                    >
+                      className="wrapper-img-home">
                       <img
                         src={photoUrl}
                         className="img-size "

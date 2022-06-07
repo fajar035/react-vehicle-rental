@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./Profile.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading.js";
 import { Link } from "react-router-dom";
 import photoProfileDefault from "../../assets/images/photo-profile-default.webp";
 import pencilSvg from "../../assets/icons/pencil.svg";
@@ -215,8 +215,7 @@ function Profile(props) {
                   fontFamily: `'Nunito', sans-serif`,
                   fontWeight: "900",
                   fontSize: "40px",
-                }}
-              >
+                }}>
                 Profile
               </div>
               <div className="col-12 profile-info">
@@ -234,8 +233,7 @@ function Profile(props) {
                         <button
                           type="button"
                           onClick={inputImage}
-                          className="btn-pencil"
-                        >
+                          className="btn-pencil">
                           <img
                             src={pencilSvg}
                             width="50px"
@@ -367,8 +365,7 @@ function Profile(props) {
                           <div className="col-12 col-md-4 col-sm-4 wrapper-btn">
                             <Link
                               to="/profile/forgot"
-                              className="btn-edit-password"
-                            >
+                              className="btn-edit-password">
                               Edit Password
                             </Link>
                           </div>

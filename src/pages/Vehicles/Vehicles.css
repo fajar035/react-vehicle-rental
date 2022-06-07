@@ -161,6 +161,7 @@
   width: 100%;
   margin-left: -18px;
   height: 100%;
+  cursor: pointer;
 }
 
 .btn-save-item-add-vehicle,
@@ -193,6 +194,25 @@
 }
 
 /* END ADD VEHICLES */
+
+/* START EDIT VEHICLE */
+.wrapper-link-detail {
+  cursor: pointer !important;
+  height: fit-content;
+}
+
+.img-upload {
+  width: 500px;
+  height: 400px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.wrapper-img-child {
+  width: 250px;
+  height: 200px;
+}
+/* END EDIT VEHICLE */
 
 /* START SEARCH VEHICLE */
 .cobaSearch {

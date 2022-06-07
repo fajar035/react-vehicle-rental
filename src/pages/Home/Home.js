@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSelector } from "react-redux";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading.js";
 import {
   getVehiclesPopularApi,
   getLocationApi,
@@ -182,8 +182,7 @@ function Home(props) {
                       className="input-select dropdown-toggle p-2 ms-3"
                       value={selectLocation}
                       onChange={handleDropdownChangeLocation}
-                      name="location"
-                    >
+                      name="location">
                       <option disabled>Location</option>
                       {location.length !== 0 &&
                         location.map((item, idx) => {
@@ -204,8 +203,7 @@ function Home(props) {
                       className="input-select dropdown-toggle p-2 ms-3"
                       value={selectCategory}
                       onChange={handleDropdownChangeCategory}
-                      name="category"
-                    >
+                      name="category">
                       <option disabled>Category</option>
                       {category.length !== 0 &&
                         category.map((item, idx) => {
@@ -221,21 +219,32 @@ function Home(props) {
                 </div>
 
                 {/* Button Search */}
-                <div className="col-6 p-0">
-                  <div className="btn-clear" onClick={handlerClear}>
-                    Clear
+
+                {isSearching ? (
+                  <>
+                    <div className="col-6 p-0">
+                      <div className="btn-clear" onClick={handlerClear}>
+                        Clear
+                      </div>
+                    </div>
+                    <div className="col-6 p-0 d-flex justify-content-end">
+                      <button className="btn-search " type="submit">
+                        Search
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="col-12 p-0 d-flex justify-content-end">
+                    <button className="btn-search " type="submit">
+                      Search
+                    </button>
                   </div>
-                </div>
-                <div className="col-6 p-0 d-flex justify-content-end">
-                  <button className="btn-search " type="submit">
-                    Search
-                  </button>
-                </div>
+                )}
               </form>
             </div>
           </div>
 
-          <div className="row mb-5 ">
+          <div className="row mb-5">
             <div className="col-lg-12 mb-5 ">
               {isSearching ? (
                 <div className="container px-4">

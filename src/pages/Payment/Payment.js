@@ -8,7 +8,7 @@ import { getVehicleApi } from "../../utils/https/vehicles";
 import { getUserIdApi } from "../../utils/https/user";
 import { addHistoryApi } from "../../utils/https/history";
 import Swal from "sweetalert2";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading.js";
 
 function Payment(props) {
   const token = useSelector((state) => state.auth.userData.token);
@@ -152,8 +152,7 @@ function Payment(props) {
             onClick={() => {
               return props.history.goBack();
             }}
-            className="col-lg-4 mb-5 d-flex flex-row align-items-center wrapper-link-detail link-detail"
-          >
+            className="col-lg-4 mb-5 d-flex flex-row align-items-center wrapper-link-detail link-detail">
             <i className="fas fa-chevron-left fs-2 "></i>
             <p className="ms-4 link-detail">Payment</p>
           </div>
@@ -183,8 +182,7 @@ function Payment(props) {
             <p className="code-booking">{bookingCode}</p>
             <div
               className="btn-copy-booking"
-              onClick={() => copyBookingCode(bookingCode)}
-            >
+              onClick={() => copyBookingCode(bookingCode)}>
               <p>Copy Booking Code</p>
             </div>
           </div>
@@ -265,8 +263,7 @@ function Payment(props) {
                   className="btn-copy"
                   onClick={() => {
                     copyPaymentCode(paymentCode);
-                  }}
-                >
+                  }}>
                   <p>copy</p>
                 </div>
               </div>

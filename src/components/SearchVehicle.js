@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import defaultImage from "../assets/images/vehicle-default.jpg";
 import { searchVehicleHomeApi } from "../utils/https/vehicles";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading.js";
 
 function SearchVehicle(props) {
   const [result, setResult] = useState([]);
@@ -56,7 +56,9 @@ function SearchVehicle(props) {
 
                 return (
                   <div key={idx} className="col-lg-3 col-md-6 card  ">
-                    <Link to={`vehicles/bike/detail/${item.id}`}>
+                    <Link
+                      to={`vehicles/bike/detail/${item.id}`}
+                      className="wrapper-img-home">
                       <img
                         src={photoUrl}
                         className="img-size"

@@ -86,15 +86,13 @@ function Header() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
         <div
           className="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
+          id="navbarSupportedContent">
           <ul className="navbar-nav mb-5 mt-5 mb-lg-0 mt-lg-0 align-items-center">
             <li className="nav-item align-content-center">
               <Link to="/" className="navbar-font">
@@ -128,7 +126,7 @@ function Header() {
               </Link>
             </div>
           ) : (
-            <div className="d-flex flex-row ms-3">
+            <div className="d-flex flex-row ms-3 align-items-center">
               <div className="icon">
                 <div className="count ">
                   <p>10</p>
@@ -150,8 +148,7 @@ function Header() {
 
                 <ul
                   className="dropdown-menu "
-                  aria-labelledby="dropdownMenuLink"
-                >
+                  aria-labelledby="dropdownMenuLink">
                   <li>
                     <Link to="/profile" className="dropdown-item">
                       <i className="fas fa-angle-right float-end me-4"></i>
@@ -168,8 +165,7 @@ function Header() {
                   <li>
                     <div
                       className="dropdown-item btn-logout"
-                      onClick={onClickLogout}
-                    >
+                      onClick={onClickLogout}>
                       <i className="fas fa-angle-right float-end me-4"></i>
                       Logout
                     </div>
