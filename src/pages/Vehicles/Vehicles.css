@@ -306,6 +306,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .item-add-category {
@@ -322,7 +323,38 @@
 }
 
 .icon-item:hover {
-  color: black;
+  color: #000000;
+}
+
+.icon-item:hover + .wrapper-span-delete {
+  /* color: black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.wrapper-span-delete {
+  position: absolute;
+  height: 90px;
+  width: 300px;
+  padding: 10px;
+  display: none;
+  border-radius: 10px;
+  left: 320px;
+  top: -5px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.span-delete {
+  font-family: "Nunito";
+  font-weight: 900;
+  color: #393939;
 }
 
 .btn-save-item-edit-vehicle {
@@ -347,17 +379,28 @@
   background: #393939;
   border: none;
   border-radius: 10px;
-  font-family: Nunito;
+  font-family: "Nunito";
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
   line-height: 25px;
   color: #ffcd61;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .dropdown-item-category:hover {
   background-color: #ffcd61;
 }
+
+.form-input-category[type="text"]:focus {
+  border-color: rgb(255, 205, 97);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgb(255, 205, 97);
+  outline: 0 none;
+}
+
 /* END EDIT VEHICLE */
 
 /* START SEARCH VEHICLE */

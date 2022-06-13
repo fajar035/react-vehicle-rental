@@ -8,7 +8,7 @@ import Loading from "../../components/Loading/Loading.js";
 import {
   getVehiclesPopularApi,
   getLocationApi,
-  getCategoryApi,
+  getCategoryApi
 } from "../../utils/https/vehicles";
 import SearchVehicle from "../../components/SearchVehicle";
 
@@ -18,7 +18,7 @@ function Home(props) {
   const [dataSearch, setDataSearch] = useState({
     keyword: "",
     location: "",
-    category: "",
+    category: ""
   });
   const [selectLocation, setSelectLocation] = useState("Location");
   const [locationArr, setLocationArr] = useState([]);
@@ -27,9 +27,10 @@ function Home(props) {
   const [categoryArr, setCategoryArr] = useState([]);
   const [category, setCategory] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-
   const user = useSelector((state) => state.auth);
   const role = user.userData.role;
+
+  console.log(dataPopular);
 
   const handleDropdownChangeLocation = (e) => {
     setSelectLocation(e.target.value);
@@ -48,6 +49,7 @@ function Home(props) {
       })
       .catch((err) => {
         console.log(err);
+        setSuccess(false);
       });
   }, []);
 
@@ -55,9 +57,11 @@ function Home(props) {
     getCategoryApi()
       .then((res) => {
         setCategoryArr(res.data.result);
+        setSuccess(true);
       })
       .catch((err) => {
         console.log(err);
+        setSuccess(false);
       });
   }, []);
 
@@ -66,9 +70,11 @@ function Home(props) {
       .then((res) => {
         const location = res.data.result;
         setLocationArr(location);
+        setSuccess(true);
       })
       .catch((err) => {
         console.log(err);
+        setSuccess(false);
       });
   }, []);
 
@@ -85,12 +91,12 @@ function Home(props) {
     setDataSearch({
       keyword: keyword,
       location: location === "Location" ? "" : location,
-      category: category === "Category" ? "" : category,
+      category: category === "Category" ? "" : category
     });
     setIsSearching(true);
     return window.scrollTo({
       top: 850,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   };
   // console.log(dataSearch);
@@ -98,7 +104,7 @@ function Home(props) {
     setDataSearch({
       keyword: "",
       location: "",
-      category: "",
+      category: ""
     });
     setSelectLocation("Location");
     setSelectCategory("Category");
@@ -124,7 +130,7 @@ function Home(props) {
       setLocation(arrLocation);
     }
     return window.scrollTo({
-      top: 0,
+      top: 0
     });
   }, [locationArr]);
 
@@ -140,7 +146,7 @@ function Home(props) {
       setCategory(arrCategory);
     }
     return window.scrollTo({
-      top: 0,
+      top: 0
     });
   }, [categoryArr]);
 
@@ -152,37 +158,38 @@ function Home(props) {
       <Header />
       {success ? (
         <>
-          <div className="row bg-image p-5 jumbotron">
-            <div className="col-lg-6 ">
-              <div className="row mb-5 p-0">
-                <div className="f-playfair mb-5">
+          <div className='row bg-image p-5 jumbotron'>
+            <div className='col-lg-6 '>
+              <div className='row mb-5 p-0'>
+                <div className='f-playfair mb-5'>
                   Explore and <br />
                   Travel
                 </div>
-                <div className="f-nunito-vehicle-finder mt-5 mb-3">
+                <div className='f-nunito-vehicle-finder mt-5 mb-3'>
                   Vehicle Finder
                 </div>
-                <div className="line-jumbroton col-1 ms-3"></div>
+                <div className='line-jumbroton col-1 ms-3'></div>
               </div>
 
-              <form className="row mb-5" onSubmit={onSubmitSearch}>
+              <form className='row mb-5' onSubmit={onSubmitSearch}>
                 {/* input Search */}
-                <div className="col-lg-12 p-0">
+                <div className='col-lg-12 p-0'>
                   <input
-                    type="text"
-                    name="name"
-                    className="input-type mb-5 ms-1"
-                    placeholder="Type the vehicle (ex. motorbike"
+                    type='text'
+                    name='name'
+                    className='input-type mb-5 ms-1'
+                    placeholder='Type the vehicle (ex. motorbike'
                   />
                 </div>
-                <div className="row d-flex justify-content-between p-0">
+                <div className='row d-flex justify-content-between p-0'>
                   {/* location */}
-                  <div className="col-lg-5 mb-5 p-0">
+                  <div className='col-lg-5 mb-5 p-0'>
                     <select
-                      className="input-select dropdown-toggle p-2 ms-3"
+                      className='input-select dropdown-toggle p-2 ms-3'
                       value={selectLocation}
                       onChange={handleDropdownChangeLocation}
-                      name="location">
+                      name='location'
+                    >
                       <option disabled>Location</option>
                       {location.length !== 0 &&
                         location.map((item, idx) => {
@@ -198,12 +205,13 @@ function Home(props) {
                   </div>
 
                   {/* Category*/}
-                  <div className="col-lg-5 mb-5 p-0">
+                  <div className='col-lg-5 mb-5 p-0'>
                     <select
-                      className="input-select dropdown-toggle p-2 ms-3"
+                      className='input-select dropdown-toggle p-2 ms-3'
                       value={selectCategory}
                       onChange={handleDropdownChangeCategory}
-                      name="category">
+                      name='category'
+                    >
                       <option disabled>Category</option>
                       {category.length !== 0 &&
                         category.map((item, idx) => {
@@ -222,20 +230,23 @@ function Home(props) {
 
                 {isSearching ? (
                   <>
-                    <div className="col-6 p-0">
-                      <div className="btn-clear" onClick={handlerClear}>
+                    <div className='col-6 p-0'>
+                      <div
+                        className='btn-clear'
+                        onClick={handlerClear}
+                      >
                         Clear
                       </div>
                     </div>
-                    <div className="col-6 p-0 d-flex justify-content-end">
-                      <button className="btn-search " type="submit">
+                    <div className='col-6 p-0 d-flex justify-content-end'>
+                      <button className='btn-search ' type='submit'>
                         Search
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="col-12 p-0 d-flex justify-content-end">
-                    <button className="btn-search " type="submit">
+                  <div className='col-12 p-0 d-flex justify-content-end'>
+                    <button className='btn-search ' type='submit'>
                       Search
                     </button>
                   </div>
@@ -244,10 +255,10 @@ function Home(props) {
             </div>
           </div>
 
-          <div className="row mb-5">
-            <div className="col-lg-12 mb-5 ">
+          <div className='row mb-5'>
+            <div className='col-lg-12 mb-5 '>
               {isSearching ? (
-                <div className="container px-4">
+                <div className='container px-4'>
                   <SearchVehicle
                     dataSearch={dataSearch}
                     isSearching={isSearching}
@@ -255,14 +266,13 @@ function Home(props) {
                   />
                 </div>
               ) : (
-                <div className="container px-4">
-                  <h3 className="mb-5 mt-5 f-playfair-main">Popular in town</h3>
-                  <div className="row position-relative d-flex justify-content-center">
-                    {/* <div className="next">
-                      <i className="fas fa-angle-right"></i>
-                    </div> */}
+                <div className='container px-4'>
+                  <h3 className='mb-5 mt-5 f-playfair-main'>
+                    Popular in town
+                  </h3>
 
-                    {Array.isArray(dataPopular).length !== 0 &&
+                  <div className='row position-relative d-flex justify-content-center'>
+                    {Array.isArray(dataPopular).length !== 0 ||
                     dataPopular !== undefined ? (
                       dataPopular.map((item, idx) => {
                         // console.log("DATA POPULAR", item);
@@ -270,18 +280,26 @@ function Home(props) {
                         // console.log("ID", item);
 
                         return (
-                          <div key={idx} className="col-lg-3 col-md-6 card  ">
-                            <Link to={`/vehicles/popular/detail/${item.id}`}>
+                          <div
+                            key={idx}
+                            className='col-lg-3 col-md-6 card  '
+                          >
+                            <Link
+                              to={`/vehicles/popular/detail/${item.id}`}
+                            >
                               <img
-                                src={process.env.REACT_APP_HOST + photo[0]}
-                                className="img-size "
-                                alt="photo_vehicle"
+                                src={
+                                  process.env.REACT_APP_HOST +
+                                  photo[0]
+                                }
+                                className='img-size '
+                                alt='photo_vehicle'
                               />
                             </Link>
-                            <div className="city-home col-9  shadow ">
-                              <p className="m-0">
+                            <div className='city-home col-9  shadow '>
+                              <p className='m-0'>
                                 {item.vehicle} <br />
-                                <span className="color-subtitle">
+                                <span className='color-subtitle'>
                                   {item.location}
                                 </span>
                               </p>
@@ -290,12 +308,17 @@ function Home(props) {
                         );
                       })
                     ) : (
-                      <p className="no-data">No data</p>
+                      <div className='col-lg-12 border'>
+                        <p className='no-data mb-5'>No data</p>
+                      </div>
                     )}
 
                     {role === "2" ? (
-                      <div className="col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input">
-                        <Link to="/vehicles/add" className="btn-add-item">
+                      <div className='col-lg-12 col-sm-12 col-md-12 d-flex justify-content-center rounded-3 mt-5 container-input'>
+                        <Link
+                          to='/vehicles/add'
+                          className='btn-add-item'
+                        >
                           Add New Items
                         </Link>
                       </div>
@@ -306,60 +329,65 @@ function Home(props) {
                     )}
 
                     {/* Testimonial */}
-                    <div className="col-lg-12 mt-5">
-                      <div className="container">
-                        <div className="row d-flex flex-row justify-content-center align-item-center p-5">
-                          <h3 className="f-playfair-main">Testimonials</h3>
+                    <div className='col-lg-12 mt-5'>
+                      <div className='container'>
+                        <div className='row d-flex flex-row justify-content-center align-item-center p-5'>
+                          <h3 className='f-playfair-main'>
+                            Testimonials
+                          </h3>
 
-                          <div className="col-lg-6 mt-5 d-flex flex-column justify-content-center">
-                            <ul className="list-group d-flex flex-row align-item-center mb-3">
-                              <li className="list-group-item border-0">
-                                <i className="fas fa-star text-warning"></i>
+                          <div className='col-lg-6 mt-5 d-flex flex-column justify-content-center'>
+                            <ul className='list-group d-flex flex-row align-item-center mb-3'>
+                              <li className='list-group-item border-0'>
+                                <i className='fas fa-star text-warning'></i>
                               </li>
-                              <li className="list-group-item border-0">
-                                <i className="fas fa-star text-warning"></i>
+                              <li className='list-group-item border-0'>
+                                <i className='fas fa-star text-warning'></i>
                               </li>
-                              <li className="list-group-item border-0">
-                                <i className="fas fa-star text-warning"></i>
+                              <li className='list-group-item border-0'>
+                                <i className='fas fa-star text-warning'></i>
                               </li>
-                              <li className="list-group-item border-0">
-                                <i className="fas fa-star text-warning"></i>
+                              <li className='list-group-item border-0'>
+                                <i className='fas fa-star text-warning'></i>
                               </li>
-                              <li className="list-group-item border-0">
-                                <i className="fas fa-star text-warning"></i>
+                              <li className='list-group-item border-0'>
+                                <i className='fas fa-star text-warning'></i>
                               </li>
                             </ul>
 
-                            <div className="col-lg-8 mb-5">
-                              <p className="f-mulish">
-                                ”It was the right decision to rent vehicle here,
-                                I spent less money and enjoy the trip. It was an
-                                amazing experience to have a ride for wildlife
+                            <div className='col-lg-8 mb-5'>
+                              <p className='f-mulish'>
+                                ”It was the right decision to rent
+                                vehicle here, I spent less money and
+                                enjoy the trip. It was an amazing
+                                experience to have a ride for wildlife
                                 trip!”
                               </p>
                             </div>
 
-                            <div className="col-lg-8">
-                              <p className="f-nunito">Edward Newgate</p>
+                            <div className='col-lg-8'>
+                              <p className='f-nunito'>
+                                Edward Newgate
+                              </p>
                               <p>Founder Circle</p>
                             </div>
                           </div>
 
-                          <div className="col-lg-6 mt-5 d-flex flex-row justify-content-center">
-                            <div className="bg-image img-cs position-relative">
-                              <div className="circle-testimonial position-circle"></div>
+                          <div className='col-lg-6 mt-5 d-flex flex-row justify-content-center'>
+                            <div className='bg-image img-cs position-relative'>
+                              <div className='circle-testimonial position-circle'></div>
 
-                              <div className="plus">
-                                <div className="vertikal"></div>
-                                <div className="horizontal"></div>
+                              <div className='plus'>
+                                <div className='vertikal'></div>
+                                <div className='horizontal'></div>
                               </div>
 
-                              <div className="rectangle">
-                                <div className="left">
-                                  <i className="fas fa-angle-left"></i>
+                              <div className='rectangle'>
+                                <div className='left'>
+                                  <i className='fas fa-angle-left'></i>
                                 </div>
-                                <div className="right">
-                                  <i className="fas fa-angle-right"></i>
+                                <div className='right'>
+                                  <i className='fas fa-angle-right'></i>
                                 </div>
                               </div>
                             </div>
