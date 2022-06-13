@@ -11,7 +11,6 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import vehicleDefault from "../../assets/images/vehicle-default.jpg";
 import Loading from "../../components/Loading/Loading.js";
-import { useMemo } from "react";
 
 function Vehicles() {
   let { url } = useRouteMatch();
@@ -20,12 +19,6 @@ function Vehicles() {
   const [vehiclesCars, setVehiclesCars] = useState([]);
   const [vehiclesPopular, setVehiclesPopular] = useState([]);
   const [isOk, setisOk] = useState(false);
-  const [isNull, setIsNull] = useState({
-    popular: false,
-    bike: false,
-    motorbike: false,
-    car: false
-  });
 
   const getVehiclesBike = useCallback(() => {
     getVehiclesBikeApi()
