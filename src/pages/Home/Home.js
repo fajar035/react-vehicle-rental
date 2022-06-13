@@ -30,8 +30,6 @@ function Home(props) {
   const user = useSelector((state) => state.auth);
   const role = user.userData.role;
 
-  console.log(dataPopular);
-
   const handleDropdownChangeLocation = (e) => {
     setSelectLocation(e.target.value);
   };
@@ -84,7 +82,6 @@ function Home(props) {
 
   const onSubmitSearch = (e) => {
     e.preventDefault();
-    // console.log("event", e.target);
     const keyword = e.target[0].value;
     const location = selectLocation;
     const category = e.target[2].value;
@@ -99,7 +96,7 @@ function Home(props) {
       behavior: "smooth"
     });
   };
-  // console.log(dataSearch);
+
   const handlerClear = () => {
     setDataSearch({
       keyword: "",
@@ -150,9 +147,6 @@ function Home(props) {
     });
   }, [categoryArr]);
 
-  // console.log("DATA-SEARCH", dataSearch);
-  // console.log("LOCATION ARR", selectCategory);
-
   return (
     <main>
       <Header />
@@ -193,10 +187,8 @@ function Home(props) {
                       <option disabled>Location</option>
                       {location.length !== 0 &&
                         location.map((item, idx) => {
-                          // console.log("LOCATION-ITEM", item);
                           return (
                             <option value={item} key={idx}>
-                              {/* {console.log(item, idx)} */}
                               {item}
                             </option>
                           );
@@ -272,8 +264,8 @@ function Home(props) {
                   </h3>
 
                   <div className='row position-relative d-flex justify-content-center'>
-                    {Array.isArray(dataPopular).length !== 0 ||
-                    dataPopular !== undefined ? (
+                    {Array.isArray(dataPopular) &&
+                    dataPopular.length !== 0 ? (
                       dataPopular.map((item, idx) => {
                         // console.log("DATA POPULAR", item);
                         const photo = JSON.parse(item.photo);
@@ -308,8 +300,10 @@ function Home(props) {
                         );
                       })
                     ) : (
-                      <div className='col-lg-12 border'>
-                        <p className='no-data mb-5'>No data</p>
+                      <div className='col-lg-12 text-center'>
+                        <p className='no-data mb-5 text-datanull'>
+                          No data
+                        </p>
                       </div>
                     )}
 

@@ -88,7 +88,20 @@ function DetailVehicle(props) {
     }
     if (vehiclePopular.id_vehicle !== undefined)
       return setIdPopular(vehiclePopular.id_vehicle);
-  }, [getVehicle, getVehiclePopular, checkUrlPopular, url, vehiclePopular]);
+  }, [
+    getVehicle,
+    getVehiclePopular,
+    checkUrlPopular,
+    url,
+    vehiclePopular
+  ]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
 
   return (
     <main>
@@ -151,7 +164,9 @@ function DetailVehicle(props) {
               <div className='price'>
                 <p>
                   Rp.
-                  {vehicle.length !== 0 ? numberToRupiah(vehicle.price) : " "}
+                  {vehicle.length !== 0
+                    ? numberToRupiah(vehicle.price)
+                    : " "}
                   /day
                 </p>
               </div>
@@ -257,7 +272,9 @@ function DetailVehicle(props) {
               <button className='btn-minus'>
                 <i className='fas fa-minus'></i>
               </button>
-              <p className='number'>{isNaN(stockPopular) ? 0 : stockPopular}</p>
+              <p className='number'>
+                {isNaN(stockPopular) ? 0 : stockPopular}
+              </p>
               <button className='btn-plus'>
                 <i className='fas fa-plus'></i>
               </button>
@@ -276,7 +293,9 @@ function DetailVehicle(props) {
                     state: { id, popular: false }
                   }}
                 >
-                  <button className='btn-reservation'>Reservation</button>
+                  <button className='btn-reservation'>
+                    Reservation
+                  </button>
                 </Link>
               ) : (
                 <Link
@@ -285,7 +304,9 @@ function DetailVehicle(props) {
                     state: { id }
                   }}
                 >
-                  <button className='btn-reservation'>Edit Item</button>
+                  <button className='btn-reservation'>
+                    Edit Item
+                  </button>
                 </Link>
               )}
               {/* <Link to="/reservation">Reservation</Link> */}
@@ -306,7 +327,9 @@ function DetailVehicle(props) {
                     state: { idPopular, popular: true }
                   }}
                 >
-                  <button className='btn-reservation'>Reservation</button>
+                  <button className='btn-reservation'>
+                    Reservation
+                  </button>
                 </Link>
               ) : (
                 <Link
@@ -315,7 +338,9 @@ function DetailVehicle(props) {
                     state: { id: idPopular, popular: true }
                   }}
                 >
-                  <button className='btn-reservation'>Edit Item</button>
+                  <button className='btn-reservation'>
+                    Edit Item
+                  </button>
                 </Link>
               )}
               {/* <Link to="/reservation">Reservation</Link> */}

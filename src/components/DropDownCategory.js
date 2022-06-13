@@ -137,7 +137,7 @@ function NewCategory({
       newCategory(body, token)
         .then((res) => {
           Swal.fire({
-            position: "top-right",
+            position: "center",
             icon: "success",
             title: res.data.result.message,
             showCancelButton: false,

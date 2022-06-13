@@ -163,11 +163,23 @@ function EditItem(props) {
         if (!checkId) {
           deleteCategoryApi(idCategory, token)
             .then((res) => {
-              console.log(res);
               getCategory();
+              Swal.fire({
+                title: "Successfully deleted category",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+                position: "center"
+              });
             })
             .catch((err) => {
               console.log(err);
+              Swal.fire({
+                title: "Cannot be deleted",
+                icon: "info",
+                showConfirmButton: false,
+                timer: 1500
+              });
             });
         } else {
           Swal.fire({
@@ -263,10 +275,6 @@ function EditItem(props) {
     setImage3(URL.createObjectURL(uploaded[2]));
   };
 
-  // const handleShowModal = (newValue) => {
-  //   setShowModal(newValue);
-  // };
-
   const handlerUpdateCategory = (newValue) => {
     setUpdateCategory(newValue);
   };
@@ -275,10 +283,14 @@ function EditItem(props) {
     setIdcategory(newValue);
   };
 
+  // console.log("STOCK", stock.toString());
+  // console.log("TYPEOF", typeof stock.toString());
+
   const handlerSubmitData = (e) => {
     e.preventDefault();
     const data = e.target;
     const body = new FormData();
+    const stockInput = stock.toString();
 
     if (selectedFile !== null) {
       [...selectedFile].map((img) => {
@@ -301,8 +313,8 @@ function EditItem(props) {
       body.append("price", data.price.value);
     }
 
-    if (stock !== null && stock !== undefined && isNaN(stock)) {
-      body.append("stock", stock);
+    if (stock !== null && stock !== undefined) {
+      body.append("stock", stockInput);
     }
 
     let idStatus;
@@ -369,6 +381,7 @@ function EditItem(props) {
             ...onLoadingButton,
             saveButton: false
           });
+          return back();
         })
         .catch((err) => {
           console.log(err);
@@ -382,6 +395,9 @@ function EditItem(props) {
     if (updateCategory) {
       getCategory();
     }
+    return () => {
+      setUpdateCategory(false);
+    };
   }, [getCategory, updateCategory]);
 
   return (

@@ -64,7 +64,6 @@ export const deleteCategoryApi = (id, token) => {
     }
   };
 
-  console.log(id, token);
   return axios.delete(url, config);
 };
 
