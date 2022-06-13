@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch
 } from "react-router-dom";
 
 import { PersistGate } from "redux-persist/es/integration/react";
@@ -41,51 +41,75 @@ function MainRouter(props) {
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route exact path='/' component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
 
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/forgot" component={Forgot} />
+            <Route exact path='/profile' component={Profile} />
+            <Route path='/forgot' component={Forgot} />
 
-            <Route exact path="/vehicles" component={Vehicles} />
-            <Route path="/vehicles/reservation" component={Reservation} />
-            <Route path="/vehicles/payment" component={Payment} />
+            <Route exact path='/vehicles' component={Vehicles} />
+            <Route
+              path='/vehicles/reservation'
+              component={Reservation}
+            />
+            <Route path='/vehicles/payment' component={Payment} />
 
-            <Route exact path="/vehicles/popular" component={VehiclePopular} />
             <Route
               exact
-              path="/vehicles/popular/detail/:id"
+              path='/vehicles/popular'
+              component={VehiclePopular}
+            />
+            <Route
+              exact
+              path='/vehicles/popular/detail/:id'
               component={DetailVehicle}
             />
-            <Route path="/vehicles/popular/chat" component={Chat} />
-
-            <Route exact path="/vehicles/cars" component={vehicleCars} />
-            <Route path="/vehicles/cars/detail/:id" component={DetailVehicle} />
+            <Route path='/vehicles/popular/chat' component={Chat} />
 
             <Route
               exact
-              path="/vehicles/motorbike"
+              path='/vehicles/cars'
+              component={vehicleCars}
+            />
+            <Route
+              path='/vehicles/cars/detail/:id'
+              component={DetailVehicle}
+            />
+
+            <Route
+              exact
+              path='/vehicles/motorbike'
               component={VehicleMotorbike}
             />
             <Route
-              path="/vehicles/motorbike/detail/:id"
+              path='/vehicles/motorbike/detail/:id'
               component={DetailVehicle}
             />
-            <Route path="/vehicles/reservation" component={Reservation} />
-            <Route path="/vehicles/payment" component={Payment} />
+            <Route
+              path='/vehicles/reservation'
+              component={Reservation}
+            />
+            <Route path='/vehicles/payment' component={Payment} />
 
-            <Route exact path="/vehicles/bike/" component={vehicleBike} />
-            <Route path="/vehicles/bike/detail/:id" component={DetailVehicle} />
+            <Route
+              exact
+              path='/vehicles/bike/'
+              component={vehicleBike}
+            />
+            <Route
+              path='/vehicles/bike/detail/:id'
+              component={DetailVehicle}
+            />
 
-            <Route path="/vehicles/add" component={AddVehicle} />
-            <Route path="/vehicles/edit" component={EditVehicle} />
-            <Route path="/history" component={History} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/addcart" component={Example} />
+            <Route path='/vehicles/add' component={AddVehicle} />
+            <Route path='/vehicles/edit' component={EditVehicle} />
+            <Route path='/history' component={History} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/addcart' component={Example} />
 
             <Route exact component={NotFound} />
-            <Redirect to="/404" />
+            <Redirect to='/404' />
           </Switch>
         </Router>
       </PersistGate>

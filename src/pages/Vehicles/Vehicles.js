@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import vehicleDefault from "../../assets/images/vehicle-default.jpg";
 import Loading from "../../components/Loading/Loading.js";
+import { useMemo } from "react";
 
 function Vehicles() {
   let { url } = useRouteMatch();
@@ -34,22 +35,11 @@ function Vehicles() {
         console.log("VEHICLE-BIKE", vehiclesBike);
 
         setisOk(true);
-        setIsNull({
-          ...isNull,
-          bike: false
-        });
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.result.data === "Data not found") {
-          setisOk(false);
-          setIsNull({
-            ...isNull,
-            bike: true
-          });
-        }
       });
-  }, [isNull]);
+  }, []);
 
   const getVehiclesMotorBike = useCallback(() => {
     getVehiclesMotorBikeApi()
@@ -57,22 +47,11 @@ function Vehicles() {
         const vehiclesMotorBike = res.data.result;
         setVehiclesMotorBike(vehiclesMotorBike);
         setisOk(true);
-        setIsNull({
-          ...isNull,
-          motorbike: false
-        });
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.result.data === "Data not found") {
-          setisOk(false);
-          setIsNull({
-            ...isNull,
-            motorbike: true
-          });
-        }
       });
-  }, [isNull]);
+  }, []);
 
   const getVehiclesCars = useCallback(() => {
     getVehiclesCarsApi()
@@ -80,22 +59,11 @@ function Vehicles() {
         const vehiclesCars = res.data.result;
         setisOk(true);
         setVehiclesCars(vehiclesCars);
-        setIsNull({
-          ...isNull,
-          card: false
-        });
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.result.data === "Data not found") {
-          setisOk(false);
-          setIsNull({
-            ...isNull,
-            car: true
-          });
-        }
       });
-  }, [isNull]);
+  }, []);
 
   const getVehiclesPopular = useCallback(() => {
     getVehiclesPopularApi()
@@ -103,25 +71,11 @@ function Vehicles() {
         const vehiclesPopular = res.data.result;
         setisOk(true);
         setVehiclesPopular(vehiclesPopular);
-        setIsNull({
-          ...isNull,
-          popular: false
-        });
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.result.data === "Data not found") {
-          setisOk(false);
-          setIsNull({
-            ...isNull,
-            popular: true
-          });
-        }
       });
-  }, [isNull]);
-
-  // console.log(isOk);
-  // console.log(isNull);
+  }, []);
 
   useEffect(() => {
     getVehiclesBike();
@@ -145,7 +99,7 @@ function Vehicles() {
   return (
     <main>
       <Header />
-      {!isOk ? (
+      {isOk ? (
         <div className='container px-4 mb-5'>
           <div className='col-lg-12 col-sm-12 col-md-12 justify-content-center d-flex'>
             <div className='col-lg-12 col-sm-12 col-md-12  border rounded-3 mt-5 container-input'>
@@ -176,10 +130,10 @@ function Vehicles() {
           </h3>
 
           {/* Card */}
-          {isNull.popular ? (
+          {vehiclesPopular.length === 0 ? (
             <div className='row position-relative mb-lg-5 wrapper-card'>
               <div className='col-lg-3 col-md-6 '>
-                <p>No data</p>
+                <p className='text-datanull'>No data</p>
               </div>
             </div>
           ) : (
@@ -229,41 +183,50 @@ function Vehicles() {
           </h3>
 
           {/* Card */}
-          <div className='row position-relative mb-lg-5 wrapper-card'>
-            {vehiclesBike.map((item, idx) => {
-              // console.log(item);
-              const photos = item.photo;
-              const photo = JSON.parse(photos);
-              // console.log(photo);
-              if (photo !== null) {
-                var photoUrl = process.env.REACT_APP_HOST + photo[0];
-              }
-              // console.log(photoUrl);
-              // console.log(photoUrl);
-              return (
-                <div key={idx} className='col-lg-3 col-md-6 card  '>
-                  <Link
-                    to={`${url}/bike/detail/${item.id}`}
-                    className='wrapper-img-home'
-                  >
-                    <img
-                      src={!photoUrl ? vehicleDefault : photoUrl}
-                      className='img-size'
-                      alt='van_login'
-                    />
-                    <div className='city-type-vehicles  bg-light rounded shadow '>
-                      <p className='mt-3'>
-                        {item.name} <br />
-                        <span className='color-subtitle'>
-                          {item.location}
-                        </span>
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+          {vehiclesBike.length === 0 ? (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              <div className='col-lg-3 col-md-6 '>
+                <p className='text-datanull'>No data</p>
+              </div>
+            </div>
+          ) : (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              {vehiclesBike.map((item, idx) => {
+                // console.log(item);
+                const photos = item.photo;
+                const photo = JSON.parse(photos);
+                // console.log(photo);
+                if (photo !== null) {
+                  var photoUrl =
+                    process.env.REACT_APP_HOST + photo[0];
+                }
+                // console.log(photoUrl);
+                // console.log(photoUrl);
+                return (
+                  <div key={idx} className='col-lg-3 col-md-6 card  '>
+                    <Link
+                      to={`${url}/bike/detail/${item.id}`}
+                      className='wrapper-img-home'
+                    >
+                      <img
+                        src={!photoUrl ? vehicleDefault : photoUrl}
+                        className='img-size'
+                        alt='van_login'
+                      />
+                      <div className='city-type-vehicles  bg-light rounded shadow '>
+                        <p className='mt-3'>
+                          {item.name} <br />
+                          <span className='color-subtitle'>
+                            {item.location}
+                          </span>
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* MotorBike */}
           <h3 className='mb-5 mt-5 f-playfair-main'>
@@ -278,39 +241,48 @@ function Vehicles() {
           </h3>
 
           {/* Card */}
-          <div className='row position-relative mb-lg-5 wrapper-card'>
-            {vehiclesMotorBike.map((item, idx) => {
-              const photos = item.photo;
-              const photo = JSON.parse(photos);
-              // console.log(photo);
-              if (photo !== null) {
-                var photoUrl = process.env.REACT_APP_HOST + photo[0];
-              }
-              // console.log(photoUrl);
-              return (
-                <div key={idx} className='col-lg-3 col-md-6 card  '>
-                  <Link
-                    to={`${url}/motorbike/detail/${item.id}`}
-                    className='wrapper-img-home'
-                  >
-                    <img
-                      src={!photoUrl ? vehicleDefault : photoUrl}
-                      className='img-size'
-                      alt='van_login'
-                    />
-                    <div className='city-type-vehicles  bg-light rounded shadow '>
-                      <p className='mt-3'>
-                        {item.name} <br />
-                        <span className='color-subtitle'>
-                          {item.location}
-                        </span>
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+          {vehiclesMotorBike.length === 0 ? (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              <div className='col-lg-3 col-md-6 '>
+                <p className='text-datanull'>No data</p>
+              </div>
+            </div>
+          ) : (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              {vehiclesMotorBike.map((item, idx) => {
+                const photos = item.photo;
+                const photo = JSON.parse(photos);
+                // console.log(photo);
+                if (photo !== null) {
+                  var photoUrl =
+                    process.env.REACT_APP_HOST + photo[0];
+                }
+                // console.log(photoUrl);
+                return (
+                  <div key={idx} className='col-lg-3 col-md-6 card  '>
+                    <Link
+                      to={`${url}/motorbike/detail/${item.id}`}
+                      className='wrapper-img-home'
+                    >
+                      <img
+                        src={!photoUrl ? vehicleDefault : photoUrl}
+                        className='img-size'
+                        alt='van_login'
+                      />
+                      <div className='city-type-vehicles  bg-light rounded shadow '>
+                        <p className='mt-3'>
+                          {item.name} <br />
+                          <span className='color-subtitle'>
+                            {item.location}
+                          </span>
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Cars */}
           <h3 className='mb-5 mt-5 f-playfair-main'>
@@ -325,38 +297,47 @@ function Vehicles() {
           </h3>
 
           {/* Card */}
-          <div className='row position-relative mb-lg-5 wrapper-card'>
-            {vehiclesCars.map((item, idx) => {
-              const photos = item.photo;
-              const photo = JSON.parse(photos);
-              // console.log(photo);
-              if (photo !== null) {
-                var photoUrl = process.env.REACT_APP_HOST + photo[0];
-              }
-              return (
-                <div key={idx} className='col-lg-3 col-md-6 card  '>
-                  <Link
-                    to={`${url}/cars/detail/${item.id}`}
-                    className='wrapper-img-home'
-                  >
-                    <img
-                      src={!photoUrl ? vehicleDefault : photoUrl}
-                      className='img-size'
-                      alt='van_login'
-                    />
-                    <div className='city-type-vehicles  bg-light rounded shadow '>
-                      <p className='mt-3'>
-                        {item.name} <br />
-                        <span className='color-subtitle'>
-                          {item.location}
-                        </span>
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+          {vehiclesCars.length === 0 ? (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              <div className='col-lg-3 col-md-6'>
+                <p className='text-datanull'>No data</p>
+              </div>
+            </div>
+          ) : (
+            <div className='row position-relative mb-lg-5 wrapper-card'>
+              {vehiclesCars.map((item, idx) => {
+                const photos = item.photo;
+                const photo = JSON.parse(photos);
+                // console.log(photo);
+                if (photo !== null) {
+                  var photoUrl =
+                    process.env.REACT_APP_HOST + photo[0];
+                }
+                return (
+                  <div key={idx} className='col-lg-3 col-md-6 card  '>
+                    <Link
+                      to={`${url}/cars/detail/${item.id}`}
+                      className='wrapper-img-home'
+                    >
+                      <img
+                        src={!photoUrl ? vehicleDefault : photoUrl}
+                        className='img-size'
+                        alt='van_login'
+                      />
+                      <div className='city-type-vehicles  bg-light rounded shadow '>
+                        <p className='mt-3'>
+                          {item.name} <br />
+                          <span className='color-subtitle'>
+                            {item.location}
+                          </span>
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       ) : (
         <Loading />
