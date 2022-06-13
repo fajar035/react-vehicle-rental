@@ -26,9 +26,14 @@ function Dropdown({ selected, setSelected, data }) {
     getValues();
   }, [getValues]);
 
+  console.log(values);
+
   return (
     <div className='dropdown'>
-      <div className='dropdown-btn' onClick={(e) => setisActive(!isActive)}>
+      <div
+        className='dropdown-btn'
+        onClick={(e) => setisActive(!isActive)}
+      >
         {selected}
         {isActive ? (
           <i className='fa-solid fa-chevron-up fs-4'></i>

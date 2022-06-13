@@ -108,8 +108,20 @@
   cursor: pointer;
 }
 
-.btn-delete-history:hover {
+.btn-delete-history:hover,
+.btn-update-rating:hover {
   box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.75);
+}
+
+.btn-update-rating {
+  width: 100%;
+  height: 15%;
+  background-color: #ffcd61;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-delete-history-disable {
