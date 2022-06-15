@@ -79,6 +79,7 @@ export const getLocationApi = () => {
 
 export const addVehicleApi = (body, token) => {
   const url = process.env.REACT_APP_HOST + "/vehicles/";
+  console.log(body);
   const config = {
     headers: {
       "x-access-token": token

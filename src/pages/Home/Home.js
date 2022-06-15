@@ -41,13 +41,18 @@ function Home(props) {
   const getPopular = useCallback(() => {
     getVehiclesPopularApi()
       .then((res) => {
-        // console.log("HIT GET POPULAR");
+        console.log(res);
         setDataPopular(res.data.result);
         setSuccess(true);
       })
       .catch((err) => {
         console.log(err);
-        setSuccess(false);
+        const statusCode = err.response.status;
+        if (statusCode === 400) {
+          setSuccess(true);
+        } else {
+          setSuccess(false);
+        }
       });
   }, []);
 

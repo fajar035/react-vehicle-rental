@@ -26,8 +26,6 @@ function Dropdown({ selected, setSelected, data }) {
     getValues();
   }, [getValues]);
 
-  console.log(values);
-
   return (
     <div className='dropdown'>
       <div

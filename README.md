@@ -7,6 +7,7 @@
 [![bootstrap](https://img.shields.io/npm/v/bootstrap?label=bootstrap)](https://www.npmjs.com/package/react-bootstrap)
 [![redux](https://img.shields.io/npm/v/redux?label=redux)](https://www.npmjs.com/package/redux)
 [![react-toastify](https://img.shields.io/npm/v/react-toastify?label=react-toastify)](https://www.npmjs.com/package/react-toastify)
+<a href="https://wakatime.com/badge/github/ikehikeh151/react-vehicle-rental"><img src="https://wakatime.com/badge/github/ikehikeh151/react-vehicle-rental.svg" alt="wakatime"></a>
 
 Vehicle Rental is a website that was built using React JS providing service to make it easier for owners and users make transactions anywhere and anytime. This app also equipped with two role access for owner and user. This is the frontend service for this app. You can see the backend service [here](https://github.com/rahmasbn/Vehicle_Rental)
 

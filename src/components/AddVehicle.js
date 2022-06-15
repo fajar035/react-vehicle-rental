@@ -82,18 +82,32 @@ export class Additem extends Component {
     this.getCategory();
     this.getStatus();
     this.getLocation();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
   handleDropdownChangeCategory(e) {
-    this.setState({ ...this.state, selectValueCategory: e.target.value });
+    this.setState({
+      ...this.state,
+      selectValueCategory: e.target.value
+    });
   }
 
   handleDropdownChangeStatus(e) {
-    this.setState({ ...this.state, selectValueStatus: e.target.value });
+    this.setState({
+      ...this.state,
+      selectValueStatus: e.target.value
+    });
   }
 
   handleDropdownChangeLocation(e) {
-    this.setState({ ...this.state, selectValueLocation: e.target.value });
+    this.setState({
+      ...this.state,
+      selectValueLocation: e.target.value
+    });
   }
 
   onClickPrev = () => {
@@ -142,13 +156,11 @@ export class Additem extends Component {
     e.preventDefault();
     const token = this.props.auth.userData.token;
     const body = new FormData();
-    // const url = process.env.REACT_APP_HOST + "/vehicles"
-    // const userToken = this.props.auth.userData.token
     const vehicleImg = this.state.selectedFile;
 
-    if (this.state.selectedFile !== null) {
+    if (vehicleImg !== null) {
       [...vehicleImg].forEach((img) => {
-        body.append("uploadPhotoVehicle", img);
+        return body.append("uploadPhotoVehicle", img);
       });
     }
 
@@ -176,7 +188,6 @@ export class Additem extends Component {
     }
 
     if (
-      this.state.selectedFile !== null &&
       this.state.name !== null &&
       this.state.description !== null &&
       this.state.capacity !== null &&
@@ -224,22 +235,22 @@ export class Additem extends Component {
       <>
         <Header />
 
-        <div className="row mt-5 ms-lg-5 d-lg-flex justify-content-lg-around container-main mb-lg-5">
-          <div className="col-lg-12 p-0 mb-5">
-            <div className="col-lg-3 mb-5 d-flex flex-row align-items-center wrapper-link-detail">
-              <Link to={`/`} className="link-detail-0">
-                <i className="fas fa-chevron-left fs-2"></i>
-                <p className="ms-4 link-detail">Add New Item</p>
+        <div className='row mt-5 ms-lg-5 d-lg-flex justify-content-lg-around container-main mb-lg-5'>
+          <div className='col-lg-12 p-0 mb-5'>
+            <div className='col-lg-3 mb-5 d-flex flex-row align-items-center wrapper-link-detail'>
+              <Link to={`/`} className='link-detail-0'>
+                <i className='fas fa-chevron-left fs-2'></i>
+                <p className='ms-4 link-detail'>Add New Item</p>
               </Link>
             </div>
           </div>
 
-          <div className="col-lg-6 col-md-5  wrapper-img-upload">
-            <div className="col-lg-10  ">
+          <div className='col-lg-6 col-md-5  wrapper-img-upload'>
+            <div className='col-lg-10  '>
               <img
                 src={imgUpload}
-                alt="icon-camera"
-                className="camera-btn-input"
+                alt='icon-camera'
+                className='camera-btn-input'
                 multiple
                 onClick={this.inputImage}
               />
@@ -247,41 +258,47 @@ export class Additem extends Component {
           </div>
           <form
             onSubmit={this.submitAddItem}
-            className="col-lg-6 col-md-6 mt-lg-0">
-            <div className="col-lg-9 d-flex flex-column">
+            className='col-lg-6 col-md-6 mt-lg-0'
+          >
+            <div className='col-lg-9 d-flex flex-column'>
               <input
-                type="file"
-                name="image"
-                id="image"
+                type='file'
+                name='image'
+                id='image'
                 multiple
                 ref={this.inputFileRef}
                 onChange={this.inputFileSelectHandler}
                 hidden
               />
               <input
-                className="input-add"
-                id="name"
-                placeholder="Name (max up to 50 words)"
+                className='input-add'
+                id='name'
+                placeholder='Name (max up to 50 words)'
               />
               <input
-                className="input-add"
-                id="description"
-                placeholder="Description (max up to 150 words)"
+                className='input-add'
+                id='description'
+                placeholder='Description (max up to 150 words)'
               />
-              <input id="price" className="input-add" placeholder="Price" />
               <input
-                className="input-add"
-                id="capacity"
-                placeholder="Capacity Vehicle"
+                id='price'
+                className='input-add'
+                placeholder='Price'
+              />
+              <input
+                className='input-add'
+                id='capacity'
+                placeholder='Capacity Vehicle'
               />
 
-              <label className="label-add">Status:</label>
+              <label className='label-add'>Status:</label>
               <select
-                className="dropwdown-status p-2 "
+                className='dropwdown-status p-2 '
                 additem={this.state.selectValueStatus}
                 onChange={this.handleDropdownChangeStatus}
-                name="status"
-                id="status">
+                name='status'
+                id='status'
+              >
                 <option value={this.state.selectValueStatus}>
                   Select Status
                 </option>
@@ -295,13 +312,14 @@ export class Additem extends Component {
                 })}
               </select>
 
-              <label className="label-add">Location:</label>
+              <label className='label-add'>Location:</label>
               <select
-                className="dropwdown-status p-2 "
+                className='dropwdown-status p-2 '
                 additem={this.state.selectValueLocation}
                 onChange={this.handleDropdownChangeLocation}
-                name="location"
-                id="location">
+                name='location'
+                id='location'
+              >
                 <option value={this.state.selectValueLocation}>
                   Select Location
                 </option>
@@ -314,35 +332,38 @@ export class Additem extends Component {
                 })}
               </select>
             </div>
-            <div className="col-lg-9 mt-5">
-              <div className="row">
-                <div className="col-lg-6 ">
-                  <label className="label-add me-5">Stock :</label>
+            <div className='col-lg-9 mt-5'>
+              <div className='row'>
+                <div className='col-lg-6 '>
+                  <label className='label-add me-5'>Stock :</label>
                 </div>
-                <div className="col-lg-6 d-flex flex-row justify-content-around align-items-center">
+                <div className='col-lg-6 d-flex flex-row justify-content-around align-items-center'>
                   <div
-                    className="btn-minus-add d-flex justify-content-center align-items-center"
-                    onClick={this.onClickPrev}>
-                    <i className="fas fa-minus"></i>
+                    className='btn-minus-add d-flex justify-content-center align-items-center'
+                    onClick={this.onClickPrev}
+                  >
+                    <i className='fas fa-minus'></i>
                   </div>
-                  <p className="number-add">{this.state.stock}</p>
+                  <p className='number-add'>{this.state.stock}</p>
                   <div
-                    className="btn-plus-add d-flex justify-content-center align-items-center"
-                    onClick={this.onClickNext}>
-                    <i className="fas fa-plus"></i>
+                    className='btn-plus-add d-flex justify-content-center align-items-center'
+                    onClick={this.onClickNext}
+                  >
+                    <i className='fas fa-plus'></i>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="row mt-5 ">
-              <div className="col-lg-6">
+            <div className='row mt-5 '>
+              <div className='col-lg-6'>
                 <select
-                  className="dropwdown-category-add-vehicle p-2 ms-3"
+                  className='dropwdown-category-add-vehicle p-2 ms-3'
                   additem={this.state.selectValueCategory}
                   onChange={this.handleDropdownChangeCategory}
-                  name="category"
-                  id="category">
+                  name='category'
+                  id='category'
+                >
                   <option value={this.state.selectValueCategory}>
                     Add item To
                   </option>
@@ -355,8 +376,10 @@ export class Additem extends Component {
                   })}
                 </select>
               </div>
-              <div className="col-lg-6">
-                <button className="btn-save-item-add-vehicle">Save Item</button>
+              <div className='col-lg-6'>
+                <button className='btn-save-item-add-vehicle'>
+                  Save Item
+                </button>
               </div>
             </div>
           </form>
