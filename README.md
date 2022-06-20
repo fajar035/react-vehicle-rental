@@ -50,7 +50,7 @@ Vehicle Rental is a website that was built using React JS providing service to m
 1. Clone the backend repository from the link provided and follow the steps.
 2. Clone this repository
    ```bash
-   $ git clone https://github.com/rahmasbn/Vehicle-Rental-React
+   $ git clone https://github.com/ikehikeh151/react-vehicle-rental
    ```
 3. Install all modules required.
    ```bash

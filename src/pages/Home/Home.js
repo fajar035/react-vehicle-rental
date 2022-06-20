@@ -11,8 +11,10 @@ import {
   getCategoryApi
 } from "../../utils/https/vehicles";
 import SearchVehicle from "../../components/SearchVehicle";
+import imgDefaultVehicle from "../../assets/images/vehicle-default.jpg";
 
 function Home(props) {
+  const [is404, setIs404] = useState(false);
   const [dataPopular, setDataPopular] = useState([]);
   const [success, setSuccess] = useState(false);
   const [dataSearch, setDataSearch] = useState({
@@ -41,7 +43,7 @@ function Home(props) {
   const getPopular = useCallback(() => {
     getVehiclesPopularApi()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setDataPopular(res.data.result);
         setSuccess(true);
       })
@@ -267,6 +269,7 @@ function Home(props) {
                   <h3 className='mb-5 mt-5 f-playfair-main'>
                     Popular in town
                   </h3>
+                  {console.log()}
 
                   <div className='row position-relative d-flex justify-content-center'>
                     {Array.isArray(dataPopular) &&
@@ -274,7 +277,14 @@ function Home(props) {
                       dataPopular.map((item, idx) => {
                         // console.log("DATA POPULAR", item);
                         const photo = JSON.parse(item.photo);
-                        // console.log("ID", item);
+
+                        fetch(process.env.REACT_APP_HOST + photo)
+                          .then((res) => {
+                            if (res.status !== 200)
+                              return setIs404(true);
+                            return setIs404(false);
+                          })
+                          .catch((err) => console.log(err));
 
                         return (
                           <div
@@ -286,8 +296,10 @@ function Home(props) {
                             >
                               <img
                                 src={
-                                  process.env.REACT_APP_HOST +
-                                  photo[0]
+                                  photo === null || is404
+                                    ? imgDefaultVehicle
+                                    : process.env.REACT_APP_HOST +
+                                      photo[0]
                                 }
                                 className='img-size '
                                 alt='photo_vehicle'

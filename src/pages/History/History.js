@@ -8,6 +8,7 @@ import {
   deleteHistoryApi
 } from "../../utils/https/history";
 import { getUserIdApi } from "../../utils/https/user";
+import { updateRatingHistoryApi } from "../../utils/https/history";
 import Loading from "../../components/Loading/Loading.js";
 import Swal from "sweetalert2";
 import defaultImage from "../../assets/images/vehicle-default.jpg";
@@ -23,13 +24,17 @@ function History(props) {
   const [isNull, setIsNull] = useState(false);
   const [onDelete, setOnDelete] = useState(false);
   const [selectItem, setSelectItem] = useState([]);
-  // const [isActive, setisActive] = useState(false);
-  // const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedRating, setSelectedRating] = useState({
+    idx: null,
+    value: null,
+    idVehicle: null
+  });
   const [dataRating] = useState(["1", "2", "3", "4", "5"]);
+
   // const [updateRating, setUpdateRating] = useState(false);
 
   const handleCheck = (event) => {
-    // console.log(event.target.value);
+    console.log(event.target.value);
     let updateList = [...checked];
     if (event.target.checked) {
       updateList = [...checked, event.target.checked];
@@ -42,8 +47,22 @@ function History(props) {
     setOnDelete(true);
   };
 
-  const handlerRating = (event) => {
-    console.log(event.target.value);
+  const handlerRating = (e, index) => {
+    console.log("DATA", selectedRating);
+    console.log("INDEX", index);
+    console.log("RATING", dataHistory[index].rating);
+
+    updateRatingHistoryApi(
+      selectedRating.idVehicle,
+      { rating: selectedRating.value },
+      token
+    )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getUser = useCallback(() => {
@@ -249,6 +268,10 @@ function History(props) {
                   );
                   const tahun_return = dateArr_return[0];
                   const photo = JSON.parse(item.photo);
+                  const idVehicle = item.id;
+
+                  // console.log(idVehicle[0]);
+                  // console.log(idx1);
 
                   return (
                     <div key={idx1} className='row '>
@@ -280,27 +303,31 @@ function History(props) {
                           </p> */}
                         </div>
                       </div>
-                      <div className='col-lg-2 d-flex justify-content-center align-items-center flex-column border'>
-                        <input
-                          className='form-check-input mb-3'
-                          type='checkbox'
-                          value={idx1}
-                          onChange={handleCheck}
-                          id='historyId'
-                        />
-
-                        <p className='text-datanull text-warning p-0 m-0'>
-                          Rating{" "}
-                          <i className='fa-solid fa-star text-dark'></i>
-                        </p>
+                      <div className='col-lg-2 d-flex justify-content-center align-items-center flex-column '>
+                        <div className='d-flex w-100 justify-content-around m-0 p-0 '>
+                          <p className='m-0'>Delete</p>
+                          <input
+                            className='form-check-input '
+                            type='checkbox'
+                            value={idx1}
+                            onChange={handleCheck}
+                          />
+                        </div>
 
                         <Dropdown
                           onSelect={(e) => {
-                            console.log(idx1);
-
-                            // setSelectedRating(selectRating);
+                            const value = e;
+                            // console.log("ID-VEHICLE", idVehicle);
+                            // console.log("INDEX", idx1);
+                            // console.log("VALUE", value);
+                            setSelectedRating({
+                              idx: idx1,
+                              idVehicle,
+                              value
+                            });
                           }}
                           key={idx1}
+                          id={`dropdown-button-drop-${idx1}`}
                         >
                           <Dropdown.Toggle
                             variant='secondary'
@@ -310,37 +337,36 @@ function History(props) {
                               width: "100%"
                             }}
                           >
-                            {/* {selectedRating}{" "} */}
-                            <i className='fa-solid fa-star me-5'></i>
+                            {dataHistory[idx1].rating !== null
+                              ? dataHistory[idx1].rating
+                              : selectedRating.value !== null
+                              ? dataHistory[idx1].rating
+                              : "No ratings yet"}
+                            <i className='fa-solid fa-star ms-3 me-5'></i>
                           </Dropdown.Toggle>
-
                           <Dropdown.Menu variant='dark'>
                             {dataRating.map((data, idx2) => {
                               return (
                                 <Dropdown.Item
-                                  href='#/action-1'
                                   eventKey={data}
+                                  key={idx2}
                                 >
                                   {data}
                                 </Dropdown.Item>
                               );
                             })}
-
-                            {/* <Dropdown.Item href='#/action-2'>
-                              Another action
-                            </Dropdown.Item>
-                            <Dropdown.Item href='#/action-3'>
-                              Something else
-                            </Dropdown.Item> */}
                           </Dropdown.Menu>
                         </Dropdown>
-
-                        <div
-                          className='btn-update-rating'
-                          onClick={handlerRating}
-                        >
-                          Update Rating
-                        </div>
+                        {selectedRating.idx === idx1 ? (
+                          <div
+                            className='btn-update-rating'
+                            onClick={(e) => {
+                              handlerRating(e, idx1);
+                            }}
+                          >
+                            Update Rating
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   );
