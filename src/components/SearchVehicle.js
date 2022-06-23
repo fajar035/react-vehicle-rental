@@ -8,7 +8,7 @@ function SearchVehicle(props) {
   const [result, setResult] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [isDataNull, setIsDataNull] = useState(false);
-  console.log("PROPS", props);
+  const [is404, setIs404] = useState(false);
 
   // const url = useLocation();
 
@@ -24,7 +24,7 @@ function SearchVehicle(props) {
         setIsDataNull(false);
         return window.scrollTo({
           top: 850,
-          behavior: "smooth",
+          behavior: "smooth"
         });
       })
       .catch((err) => {
@@ -41,33 +41,44 @@ function SearchVehicle(props) {
       ) : (
         <>
           {isDataNull ? (
-            <div className="text-center p-5">
-              <p className="p-5 text-no-vehicle">There is no vehicle</p>
+            <div className='text-center p-5'>
+              <p className='p-5 text-no-vehicle'>
+                There is no vehicle
+              </p>
             </div>
           ) : (
-            <div className="row position-relative mb-lg-5 wrapper-card mt-5">
+            <div className='row position-relative mb-lg-5 wrapper-card mt-5'>
               {result.map((item, idx) => {
-                const photos = item.photo;
-                const photo = JSON.parse(photos);
-                const photoUrl =
-                  photo !== null
-                    ? process.env.REACT_APP_HOST + photo[0]
-                    : defaultImage;
+                const photo = JSON.parse(item.photo);
+
+                fetch(process.env.REACT_APP_HOST + photo).then(
+                  (res) => {
+                    if (res.status !== 200) {
+                      setIs404(true);
+                    }
+                    return setIs404(false);
+                  }
+                );
 
                 return (
-                  <div key={idx} className="col-lg-3 col-md-6 card  ">
+                  <div key={idx} className='col-lg-3 col-md-6 card  '>
                     <Link
                       to={`vehicles/bike/detail/${item.id}`}
-                      className="wrapper-img-home">
+                      className='wrapper-img-home'
+                    >
                       <img
-                        src={photoUrl}
-                        className="img-size"
-                        alt="van_login"
+                        src={
+                          photo === null || is404
+                            ? defaultImage
+                            : process.env.REACT_APP_HOST + photo[0]
+                        }
+                        className='img-size'
+                        alt='photo_vehicle'
                       />
-                      <div className="city-type-vehicles  bg-light rounded shadow ">
-                        <p className="mt-3">
+                      <div className='city-type-vehicles  bg-light rounded shadow '>
+                        <p className='mt-3'>
                           {item.name} <br />
-                          <span className="color-subtitle">
+                          <span className='color-subtitle'>
                             {item.location}
                           </span>
                         </p>
